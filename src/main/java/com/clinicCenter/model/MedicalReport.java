@@ -10,4 +10,5 @@ public class MedicalReport {
     private Recipe recipe;
     private Diagnosis diagnosis;
     private String examinationInfo;
+    private Doctor doctorWhoExamined;
 }

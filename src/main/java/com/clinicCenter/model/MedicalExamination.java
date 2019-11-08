@@ -3,17 +3,18 @@ package com.clinicCenter.model;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.print.Doc;
 import java.util.Date;
 
 @Data
 @Builder
 public class MedicalExamination {
-    private long id;
+    private Long id;
     private Date date;
-    private double duration;
+    private Double duration;
     private MedicalExaminationRoom room;
-    private User doctor;
-    private double price;
+    private Doctor doctor;
+    private Double price;
     private MedicalExaminationType type;
-    private double discount;
+    private Double discount;
 }

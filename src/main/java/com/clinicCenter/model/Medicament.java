@@ -10,5 +10,5 @@ public class Medicament {
     private String name;
     private String purpose;
     private String description;
-    private boolean onPrescription; //da li je na recept
+    private Boolean onPrescription; //da li je na recept
 }

@@ -9,9 +9,12 @@ import java.util.Set;
 @Builder
 public class MedicalRecord {
     private Long id;
-    private int weight;
-    private double height;
+    private Integer weight;
+    private Double height;
     private String bloodType;
-    private String medicamentAllergy;
+    private Double diopter;
+    private Set<Medicament> medicamentAllergy;
     private Set<MedicalReport> illnessHistory;
+    private Set<MedicalExamination> examinationHistory;
+    private Set<Operation> operationHistory;
 }

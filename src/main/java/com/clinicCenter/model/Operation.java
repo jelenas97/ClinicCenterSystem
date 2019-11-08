@@ -5,18 +5,19 @@ import lombok.Data;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Builder
 public class Operation {
-    private long id;
+    private Long id;
     private Date date;
-    private double duration;
+    private Double duration;
     private OperationRoom room;
-    private Collection<User> doctors;
-   /* private double price;
+    private Set<Doctor> doctors;
+   /* private Double price;
     private MedicalExaminationType type;
-    private double discount;
+    private Double discount;
     */
 
 }

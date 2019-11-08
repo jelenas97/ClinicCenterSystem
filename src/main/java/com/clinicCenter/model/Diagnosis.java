@@ -9,5 +9,4 @@ public class Diagnosis {
     private Long id;
     private String name;
     private String description;
-
 }

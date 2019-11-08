@@ -4,11 +4,12 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Data
 @Builder
 public class MedicalExaminationType {
-    private long id;
+    private Long id;
     private String name;
-    private Collection<MedicalExamination> exams;
+    private Set<MedicalExamination> exams;
 }

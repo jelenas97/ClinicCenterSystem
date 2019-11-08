@@ -4,13 +4,14 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Data
 @Builder
 public class OperationRoom {
-    private long id;
+    private Long id;
     private String name;
-    private int number;
-    private Collection<Operation> operations;
+    private Integer number;
+    private Set<Operation> operations;
 
 }
