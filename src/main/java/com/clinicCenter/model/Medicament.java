@@ -23,6 +23,6 @@ public class Medicament {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Boolean onPrescription; //da li je na recept
 }
