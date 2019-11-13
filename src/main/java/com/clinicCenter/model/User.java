@@ -3,6 +3,7 @@ package com.clinicCenter.model;
 import lombok.Builder;
 import lombok.Data;
 
+@Data
 public abstract class User {
     private String email;
     private String password;
