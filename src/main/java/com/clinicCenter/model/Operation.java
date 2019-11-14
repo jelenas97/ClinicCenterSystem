@@ -1,7 +1,6 @@
 package com.clinicCenter.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Collection;
 import java.util.Date;
@@ -16,7 +15,6 @@ public class Operation {
     private OperationRoom room;
     private Set<Doctor> doctors;
    /* private Double price;
-    private MedicalExaminationType type;
     private Double discount;
     */
 
