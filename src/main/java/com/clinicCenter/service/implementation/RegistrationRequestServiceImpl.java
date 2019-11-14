@@ -23,4 +23,11 @@ public class RegistrationRequestServiceImpl implements RegistrationRequestServic
     public Set<RegistrationRequest> getAll() {
         return registrationRequestRepository.getAll();
     }
+
+    @Override
+    public RegistrationRequest getById(Long id) {
+        return registrationRequestRepository.findById(id).get();
+    }
+
+
 }
