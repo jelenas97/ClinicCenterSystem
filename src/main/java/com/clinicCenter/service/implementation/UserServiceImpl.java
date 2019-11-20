@@ -1,5 +1,6 @@
 package com.clinicCenter.service.implementation;
 
+import com.clinicCenter.model.Patient;
 import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapper;
 import com.clinicCenter.repository.UserRepository;
@@ -20,5 +21,11 @@ public class UserServiceImpl implements UserService {
 
     public int updateMedicalStaff(Long id, UserMapper user) {
         return userRepository.updateMedicalStaff(id,user.getFirstName(),user.getLastName(),user.getCountry(),user.getCity(),user.getAddress(), user.getPhone());
+    }
+
+    @Override
+    public void save(Patient patient) {
+        userRepository.save(patient);
+
     }
 }
