@@ -2,6 +2,7 @@ package com.clinicCenter.model;
 
 import lombok.Builder;
 import lombok.Data;
+import org.joda.time.DateTime;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,13 +18,13 @@ import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
 @Data
 @Entity
-@Inheritance(strategy=SINGLE_TABLE)
-@DiscriminatorColumn(name="type", discriminatorType=STRING)
+@Inheritance(strategy = SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = STRING)
 public abstract class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique=true, nullable = false)
+    @Column(unique = true, nullable = false)
     private Long id;
 
     @Column(nullable = false)
@@ -77,5 +78,15 @@ public abstract class User implements UserDetails {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public void setPassword(String password) {
+        Timestamp now = new Timestamp(DateTime.now().getMillis());
+        this.setLastPasswordResetDate(now);
+        this.password = password;
+    }
+
+    public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 }
