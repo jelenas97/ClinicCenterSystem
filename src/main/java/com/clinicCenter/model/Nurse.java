@@ -12,6 +12,30 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("NU")
 public class Nurse extends User {
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
     //to be added
     /*private Clinic worksInClinic;
     private Set<Recipe> validatedRecipes;

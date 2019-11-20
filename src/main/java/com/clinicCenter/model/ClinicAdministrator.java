@@ -13,6 +13,30 @@ import javax.persistence.ManyToOne;
 @Entity
 @DiscriminatorValue("CA")
 public class ClinicAdministrator extends User {
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 
     //@ManyToOne
     //@JoinColumn(name = "clinic_id")

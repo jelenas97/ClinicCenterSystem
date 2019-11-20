@@ -89,4 +89,8 @@ public abstract class User implements UserDetails {
     public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
+
+    public Long getId() {
+        return this.id;
+    }
 }

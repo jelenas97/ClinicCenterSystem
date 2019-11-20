@@ -22,4 +22,10 @@ public class UserController {
     public int updateMedicalStaff(@PathVariable Long id, @RequestBody UserMapper user) {
         return userService.updateMedicalStaff(id, user);
     }
+
+    @PostMapping("/login")
+    public void getUser(@RequestBody User user){
+        System.out.println("loginovo sam se");
+        userService.getByEmail(user.getEmail());
+    }
 }

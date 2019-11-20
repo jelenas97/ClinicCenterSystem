@@ -12,6 +12,30 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("DO")
 public class Doctor extends User {
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
     /*private Set<Patient> examinedPatients;
     private Set<Patient> allClinicPatients;
     private Long doctorAverageRating;
