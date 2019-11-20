@@ -44,7 +44,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public void changePassword(String oldPassword, String newPassword) {
 
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
-        String email = currentUser.getEmail();
+        String email = currentUser.getName();
 
         if (authenticationManager != null) {
             LOGGER.debug("Re-authenticating user '" + email + "' for password change request.");
