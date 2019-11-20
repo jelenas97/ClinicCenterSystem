@@ -18,6 +18,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).get();
     }
 
+    @Override
+    public User getByEmail(String email) {return userRepository.findByEmail(email);}
+
     public int updateMedicalStaff(Long id, UserMapper user) {
         return userRepository.updateMedicalStaff(id,user.getFirstName(),user.getLastName(),user.getCountry(),user.getCity(),user.getAddress(), user.getPhone());
 

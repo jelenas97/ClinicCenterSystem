@@ -11,6 +11,30 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("CCA")
 public class ClinicCenterAdministrator extends User {
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
     /*
     For clinic center administrator
     ako imamo klase za zahteve
