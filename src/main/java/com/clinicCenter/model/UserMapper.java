@@ -17,4 +17,5 @@ public class UserMapper {
     private String country;
     private String phone;
     private Long ssn;
+
 }
