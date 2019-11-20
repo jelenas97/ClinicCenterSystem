@@ -20,5 +20,6 @@ public class UserServiceImpl implements UserService {
 
     public int updateMedicalStaff(Long id, UserMapper user) {
         return userRepository.updateMedicalStaff(id,user.getFirstName(),user.getLastName(),user.getCountry(),user.getCity(),user.getAddress(), user.getPhone());
+
     }
 }
