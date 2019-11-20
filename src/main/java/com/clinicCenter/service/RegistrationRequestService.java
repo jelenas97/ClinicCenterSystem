@@ -8,4 +8,6 @@ public interface RegistrationRequestService {
     void save(RegistrationRequest registrationRequest);
     Set<RegistrationRequest> getAll();
     RegistrationRequest getById(Long id);
+
+    void removeById(Long id);
 }

@@ -5,10 +5,7 @@ import com.clinicCenter.service.RegistrationRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.Set;
@@ -31,5 +28,10 @@ public class RegistrationRequestController {
     public RegistrationRequest getById(@PathVariable Long id){
        RegistrationRequest rr = registrationRequestService.getById(id);
        return rr;
+    }
+
+    @DeleteMapping(value = "/registrationRequests/removeRequest/{id}")
+    public void removeById(@PathVariable Long id) {
+        registrationRequestService.removeById(id);
     }
 }
