@@ -15,8 +15,9 @@ public class RegisterController {
     @Autowired
     private RegistrationRequestService registrationRequestService;
 
-    @PostMapping("/registration")
+    @PostMapping("/auth/registration")
     public void getUser(@RequestBody RegistrationRequest registrationRequest){
-      registrationRequestService.save(registrationRequest);
+        System.out.println("registrovo sam se");
+        registrationRequestService.save(registrationRequest);
     }
 }

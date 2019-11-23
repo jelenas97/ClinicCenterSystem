@@ -8,5 +8,8 @@ import lombok.Data;
 public class UserTokenState {
 
     private String accessToken;
-    private Long expiresIn;
+    private Integer expiresIn;
+
+    public UserTokenState(String jwt, int expiresIn) {
+    }
 }
