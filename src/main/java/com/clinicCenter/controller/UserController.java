@@ -23,8 +23,8 @@ public class UserController {
         return userService.updateMedicalStaff(id, user);
     }
 
-    @PostMapping("/login")
-    public void getUser(@RequestBody User user){
+    @PostMapping("/auth/login")
+    public void getUser(@RequestBody UserMapper user){
         System.out.println("loginovo sam se");
         userService.getByEmail(user.getEmail());
     }

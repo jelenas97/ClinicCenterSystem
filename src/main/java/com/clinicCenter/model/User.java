@@ -18,6 +18,7 @@ import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
 @Data
 @Entity
+@Table(name = "users")
 @Inheritance(strategy = SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = STRING)
 public abstract class User implements UserDetails {

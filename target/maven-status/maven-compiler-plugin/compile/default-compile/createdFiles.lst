@@ -11,7 +11,6 @@ com\clinicCenter\model\Medicament.class
 com\clinicCenter\model\Patient$PatientBuilder.class
 com\clinicCenter\security\auth\TokenAuthenticationFilter.class
 com\clinicCenter\service\implementation\RegistrationRequestServiceImpl.class
-com\clinicCenter\model\UserMapper$UserMapperBuilder.class
 com\clinicCenter\model\DiagnosisCodeBook.class
 com\clinicCenter\security\TokenUtils.class
 com\clinicCenter\service\implementation\MedicamentServiceImpl.class

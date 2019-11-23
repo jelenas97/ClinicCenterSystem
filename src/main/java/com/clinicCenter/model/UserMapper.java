@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class UserMapper {
 
     private Long id;
@@ -17,6 +16,10 @@ public class UserMapper {
     private String country;
     private String phone;
     private Long ssn;
+
+    public UserMapper(){
+
+    }
 
     public Long getId() {
         return id;
