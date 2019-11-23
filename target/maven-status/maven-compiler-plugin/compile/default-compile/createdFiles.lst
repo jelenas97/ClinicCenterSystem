@@ -1,3 +1,4 @@
+com\clinicCenter\exception\ResourceConflictException.class
 com\clinicCenter\model\Recipe$RecipeBuilder.class
 com\clinicCenter\service\implementation\CustomUserDetailsService.class
 com\clinicCenter\repository\RegistrationRequestRepository.class
