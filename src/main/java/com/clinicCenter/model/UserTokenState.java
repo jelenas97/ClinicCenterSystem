@@ -11,5 +11,7 @@ public class UserTokenState {
     private Integer expiresIn;
 
     public UserTokenState(String jwt, int expiresIn) {
+        this.accessToken = jwt;
+        this.expiresIn = expiresIn;
     }
 }

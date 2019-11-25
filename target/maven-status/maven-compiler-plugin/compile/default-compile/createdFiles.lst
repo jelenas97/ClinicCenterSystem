@@ -6,6 +6,7 @@ com\clinicCenter\model\AnnualLeaveRequest.class
 com\clinicCenter\model\Operation.class
 com\clinicCenter\model\OperationRoom.class
 com\clinicCenter\App.class
+com\clinicCenter\service\ClinicService.class
 com\clinicCenter\model\Nurse.class
 com\clinicCenter\model\MedicalRecord$MedicalRecordBuilder.class
 com\clinicCenter\model\Medicament.class
@@ -31,6 +32,7 @@ com\clinicCenter\controller\MedicamentController.class
 com\clinicCenter\model\ClinicAdministrator$ClinicAdministratorBuilder.class
 com\clinicCenter\common\TimeProvider.class
 com\clinicCenter\service\AuthorityService.class
+com\clinicCenter\controller\ClinicController.class
 com\clinicCenter\model\Doctor.class
 com\clinicCenter\security\auth\RestAuthenticationEntryPoint.class
 com\clinicCenter\model\MedicalExaminationRoom$MedicalExaminationRoomBuilder.class
@@ -48,6 +50,7 @@ com\clinicCenter\model\MedicalExaminationType$MedicalExaminationTypeBuilder.clas
 com\clinicCenter\model\Medicament$MedicamentBuilder.class
 com\clinicCenter\service\implementation\UserServiceImpl.class
 com\clinicCenter\model\MedicalExaminationType.class
+com\clinicCenter\controller\ClinicAdminController.class
 com\clinicCenter\security\auth\TokenBasedAuthentication.class
 com\clinicCenter\model\Patient.class
 com\clinicCenter\controller\RegistrationRequestController.class
@@ -67,5 +70,6 @@ com\clinicCenter\model\Diagnosis$DiagnosisBuilder.class
 com\clinicCenter\model\Nurse$NurseBuilder.class
 com\clinicCenter\model\MedicalReport.class
 com\clinicCenter\model\ClinicCenter.class
+com\clinicCenter\repository\ClinicRepository.class
 com\clinicCenter\model\Doctor$DoctorBuilder.class
 com\clinicCenter\repository\UserRepository.class
