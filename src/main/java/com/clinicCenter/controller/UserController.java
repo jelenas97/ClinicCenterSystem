@@ -56,10 +56,9 @@ public class UserController {
                                                        HttpServletResponse response) throws AuthenticationException, IOException {
 
         final Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
+                .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
                         authenticationRequest.getPassword()));
 
-        System.out.println("Radiiiii");
         // Ubaci username + password u kontext
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -67,6 +66,7 @@ public class UserController {
         User user = (User) authentication.getPrincipal();
         String jwt = tokenUtils.generateToken(user.getEmail());
         int expiresIn = tokenUtils.getExpiredIn();
+        System.out.println("Radiiiii");
 
         // Vrati token kao odgovor na uspesno autentifikaciju
         return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));

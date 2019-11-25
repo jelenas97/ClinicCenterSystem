@@ -9,6 +9,7 @@ import com.clinicCenter.service.RegistrationRequestService;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,9 @@ public class RegistrationRequestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private AuthorityService authService;
@@ -46,7 +50,7 @@ public class RegistrationRequestController {
     public void accept(@RequestBody RegistrationRequest registrationRequest){
         System.out.println(registrationRequest.getFirstName());
         Patient patient = new Patient(registrationRequest.getEmail(),
-                registrationRequest.getPassword(),
+                passwordEncoder.encode(registrationRequest.getPassword()),
                 registrationRequest.getFirstName(),
                 registrationRequest.getLastName(),
                 registrationRequest.getAddress(),
