@@ -91,6 +91,11 @@ public abstract class User implements UserDetails {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
+    public String getPassword() {
+        System.out.println(password);
+        return password;
+    }
+
     public Long getId() {
         return this.id;
     }

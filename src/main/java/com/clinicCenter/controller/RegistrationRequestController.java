@@ -1,8 +1,10 @@
 package com.clinicCenter.controller;
 
+import com.clinicCenter.model.Authority;
 import com.clinicCenter.model.Medicament;
 import com.clinicCenter.model.Patient;
 import com.clinicCenter.model.RegistrationRequest;
+import com.clinicCenter.service.AuthorityService;
 import com.clinicCenter.service.RegistrationRequestService;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.util.List;
 import java.util.Set;
 import java.util.function.LongFunction;
 
@@ -23,6 +26,9 @@ public class RegistrationRequestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthorityService authService;
 
     @GetMapping("/registrationRequests")
     public Set<RegistrationRequest> getAll(){
@@ -49,6 +55,8 @@ public class RegistrationRequestController {
                 registrationRequest.getPhone(),
                 registrationRequest.getSsn());
         registrationRequestService.delete(registrationRequest);
+        List<Authority> auth = authService.findByname("ROLE_USER");
+        patient.setAuthorities(auth);
         userService.save(patient);
     }
 }
