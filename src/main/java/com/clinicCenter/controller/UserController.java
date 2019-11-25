@@ -59,6 +59,7 @@ public class UserController {
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
                         authenticationRequest.getPassword()));
 
+        System.out.println("Radiiiii");
         // Ubaci username + password u kontext
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
