@@ -1,5 +1,6 @@
 package com.clinicCenter.service.implementation;
 
+import com.clinicCenter.model.ClinicAdministrator;
 import com.clinicCenter.model.Patient;
 import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapper;
@@ -7,6 +8,8 @@ import com.clinicCenter.repository.UserRepository;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,4 +35,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(patient);
 
     }
+
+    @Override
+    public Set<String> getAllAdmins() {
+        return userRepository.getAllAdmins();
+    }
+
+
 }
