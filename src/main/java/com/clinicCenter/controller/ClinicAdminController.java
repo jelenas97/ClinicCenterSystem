@@ -1,5 +1,6 @@
 package com.clinicCenter.controller;
 
+import com.clinicCenter.dto.ClinicAdministratorDto;
 import com.clinicCenter.model.ClinicAdministrator;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,7 @@ public class ClinicAdminController {
     private UserService userService;
 
     @GetMapping("/getAll")
-    public Set<String> getAllByType(){
-        Set<String> admins = userService.getAllAdmins();
-        for(String s : admins){
-            System.out.println(s);
-        }
+    public Set<ClinicAdministratorDto> getAllByType(){
         return userService.getAllAdmins();
     }
 }

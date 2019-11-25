@@ -12,6 +12,4 @@ import java.util.Set;
 @DiscriminatorValue("CCA")
 public class ClinicCenterAdministrator extends User {
 
-    @OneToMany(mappedBy = "administrator")
-    private Set<Clinic> clinics;
 }

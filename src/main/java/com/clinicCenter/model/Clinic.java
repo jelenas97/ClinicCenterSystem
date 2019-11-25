@@ -32,6 +32,9 @@ public class Clinic {
 
     @Column
     private Double clinicAverageRating;
+
+    @Column
+    private String ref_clinic_admin;
    /*private Set<MedicalExamination> availableExaminations;
     private Set<Doctor> clinicDoctors;
     private Set<MedicalExaminationRoom> examinationRooms;
@@ -40,8 +43,6 @@ public class Clinic {
     private Set<ClinicAdministrator> clinicAdministrators;
     */
 
-   @ManyToOne
-   @JoinColumn(name = "CCA_Id")
-   private ClinicCenterAdministrator administrator;
+
 }
 
