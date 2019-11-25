@@ -1,11 +1,14 @@
 package com.clinicCenter.repository;
 
+import com.clinicCenter.model.ClinicAdministrator;
 import com.clinicCenter.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
@@ -17,4 +20,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     //@Query("SELECT * FROM user where user.email = email ")
     User findByEmail(String email);
+
+    @Query(value = "SELECT concat(first_name,\" \",last_name) from User u WHERE (u.type='CA')", nativeQuery = true)
+    Set<String> getAllAdmins();
+
 }

@@ -40,4 +40,7 @@ public class ClinicCenterAdministrator extends User {
     ako imamo klase za zahteve
     private Collection<RegisterRequest> registerRequests;
      */
+
+    @OneToMany(mappedBy = "administrator")
+    private Set<Clinic> clinics;
 }
