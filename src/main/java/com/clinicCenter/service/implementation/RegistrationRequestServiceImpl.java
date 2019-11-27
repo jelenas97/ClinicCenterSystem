@@ -34,5 +34,10 @@ public class RegistrationRequestServiceImpl implements RegistrationRequestServic
         return registrationRequestRepository.findById(id).get();
     }
 
+    @Override
+    public void removeById(Long id) {
+        registrationRequestRepository.deleteById(id);
+    }
+
 
 }

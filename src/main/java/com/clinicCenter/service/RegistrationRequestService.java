@@ -10,4 +10,5 @@ public interface RegistrationRequestService {
     Set<RegistrationRequest> getAll();
     RegistrationRequest getById(Long id);
 
+    void removeById(Long id);
 }

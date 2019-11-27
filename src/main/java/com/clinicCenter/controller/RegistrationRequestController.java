@@ -63,4 +63,9 @@ public class RegistrationRequestController {
         patient.setAuthorities(auth);
         userService.save(patient);
     }
+
+    @DeleteMapping(value = "/registrationRequests/removeRequest/{id}")
+    public void removeById(@PathVariable Long id) {
+        registrationRequestService.removeById(id);
+    }
 }
