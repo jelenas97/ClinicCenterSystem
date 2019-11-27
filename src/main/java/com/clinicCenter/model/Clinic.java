@@ -1,5 +1,6 @@
 package com.clinicCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,10 +10,12 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data
-@Builder
+//@Builder
 @Entity
 @AllArgsConstructor
 public class Clinic {
+
+    public Clinic() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +45,7 @@ public class Clinic {
 
    @ManyToOne
    @JoinColumn(name = "CCA_Id")
+   @JsonIgnore
    private ClinicCenterAdministrator administrator;
 }
 

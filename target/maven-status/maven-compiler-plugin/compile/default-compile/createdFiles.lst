@@ -56,9 +56,7 @@ com\clinicCenter\model\Patient.class
 com\clinicCenter\controller\RegistrationRequestController.class
 com\clinicCenter\service\RegistrationRequestService.class
 com\clinicCenter\model\MedicalExaminationRoom.class
-com\clinicCenter\model\ClinicCenterAdministrator$ClinicCenterAdministratorBuilder.class
 com\clinicCenter\model\Recipe.class
-com\clinicCenter\model\Clinic$ClinicBuilder.class
 com\clinicCenter\security\auth\JwtAuthenticationRequest.class
 com\clinicCenter\model\Operation$OperationBuilder.class
 com\clinicCenter\config\WebSecurityConfig.class

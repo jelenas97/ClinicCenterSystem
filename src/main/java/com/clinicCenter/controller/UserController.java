@@ -1,5 +1,6 @@
 package com.clinicCenter.controller;
 
+import com.clinicCenter.model.Authority;
 import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapper;
 import com.clinicCenter.model.UserTokenState;
@@ -13,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +37,8 @@ public class UserController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @GetMapping(value = "/medicalStaffProfile/{id}")
-    public User getById(@PathVariable Long id){
+    @GetMapping(value = "/auth/medicalStaffProfile/{id}")
+    public User getById(@PathVariable Long id) {
         return userService.getById(id);
     }
 
@@ -44,6 +46,7 @@ public class UserController {
     public int updateMedicalStaff(@PathVariable Long id, @RequestBody UserMapper user) {
         return userService.updateMedicalStaff(id, user);
     }
+
     /*
     @PostMapping("/auth/login")
     public void getUser(@RequestBody UserMapper user){
@@ -64,7 +67,8 @@ public class UserController {
 
         // Kreiraj token
         User user = (User) authentication.getPrincipal();
-        String jwt = tokenUtils.generateToken(user.getEmail());
+        Authority a = (Authority) user.getAuthorities().iterator().next();
+        String jwt = tokenUtils.generateToken(user.getEmail(), a);
         int expiresIn = tokenUtils.getExpiredIn();
         System.out.println("Radiiiii");
 

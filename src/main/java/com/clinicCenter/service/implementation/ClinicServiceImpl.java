@@ -6,6 +6,8 @@ import com.clinicCenter.service.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public class ClinicServiceImpl implements ClinicService {
 
@@ -16,4 +18,11 @@ public class ClinicServiceImpl implements ClinicService {
     public void save(Clinic clinic) {
         clinicRepository.save(clinic);
     }
+
+    @Override
+    public Collection<Clinic> getAllClinics() {
+        return  clinicRepository.findAll();
+    }
+
+
 }
