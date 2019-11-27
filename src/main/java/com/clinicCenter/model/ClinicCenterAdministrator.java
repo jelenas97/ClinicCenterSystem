@@ -2,6 +2,7 @@ package com.clinicCenter.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -11,10 +12,15 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data
-@Builder
+//@Builder
 @Entity
 @DiscriminatorValue("CCA")
 public class ClinicCenterAdministrator extends User {
+
+    public ClinicCenterAdministrator() {
+
+    }
+
     @Override
     public String getPassword() {
         return this.getPassword();
