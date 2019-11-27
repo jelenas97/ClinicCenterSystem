@@ -25,6 +25,7 @@ com\clinicCenter\model\Clinic.class
 com\clinicCenter\model\ClinicCenterAdministrator.class
 com\clinicCenter\config\WebConfig.class
 com\clinicCenter\model\MedicalRecord.class
+com\clinicCenter\controller\EmailController.class
 com\clinicCenter\model\MedicalExamination.class
 com\clinicCenter\model\OperationRoom$OperationRoomBuilder.class
 com\clinicCenter\model\UserTokenState$UserTokenStateBuilder.class
@@ -44,6 +45,7 @@ com\clinicCenter\repository\AuthorityRepository.class
 com\clinicCenter\service\implementation\AuthorityServiceImpl.class
 com\clinicCenter\model\MedicalExamination$MedicalExaminationBuilder.class
 com\clinicCenter\controller\RegisterController.class
+com\clinicCenter\service\EmailService.class
 com\clinicCenter\model\ClinicCenter$ClinicCenterBuilder.class
 com\clinicCenter\model\Diagnosis.class
 com\clinicCenter\model\MedicalExaminationType$MedicalExaminationTypeBuilder.class
@@ -69,5 +71,6 @@ com\clinicCenter\model\Nurse$NurseBuilder.class
 com\clinicCenter\model\MedicalReport.class
 com\clinicCenter\model\ClinicCenter.class
 com\clinicCenter\repository\ClinicRepository.class
+com\clinicCenter\service\implementation\EmailServiceImpl.class
 com\clinicCenter\model\Doctor$DoctorBuilder.class
 com\clinicCenter\repository\UserRepository.class

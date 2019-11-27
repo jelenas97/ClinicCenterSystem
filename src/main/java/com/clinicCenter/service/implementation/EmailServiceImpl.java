@@ -1,6 +1,6 @@
 package com.clinicCenter.service.implementation;
 
-import com.clinicCenter.model.User;
+
 import com.clinicCenter.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -21,11 +21,11 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     @Async
-    public void sendNotification(User user) throws MailException, InterruptedException{
+    public void sendNotification(String email) throws MailException, InterruptedException{
         System.out.println("Sending email...");
 
         SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(user.getEmail());
+        mail.setTo(email);
         mail.setFrom(env.getProperty("spring.mail.username"));
         mail.setSubject("Automated mail");
         mail.setText("This is an automated mail!");

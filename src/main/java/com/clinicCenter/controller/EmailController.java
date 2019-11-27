@@ -17,7 +17,7 @@ public class EmailController {
 
     public String sendMail(User user) {
         try {
-            emailService.sendNotification(user);
+            emailService.sendNotification(user.getEmail());
         } catch (Exception e) {
             logger.info("Error sending the mail: " + e.getMessage());
         }

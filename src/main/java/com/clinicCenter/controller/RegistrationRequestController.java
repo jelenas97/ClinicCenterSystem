@@ -5,6 +5,7 @@ import com.clinicCenter.model.Medicament;
 import com.clinicCenter.model.Patient;
 import com.clinicCenter.model.RegistrationRequest;
 import com.clinicCenter.service.AuthorityService;
+import com.clinicCenter.service.EmailService;
 import com.clinicCenter.service.RegistrationRequestService;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class RegistrationRequestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -65,7 +69,9 @@ public class RegistrationRequestController {
     }
 
     @DeleteMapping(value = "/registrationRequests/removeRequest/{id}")
-    public void removeById(@PathVariable Long id) {
+    public void removeById(@PathVariable Long id) throws InterruptedException {
+        RegistrationRequest req = registrationRequestService.getById(id);
+        emailService.sendNotification(req.getEmail());
         registrationRequestService.removeById(id);
     }
 }
