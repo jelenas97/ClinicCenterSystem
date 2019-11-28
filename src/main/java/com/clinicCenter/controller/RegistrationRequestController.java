@@ -66,6 +66,7 @@ public class RegistrationRequestController {
         List<Authority> auth = authService.findByname("ROLE_USER");
         patient.setAuthorities(auth);
         userService.save(patient);
+        emailController.sendMail(patient.getEmail(), "http://localhost:4200/activateUser/" + patient.getId());
     }
 
     @DeleteMapping(value = "/registrationRequests/removeRequest/{id}/{message}")

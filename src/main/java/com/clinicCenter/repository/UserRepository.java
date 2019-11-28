@@ -18,10 +18,17 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query("UPDATE User u SET u.firstName = :first , u.lastName = :last, u.country = :country, u.city =:city, u.address =:adress, u.phone = :phone WHERE u.id = :id")
     int updateMedicalStaff(Long id, String first, String last, String country, String city, String adress, String phone);
 
-    @Query(value = "SELECT concat(first_name,\" \",last_name) from User u WHERE (u.type='CA')", nativeQuery = true)
-    Set<String> getAllAdmins();
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.enabled = TRUE WHERE u.id = :id")
+    int activateUser(Long id);
 
 
     //@Query("SELECT * FROM user where user.email = email ")
     User findByEmail(String email);
+
+    @Query(value = "SELECT concat(first_name,\" \",last_name) from User u WHERE (u.type='CA')", nativeQuery = true)
+    Set<String> getAllAdmins();
+
+
 }

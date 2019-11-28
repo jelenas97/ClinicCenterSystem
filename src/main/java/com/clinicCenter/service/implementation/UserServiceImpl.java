@@ -41,5 +41,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.getAllAdmins();
     }
 
+    @Override
+    public void activateUser(Long id) {
+        User user = userRepository.findById(id).get();
+        user.setEnabled(true);
+        System.out.println("sad treba da je true : " + user.isEnabled());
+        userRepository.activateUser(id);
+    }
+
 
 }

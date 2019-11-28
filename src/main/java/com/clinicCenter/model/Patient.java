@@ -51,5 +51,6 @@ public class Patient extends User {
         this.setCountry(country);
         this.setPhone(phone);
         this.setSsn(ssn);
+        this.setEnabled(false);
     }
 }

@@ -16,4 +16,6 @@ public interface UserService {
     int updateMedicalStaff(Long id, UserMapper user);
     void save(Patient patient);
     Set<String> getAllAdmins();
+
+    void activateUser(Long id);
 }

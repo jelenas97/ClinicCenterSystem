@@ -28,6 +28,9 @@ public abstract class User implements UserDetails {
     @Column(unique = true, nullable = false)
     private Long id;
 
+    @Column(name = "enabled")
+    private boolean enabled = false;
+
     @Column(nullable = false)
     private String email;
 
