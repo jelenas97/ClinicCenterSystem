@@ -63,7 +63,7 @@ public class RegistrationRequestController {
                 registrationRequest.getPhone(),
                 registrationRequest.getSsn());
         registrationRequestService.delete(registrationRequest);
-        List<Authority> auth = authService.findByname("ROLE_USER");
+        List<Authority> auth = authService.findByname("ROLE_PATIENT");
         patient.setAuthorities(auth);
         userService.save(patient);
     }
