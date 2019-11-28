@@ -47,6 +47,12 @@ public class UserController {
         return userService.updateMedicalStaff(id, user);
     }
 
+    @PutMapping("/auth/activateUser/{id}")
+    public void activateUser(@PathVariable Long id) {
+        System.out.println("aktiviran");
+        userService.activateUser(id);
+    }
+
     /*
     @PostMapping("/auth/login")
     public void getUser(@RequestBody UserMapper user){

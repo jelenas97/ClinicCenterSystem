@@ -15,6 +15,7 @@ com\clinicCenter\security\auth\TokenAuthenticationFilter.class
 com\clinicCenter\service\implementation\RegistrationRequestServiceImpl.class
 com\clinicCenter\model\DiagnosisCodeBook.class
 com\clinicCenter\security\TokenUtils.class
+com\clinicCenter\model\EmailVerificationToken.class
 com\clinicCenter\service\implementation\MedicamentServiceImpl.class
 com\clinicCenter\model\Authority.class
 com\clinicCenter\model\MedicamentCodeBook.class
@@ -53,6 +54,7 @@ com\clinicCenter\model\Medicament$MedicamentBuilder.class
 com\clinicCenter\service\implementation\UserServiceImpl.class
 com\clinicCenter\model\MedicalExaminationType.class
 com\clinicCenter\controller\ClinicAdminController.class
+com\clinicCenter\model\EmailVerificationToken$EmailVerificationTokenBuilder.class
 com\clinicCenter\security\auth\TokenBasedAuthentication.class
 com\clinicCenter\model\Patient.class
 com\clinicCenter\controller\RegistrationRequestController.class
