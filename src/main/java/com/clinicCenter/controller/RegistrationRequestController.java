@@ -30,7 +30,7 @@ public class RegistrationRequestController {
     private UserService userService;
 
     @Autowired
-    private EmailService emailService;
+    private EmailController emailController;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -68,10 +68,11 @@ public class RegistrationRequestController {
         userService.save(patient);
     }
 
-    @DeleteMapping(value = "/registrationRequests/removeRequest/{id}")
-    public void removeById(@PathVariable Long id) throws InterruptedException {
+    @DeleteMapping(value = "/registrationRequests/removeRequest/{id}/{message}")
+    public void removeById(@PathVariable Long id, @PathVariable String message) throws InterruptedException {
+        System.out.println(message);
         RegistrationRequest req = registrationRequestService.getById(id);
-        emailService.sendNotification(req.getEmail());
+        emailController.sendMail(req.getEmail(), message);
         registrationRequestService.removeById(id);
     }
 }
