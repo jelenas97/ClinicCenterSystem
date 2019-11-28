@@ -43,9 +43,9 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @PutMapping("/medicalStaffProfile/{id}")
-    public int updateMedicalStaff(@PathVariable Long id, @RequestBody UserMapper user) {
-        return userService.updateMedicalStaff(id, user);
+    @PutMapping("/medicalStaffProfile")
+    public int updateMedicalStaff( @RequestBody UserMapper user) {
+        return userService.updateMedicalStaff(user);
     }
 
     @PutMapping("/auth/activateUser/{id}")

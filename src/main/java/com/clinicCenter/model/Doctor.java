@@ -12,10 +12,7 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("DO")
 public class Doctor extends User {
-    @Override
-    public String getPassword() {
-        return this.getPassword();
-    }
+
 
     @Override
     public boolean isAccountNonExpired() {
