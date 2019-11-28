@@ -15,9 +15,9 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    public String sendMail(User user) {
+    public String sendMail(String email, String message) {
         try {
-            emailService.sendNotification(user.getEmail());
+            emailService.sendNotification(email, message);
         } catch (Exception e) {
             logger.info("Error sending the mail: " + e.getMessage());
         }
