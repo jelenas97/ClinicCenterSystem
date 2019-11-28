@@ -1,6 +1,5 @@
 package com.clinicCenter.service.implementation;
 
-import com.clinicCenter.model.ClinicAdministrator;
 import com.clinicCenter.model.Patient;
 import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapper;
@@ -25,8 +24,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByEmail(String email) {return userRepository.findByEmail(email);}
 
-    public int updateMedicalStaff(Long id, UserMapper user) {
-        return userRepository.updateMedicalStaff(id,user.getFirstName(),user.getLastName(),user.getCountry(),user.getCity(),user.getAddress(), user.getPhone());
+    public int updateMedicalStaff(UserMapper user) {
+        return userRepository.updateMedicalStaff(user.getEmail(),user.getFirstName(),user.getLastName(),user.getCountry(),user.getCity(),user.getAddress(), user.getPhone());
 
     }
 
