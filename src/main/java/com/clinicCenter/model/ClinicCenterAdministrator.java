@@ -18,7 +18,7 @@ import java.util.Set;
 public class ClinicCenterAdministrator extends User {
 
     public ClinicCenterAdministrator() {
-
+        this.setEnabled(false);
     }
 
     @Override
