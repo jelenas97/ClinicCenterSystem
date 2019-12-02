@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -42,9 +43,9 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @PutMapping("/medicalStaffProfile/{id}")
-    public int updateMedicalStaff(@PathVariable Long id, @RequestBody UserMapper user) {
-        return userService.updateMedicalStaff(id, user);
+    @PutMapping("/medicalStaffProfile")
+    public int updateMedicalStaff( @RequestBody UserMapper user) {
+        return userService.updateMedicalStaff(user);
     }
 
     @PutMapping("/auth/activateUser/{id}")
@@ -79,6 +80,13 @@ public class UserController {
         System.out.println("Radiiiii");
 
         // Vrati token kao odgovor na uspesno autentifikaciju
-        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn));
+        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, ((Authority) user.getAuthorities().iterator().next()).getName()));
+    }
+
+    @RequestMapping(value = "/api/whoami", method = RequestMethod.GET)
+    public User user(Principal user) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user1 = (User) auth.getPrincipal();
+        return this.userService.getByEmail(user1.getEmail());
     }
 }
