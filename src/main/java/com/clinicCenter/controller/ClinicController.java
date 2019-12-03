@@ -23,4 +23,9 @@ public class ClinicController {
     @GetMapping("/auth/getAllClinics")
     public Collection<Clinic> getAllClinics() {System.out.println("klinike"); return clinicService.getAllClinics();}
 
+    @PutMapping("/auth/rateClinic/{id}/{number}")
+    public void rateClinis(@PathVariable Long id, @PathVariable Integer number){
+        clinicService.rateClinic(id, number);
+    }
+
 }

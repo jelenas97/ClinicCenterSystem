@@ -24,5 +24,18 @@ public class ClinicServiceImpl implements ClinicService {
         return  clinicRepository.findAll();
     }
 
+    @Override
+    public void rateClinic(Long id, Integer number) {
+        System.out.println(number);
+        Clinic clinic = clinicRepository.findById(id).get();
+        int timesRated = clinic.getTimesRated();
+        Double averageRating = clinic.getClinicAverageRating();
+        double averageRating2 = (averageRating * timesRated + number) / (timesRated + 1);
+        System.out.println(averageRating2);
+        clinic.setClinicAverageRating(averageRating2);
+        clinic.setTimesRated(timesRated + 1);
+        clinicRepository.updateRating(id, averageRating2, timesRated + 1);
+    }
+
 
 }
