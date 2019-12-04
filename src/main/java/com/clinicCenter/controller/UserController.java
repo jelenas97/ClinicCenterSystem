@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Collection;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -54,13 +56,6 @@ public class UserController {
         userService.activateUser(id);
     }
 
-    /*
-    @PostMapping("/auth/login")
-    public void getUser(@RequestBody UserMapper user){
-        System.out.println("loginovo sam se");
-
-        //userService.getByEmail(user.getEmail());
-    }*/
     @RequestMapping(value = "/auth/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest,
                                                        HttpServletResponse response) throws AuthenticationException, IOException {
@@ -88,5 +83,16 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user1 = (User) auth.getPrincipal();
         return this.userService.getByEmail(user1.getEmail());
+    }
+
+    @GetMapping("auth/getDoctors")
+    public Set<User> getDoctors(){
+        System.out.println("daj mi doktore");
+        return this.userService.getDoctors();
+    }
+
+    @PutMapping("auth/rateDoctor/{id}/{number}")
+    public void rateDoctor(@PathVariable Long id, @PathVariable Integer number){
+        userService.rateDoctor(id, number);
     }
 }
