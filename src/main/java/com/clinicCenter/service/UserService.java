@@ -12,9 +12,13 @@ public interface UserService {
 
     User getByEmail(String email);
 
-    int updateMedicalStaff(UserMapper user);
+    int updateUser(UserMapper user);
+
     void save(Patient patient);
+
     Set<String> getAllAdmins();
 
     void activateUser(Long id);
 }
+
+

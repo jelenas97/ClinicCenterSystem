@@ -24,10 +24,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByEmail(String email) {return userRepository.findByEmail(email);}
 
-    public int updateMedicalStaff(UserMapper user) {
-        return userRepository.updateMedicalStaff(user.getEmail(),user.getFirstName(),user.getLastName(),user.getCountry(),user.getCity(),user.getAddress(), user.getPhone());
+    public int updateUser(UserMapper user) {
+        return userRepository.updateUser(user.getEmail(),user.getFirstName(),user.getLastName(),user.getCountry(),user.getCity(),user.getAddress(), user.getPhone());
 
     }
+
+
 
     @Override
     public void save(Patient patient) {

@@ -45,7 +45,7 @@ public class UserController {
 
     @PutMapping("/medicalStaffProfile")
     public int updateMedicalStaff( @RequestBody UserMapper user) {
-        return userService.updateMedicalStaff(user);
+        return userService.updateUser(user);
     }
 
     @PutMapping("/auth/activateUser/{id}")
