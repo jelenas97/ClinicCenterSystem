@@ -33,8 +33,4 @@ public class Doctor extends User {
     public boolean isEnabled() {
         return true;
     }
-    /*private Set<Patient> examinedPatients;
-    private Set<Patient> allClinicPatients;
-    private Long doctorAverageRating;
-    private Clinic worksInClinic;*/
 }

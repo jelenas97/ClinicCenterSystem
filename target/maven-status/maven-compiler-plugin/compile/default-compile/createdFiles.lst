@@ -3,17 +3,12 @@ com\clinicCenter\model\Recipe$RecipeBuilder.class
 com\clinicCenter\service\implementation\CustomUserDetailsService.class
 com\clinicCenter\repository\RegistrationRequestRepository.class
 com\clinicCenter\model\AnnualLeaveRequest.class
-com\clinicCenter\model\Operation.class
-com\clinicCenter\model\OperationRoom.class
 com\clinicCenter\App.class
 com\clinicCenter\service\ClinicService.class
 com\clinicCenter\model\Nurse.class
-com\clinicCenter\model\MedicalRecord$MedicalRecordBuilder.class
 com\clinicCenter\model\Medicament.class
 com\clinicCenter\model\Patient$PatientBuilder.class
-com\clinicCenter\security\auth\TokenAuthenticationFilter.class
 com\clinicCenter\service\implementation\RegistrationRequestServiceImpl.class
-com\clinicCenter\model\DiagnosisCodeBook.class
 com\clinicCenter\security\TokenUtils.class
 com\clinicCenter\service\implementation\MedicamentServiceImpl.class
 com\clinicCenter\model\Authority.class
@@ -23,7 +18,6 @@ com\clinicCenter\model\RegistrationRequest.class
 com\clinicCenter\service\MedicamentService.class
 com\clinicCenter\model\Clinic.class
 com\clinicCenter\model\ClinicCenterAdministrator.class
-com\clinicCenter\config\WebConfig.class
 com\clinicCenter\model\MedicalRecord.class
 com\clinicCenter\controller\EmailController.class
 com\clinicCenter\model\MedicalExamination.class
@@ -59,7 +53,6 @@ com\clinicCenter\controller\RegistrationRequestController.class
 com\clinicCenter\service\RegistrationRequestService.class
 com\clinicCenter\model\MedicalExaminationRoom.class
 com\clinicCenter\model\Recipe.class
-com\clinicCenter\security\auth\JwtAuthenticationRequest.class
 com\clinicCenter\model\Operation$OperationBuilder.class
 com\clinicCenter\config\WebSecurityConfig.class
 com\clinicCenter\model\MedicalReport$MedicalReportBuilder.class

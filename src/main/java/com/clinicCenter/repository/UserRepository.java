@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 @Repository
@@ -30,5 +32,11 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "SELECT concat(first_name,\" \",last_name) from User u WHERE (u.type='CA')", nativeQuery = true)
     Set<String> getAllAdmins();
 
+    @Query(value = "SELECT u FROM User u WHERE u.type = 'DO' ")
+    ArrayList<User> getDoctors();
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u SET u.averageRating = :averageRating2, u.timesRated = :timesRated WHERE u.id = :id")
+    void updateRating(Long id, double averageRating2, int timesRated);
 }

@@ -34,7 +34,10 @@ public class Clinic {
     private String description;
 
     @Column
-    private Double clinicAverageRating;
+    private Double clinicAverageRating = 0.0;
+
+    @Column
+    private Integer timesRated = 0;
    /*private Set<MedicalExamination> availableExaminations;
     private Set<Doctor> clinicDoctors;
     private Set<MedicalExaminationRoom> examinationRooms;
