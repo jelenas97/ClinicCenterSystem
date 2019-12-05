@@ -22,11 +22,6 @@ public class ClinicCenterAdministrator extends User {
     }
 
     @Override
-    public String getPassword() {
-        return this.getPassword();
-    }
-
-    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
