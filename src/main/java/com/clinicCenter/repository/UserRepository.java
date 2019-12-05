@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
     Set<String> getAllAdmins();
 
     @Query(value = "SELECT u FROM User u WHERE u.type = 'DO' ")
-    Set<User> getDoctors();
+    ArrayList<User> getDoctors();
 
     @Transactional
     @Modifying

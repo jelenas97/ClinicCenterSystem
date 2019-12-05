@@ -4,6 +4,7 @@ import com.clinicCenter.model.Patient;
 import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapper;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -21,5 +22,5 @@ public interface UserService {
 
     void rateDoctor(Long id, Integer number);
 
-    Set<User> getDoctors();
+    ArrayList<User> getDoctors();
 }

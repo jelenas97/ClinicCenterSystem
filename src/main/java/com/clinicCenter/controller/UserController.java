@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -86,7 +87,7 @@ public class UserController {
     }
 
     @GetMapping("auth/getDoctors")
-    public Set<User> getDoctors(){
+    public ArrayList<User> getDoctors(){
         System.out.println("daj mi doktore");
         return this.userService.getDoctors();
     }
