@@ -12,10 +12,6 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("NU")
 public class Nurse extends User {
-    @Override
-    public String getPassword() {
-        return this.getPassword();
-    }
 
     @Override
     public boolean isAccountNonExpired() {
