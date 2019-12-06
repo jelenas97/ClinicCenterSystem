@@ -2,6 +2,7 @@ package com.clinicCenter.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.DiscriminatorValue;
@@ -12,10 +13,44 @@ import java.util.Set;
 @Builder
 @Entity
 @DiscriminatorValue("PA")
+@NoArgsConstructor
 public class Patient extends User {
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
     /*private Set<MedicalExamination> scheduledExaminations;
     private Set<Operation> scheduledOperations;
     private MedicalRecord medicalRecord;
     private Set<MedicalExamination> historyOfExamination;
     private Set<Operation> historyOfOperation;*/
+
+    public Patient(String email, String password, String firstName, String lastName, String address, String city, String country, String phone, Long ssn) {
+        this.setEmail(email);
+        this.setPassword(password);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setAddress(address);
+        this.setCity(city);
+        this.setCountry(country);
+        this.setPhone(phone);
+        this.setSsn(ssn);
+        this.setEnabled(false);
+    }
 }

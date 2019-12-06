@@ -20,6 +20,11 @@ public class RegistrationRequestServiceImpl implements RegistrationRequestServic
     }
 
     @Override
+    public void delete(RegistrationRequest registrationRequest) {
+        registrationRequestRepository.delete(registrationRequest);
+    }
+
+    @Override
     public Set<RegistrationRequest> getAll() {
         return registrationRequestRepository.getAll();
     }
@@ -27,6 +32,11 @@ public class RegistrationRequestServiceImpl implements RegistrationRequestServic
     @Override
     public RegistrationRequest getById(Long id) {
         return registrationRequestRepository.findById(id).get();
+    }
+
+    @Override
+    public void removeById(Long id) {
+        registrationRequestRepository.deleteById(id);
     }
 
 
