@@ -13,10 +13,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @DiscriminatorValue("CA")
 public class ClinicAdministrator extends User {
-    @Override
-    public String getPassword() {
-        return this.getPassword();
-    }
+
 
     @Override
     public boolean isAccountNonExpired() {

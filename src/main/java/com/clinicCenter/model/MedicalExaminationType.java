@@ -2,13 +2,14 @@ package com.clinicCenter.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
 
 @Data
-@Builder
+@NoArgsConstructor
 @Entity
 public class MedicalExaminationType {
 
@@ -23,5 +24,6 @@ public class MedicalExaminationType {
     private Double price;
 
     @OneToMany
+    @JoinColumn(name = "met_id", referencedColumnName = "id")
     private Set<MedicalExaminationRequest> examinationRequests;
 }
