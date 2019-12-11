@@ -8,9 +8,13 @@ import java.util.Collection;
 import java.util.Set;
 
 @Data
-@Builder
+//@Builder
 @Entity
 public class MedicalExaminationType {
+
+    public MedicalExaminationType() {
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
