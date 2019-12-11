@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Data
@@ -33,4 +34,7 @@ public class Doctor extends User {
     public boolean isEnabled() {
         return true;
     }
+
+    @OneToMany
+    private Set<MedicalExaminationRequest> examinationRequests;
 }

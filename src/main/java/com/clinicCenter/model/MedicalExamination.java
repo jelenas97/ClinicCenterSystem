@@ -10,11 +10,14 @@ import java.util.Date;
 @Builder
 public class MedicalExamination {
     private Long id;
+
+    private MedicalExaminationType type;
+    private Doctor doctor;
+    private Clinic clinic;
+    private MedicalExaminationRoom room;
+
     private Date date;
     private Double duration;
-    private MedicalExaminationRoom room;
-    private Doctor doctor;
     private Double price;
-    private MedicalExaminationType type;
     private Double discount;
 }
