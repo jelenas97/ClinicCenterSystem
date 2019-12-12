@@ -19,4 +19,14 @@ public class MedicalExaminationTypeServiceImpl implements MedicalExaminationType
     public Set<MedicalExaminationType> getAll() {
         return this.medicalExaminationTypeRepository.getAll();
     }
+
+    @Override
+    public MedicalExaminationType getById(Long id) {
+        return this.medicalExaminationTypeRepository.getOne(id);
+    }
+
+    @Override
+    public void removeById(Long id) {
+        this.medicalExaminationTypeRepository.deleteById(id);
+    }
 }

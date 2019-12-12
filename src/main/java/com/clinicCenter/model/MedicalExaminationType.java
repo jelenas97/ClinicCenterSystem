@@ -1,5 +1,6 @@
 package com.clinicCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +26,6 @@ public class MedicalExaminationType {
 
     @OneToMany
     @JoinColumn(name = "met_id", referencedColumnName = "id")
+    @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 }
