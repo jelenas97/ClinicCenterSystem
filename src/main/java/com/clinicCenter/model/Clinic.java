@@ -1,6 +1,7 @@
 package com.clinicCenter.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +16,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Clinic {
 
-    public Clinic() {}
+    public Clinic() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,25 +35,23 @@ public class Clinic {
     @Column(nullable = false)
     private String description;
 
-    @Column
     private Double clinicAverageRating = 0.0;
 
     @Column
     private Integer timesRated = 0;
-   /*private Set<MedicalExamination> availableExaminations;
-    private Set<Doctor> clinicDoctors;
-    private Set<MedicalExaminationRoom> examinationRooms;
-    private Set<OperationRoom> operationRooms;
-    private Set<MedicalExamination> allExaminationPrices;
-    private Set<ClinicAdministrator> clinicAdministrators;
-    */
 
-   @ManyToOne
-   @JoinColumn(name = "CCA_Id")
-   @JsonIgnore
-   private ClinicCenterAdministrator administrator;
+    @ManyToOne
+    @JoinColumn(name = "CCA_Id")
+    //@JsonIgnore
+    private ClinicCenterAdministrator administrator;
 
-   @OneToMany
-   private Set<MedicalExaminationRequest> examinationRequests;
+    @OneToMany
+    //@JsonIgnore
+    private Set<MedicalExaminationRequest> examinationRequests;
+
+    @OneToMany(mappedBy = "clinic")
+    //@JsonIgnoreProperties("clinic")
+    @JsonIgnore
+    private Set<Doctor> doctors;
 }
 

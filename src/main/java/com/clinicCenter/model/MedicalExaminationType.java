@@ -1,9 +1,11 @@
 package com.clinicCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.print.Doc;
 import java.util.Collection;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ public class MedicalExaminationType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false)
@@ -28,4 +31,9 @@ public class MedicalExaminationType {
 
     @OneToMany
     private Set<MedicalExaminationRequest> examinationRequests;
+
+    @ManyToMany(mappedBy = "medicalExaminationTypes")
+    @JsonIgnore
+    private Set<Doctor> doctors;
+
 }
