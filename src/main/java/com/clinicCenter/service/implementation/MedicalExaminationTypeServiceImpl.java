@@ -29,4 +29,9 @@ public class MedicalExaminationTypeServiceImpl implements MedicalExaminationType
     public void removeById(Long id) {
         this.medicalExaminationTypeRepository.deleteById(id);
     }
+
+    @Override
+    public int updateType(MedicalExaminationType type) {
+        return this.medicalExaminationTypeRepository.updateType(type.getId(), type.getName(), type.getPrice());
+    }
 }

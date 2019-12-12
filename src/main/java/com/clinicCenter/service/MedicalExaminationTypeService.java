@@ -10,4 +10,6 @@ public interface MedicalExaminationTypeService {
     MedicalExaminationType getById(Long id);
 
     void removeById(Long id);
+
+    int updateType(MedicalExaminationType type);
 }
