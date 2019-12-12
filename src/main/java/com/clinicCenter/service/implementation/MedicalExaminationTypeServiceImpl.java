@@ -1,6 +1,7 @@
 package com.clinicCenter.service.implementation;
 
 import com.clinicCenter.model.MedicalExaminationType;
+import com.clinicCenter.model.Patient;
 import com.clinicCenter.repository.MedicalExaminationTypeRepository;
 import com.clinicCenter.repository.MedicamentRepository;
 import com.clinicCenter.service.MedicalExaminationTypeService;
@@ -33,5 +34,10 @@ public class MedicalExaminationTypeServiceImpl implements MedicalExaminationType
     @Override
     public int updateType(MedicalExaminationType type) {
         return this.medicalExaminationTypeRepository.updateType(type.getId(), type.getName(), type.getPrice());
+    }
+
+    @Override
+    public void save(MedicalExaminationType type) {
+        this.medicalExaminationTypeRepository.save(type);
     }
 }

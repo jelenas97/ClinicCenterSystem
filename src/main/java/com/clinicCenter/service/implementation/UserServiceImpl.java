@@ -28,10 +28,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    @Override
     public int updateUser(UserMapper user) {
         return userRepository.updateUser(user.getEmail(),user.getFirstName(),user.getLastName(),user.getCountry(),user.getCity(),user.getAddress(), user.getPhone());
-
     }
+
 
     @Override
     public void save(Patient patient) {

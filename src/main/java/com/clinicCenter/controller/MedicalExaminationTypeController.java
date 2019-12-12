@@ -38,4 +38,9 @@ public class MedicalExaminationTypeController {
         return medicalExaminationTypeService.updateType(type);
     }
 
+    @PostMapping("/typesOfMedicalExam")
+    public void addTypeOfMedicalExam(@RequestBody MedicalExaminationType type){
+        medicalExaminationTypeService.save(type);
+    }
+
 }
