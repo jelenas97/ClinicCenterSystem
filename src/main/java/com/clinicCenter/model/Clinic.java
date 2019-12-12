@@ -50,5 +50,8 @@ public class Clinic {
    @JoinColumn(name = "CCA_Id")
    @JsonIgnore
    private ClinicCenterAdministrator administrator;
+
+   @OneToMany
+   private Set<MedicalExaminationRequest> examinationRequests;
 }
 
