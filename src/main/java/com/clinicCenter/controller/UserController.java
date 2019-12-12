@@ -1,9 +1,6 @@
 package com.clinicCenter.controller;
 
-import com.clinicCenter.model.Authority;
-import com.clinicCenter.model.User;
-import com.clinicCenter.model.UserMapper;
-import com.clinicCenter.model.UserTokenState;
+import com.clinicCenter.model.*;
 import com.clinicCenter.security.TokenUtils;
 import com.clinicCenter.security.auth.JwtAuthenticationRequest;
 import com.clinicCenter.service.UserService;
@@ -95,5 +92,10 @@ public class UserController {
     @PutMapping("auth/rateDoctor/{id}/{number}")
     public void rateDoctor(@PathVariable Long id, @PathVariable Integer number){
         userService.rateDoctor(id, number);
+    }
+
+    @GetMapping("auth/getSearchedDoctors/{selectedOption}/{id}")
+    public Collection<UserMapperTwo> getSearchedDoctors(@PathVariable Long selectedOption, @PathVariable Long id){
+        return userService.getSearchedDoctors(selectedOption, id);
     }
 }

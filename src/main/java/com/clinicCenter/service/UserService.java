@@ -3,6 +3,7 @@ package com.clinicCenter.service;
 import com.clinicCenter.model.Patient;
 import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapper;
+import com.clinicCenter.model.UserMapperTwo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,6 +26,8 @@ public interface UserService {
     void rateDoctor(Long id, Integer number);
 
     ArrayList<User> getDoctors();
+
+    Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id);
 }
 
 

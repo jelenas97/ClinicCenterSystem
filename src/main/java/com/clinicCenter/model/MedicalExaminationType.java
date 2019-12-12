@@ -30,6 +30,7 @@ public class MedicalExaminationType {
     private Double price;
 
     @OneToMany
+    @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 
     @ManyToMany(mappedBy = "medicalExaminationTypes")
