@@ -16,4 +16,11 @@ public class MedicamentServiceImpl implements MedicamentService {
     public void save(Medicament medicament) {
         medicamentRepository.save(medicament);
     }
+
+    @Override
+    public Medicament getById(Long id) {
+        return medicamentRepository.findById(id).get();
+    }
+
+
 }

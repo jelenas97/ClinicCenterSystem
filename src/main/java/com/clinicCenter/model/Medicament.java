@@ -1,5 +1,6 @@
 package com.clinicCenter.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 @Data
 @Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Medicament {
 
     @Id
@@ -26,4 +29,7 @@ public class Medicament {
 
     @Column(nullable = true)
     private Boolean onPrescription; //da li je na recept
+
+    @OneToOne(mappedBy = "medicament")
+    private Recipe recipe;
 }

@@ -17,4 +17,7 @@ public class MedicamentController {
         System.out.println(medicament.getName());
         medicamentService.save(medicament);
     }
+
+
+
 }
