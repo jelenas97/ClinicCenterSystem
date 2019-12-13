@@ -3,6 +3,7 @@ package com.clinicCenter.service.implementation;
 import com.clinicCenter.model.Patient;
 import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapper;
+import com.clinicCenter.model.UserMapperTwo;
 import com.clinicCenter.repository.UserRepository;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public ArrayList<User> getDoctors() {
         return this.userRepository.getDoctors();
+    }
+
+    @Override
+    public Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id) {
+        return userRepository.getSearchedDoctors(selectedOption, id);
     }
 
 

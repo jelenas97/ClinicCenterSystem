@@ -4,16 +4,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Data
-@Builder
+//@Builder
 @Entity
 @DiscriminatorValue("PA")
-@NoArgsConstructor
 public class Patient extends User {
 
     @Override
@@ -35,11 +36,10 @@ public class Patient extends User {
     public boolean isEnabled() {
         return true;
     }
-    /*private Set<MedicalExamination> scheduledExaminations;
-    private Set<Operation> scheduledOperations;
-    private MedicalRecord medicalRecord;
-    private Set<MedicalExamination> historyOfExamination;
-    private Set<Operation> historyOfOperation;*/
+
+    public Patient() {
+
+    }
 
     public Patient(String email, String password, String firstName, String lastName, String address, String city, String country, String phone, Long ssn) {
         this.setEmail(email);
@@ -53,4 +53,7 @@ public class Patient extends User {
         this.setSsn(ssn);
         this.setEnabled(false);
     }
+
+    @OneToMany
+    private Set<MedicalExaminationRequest> examinationRequests;
 }
