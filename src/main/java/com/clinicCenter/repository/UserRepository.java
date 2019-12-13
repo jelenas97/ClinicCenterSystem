@@ -3,6 +3,8 @@ package com.clinicCenter.repository;
 import com.clinicCenter.model.ClinicAdministrator;
 import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapperTwo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
