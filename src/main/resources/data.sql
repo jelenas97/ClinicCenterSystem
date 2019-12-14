@@ -38,5 +38,9 @@ insert into db.doctor_examination_types (doctor_id, type_id) values('7','3');
 INSERT INTO db.registration_request (id, address, city, `country`, date, email, first_name, last_name, password, phone, ssn) VALUES ('1', 'Zbrda', 'Vlasenca', 'Republika Srpska', '2019-12-03 19:00:00.000000', 'req@gmail.com', 'Mitar', 'Mitrovic', '$2a$10$DPpa3Slt3jcwkynr.9WSaO70xTGYYK8iDlX5H89fry1vHxlLUPE0C', '456456456', '4564564565464');
 
 INSERT INTO db.medicament (id, description, name, on_prescription, purpose) VALUES ('1', 'Za glavu', 'Aspirin', null, 'Da ne boli');
+INSERT INTO db.medicament (id, description, name, on_prescription, purpose) VALUES ('2', 'Za bubrege', 'Kafetin', null, 'Da ne boli');
+INSERT INTO db.medicament (id, description, name, on_prescription, purpose) VALUES ('3', 'Za bolove', 'Brufen', null, 'Da ne boli');
 
+insert into db.recipe set id='2', description='Opis2', medicament_name = 'Kafetin', validated=false, medicament_id='2';
+insert into db.recipe set id='3', description='Opis3', medicament_name = 'Brufen', validated=false, medicament_id='3';
 
