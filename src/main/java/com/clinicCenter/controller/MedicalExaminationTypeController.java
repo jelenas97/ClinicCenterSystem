@@ -16,6 +16,7 @@ import com.clinicCenter.service.MedicamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -26,18 +27,14 @@ public class MedicalExaminationTypeController {
     private MedicalExaminationTypeService medicalExaminationTypeService;
 
     @GetMapping("/typesOfMedicalExam")
-    public Set<MedicalExaminationType> getAll(){
-        Set<MedicalExaminationType> types = this.medicalExaminationTypeService.getAll();
-        return  types;
+    public List<MedicalExaminationType> getAll(){
+        List<MedicalExaminationType> types = medicalExaminationTypeService.getAll();
+        return types;
     }
 
     @DeleteMapping(value = "/typesOfMedicalExam/removeType/{id}")
     public void removeById(@PathVariable Long id) {
         MedicalExaminationType type = this.medicalExaminationTypeService.getById(id);
-        /*if(type.getExaminations().isEmpty())
-        {
-            kad se implementira sve
-        }*/
         this.medicalExaminationTypeService.removeById(id);
     }
 

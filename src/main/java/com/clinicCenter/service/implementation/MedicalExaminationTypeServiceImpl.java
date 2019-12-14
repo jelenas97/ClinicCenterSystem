@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -18,8 +19,8 @@ public class MedicalExaminationTypeServiceImpl implements MedicalExaminationType
     private MedicalExaminationTypeRepository medicalExaminationTypeRepository;
 
     @Override
-    public Set<MedicalExaminationType> getAll() {
-        return this.medicalExaminationTypeRepository.getAll();
+    public List<MedicalExaminationType> getAll() {
+        return this.medicalExaminationTypeRepository.findAll();
     }
 
     @Override
@@ -31,6 +32,7 @@ public class MedicalExaminationTypeServiceImpl implements MedicalExaminationType
     public void removeById(Long id) {
         this.medicalExaminationTypeRepository.deleteById(id);
     }
+
 
     @Override
     public int updateType(MedicalExaminationType type) {

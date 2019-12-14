@@ -3,13 +3,14 @@ package com.clinicCenter.service;
 import com.clinicCenter.model.MedicalExaminationType;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 
 public interface MedicalExaminationTypeService {
     Collection<MedicalExaminationType> getAllMedicalExaminationTypes();
 
-    Set<MedicalExaminationType> getAll();
+    List<MedicalExaminationType> getAll();
 
     MedicalExaminationType getById(Long id);
 
