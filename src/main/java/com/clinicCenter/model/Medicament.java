@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@Builder
 @Entity
+@NoArgsConstructor
 public class Medicament {
 
     @Id

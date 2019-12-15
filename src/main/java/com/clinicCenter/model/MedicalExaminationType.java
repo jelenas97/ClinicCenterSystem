@@ -30,6 +30,7 @@ public class MedicalExaminationType {
     private Double price;
 
     @OneToMany
+    @JoinColumn(name = "met_id", referencedColumnName = "id")
     @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 

@@ -2,6 +2,7 @@ package com.clinicCenter.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -9,14 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Data
-@Builder
+@NoArgsConstructor
 @Entity
 @DiscriminatorValue("CA")
 public class ClinicAdministrator extends User {
-    @Override
-    public String getPassword() {
-        return this.getPassword();
-    }
 
     @Override
     public boolean isAccountNonExpired() {
