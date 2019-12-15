@@ -6,6 +6,8 @@ import com.clinicCenter.service.MedicamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MedicamentServiceImpl implements MedicamentService {
 
@@ -15,5 +17,10 @@ public class MedicamentServiceImpl implements MedicamentService {
     @Override
     public void save(Medicament medicament) {
         medicamentRepository.save(medicament);
+    }
+
+    @Override
+    public List<Medicament> getAll() {
+        return medicamentRepository.findAll();
     }
 }

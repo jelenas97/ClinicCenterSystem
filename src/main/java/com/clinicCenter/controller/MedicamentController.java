@@ -5,6 +5,8 @@ import com.clinicCenter.service.MedicamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class MedicamentController {
@@ -16,5 +18,10 @@ public class MedicamentController {
     public void addMedicament(@RequestBody Medicament medicament){
         System.out.println(medicament.getName());
         medicamentService.save(medicament);
+    }
+
+    @GetMapping("/allMedicaments")
+    public List<Medicament> getAll(){
+       return medicamentService.getAll();
     }
 }
