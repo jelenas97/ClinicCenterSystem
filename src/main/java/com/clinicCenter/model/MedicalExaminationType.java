@@ -16,7 +16,6 @@ import java.util.Set;
 public class MedicalExaminationType {
 
     public MedicalExaminationType() {
-
     }
 
     @Id

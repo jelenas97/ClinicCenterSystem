@@ -1,16 +1,33 @@
 package com.clinicCenter.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@Builder
+//@Builder
 @Entity
+@AllArgsConstructor
 public class MedicalExaminationRequest {
+
+    public MedicalExaminationRequest(){
+
+    }
+
+    public MedicalExaminationRequest(MedicalExaminationType type, Date date, Clinic clinic, Doctor doctor){
+        this.type = type;
+        this.date = date;
+        this.clinic = clinic;
+        this.doctor = doctor;
+        this.discount = 0.0;
+        this.duration = 30.0;
+        this.price = 1000.0;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,25 +36,33 @@ public class MedicalExaminationRequest {
     @Column(nullable = false)
     private Date date;
 
-    @Column(nullable = false)
+    @Column
     private Double duration;
 
     @ManyToOne
+    @JoinColumn(name = "clinic_id")
+    @JsonIgnore
     private Clinic clinic;
 
     @ManyToOne
+    @JoinColumn(name = "patient_id")
+    @JsonIgnore
     private Patient patient;
 
     @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    @JsonIgnore
     private Doctor doctor;
 
-    @Column(nullable = false)
+    @Column
     private Double price;
 
     @ManyToOne
+    @JoinColumn(name = "met_id")
+    @JsonIgnore
     private MedicalExaminationType type;
 
-    @Column(nullable = false)
+    @Column
     private Double discount;
 
 }
