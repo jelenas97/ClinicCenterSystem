@@ -19,12 +19,12 @@ public class AnnualLeaveRequest {
     private Long id;
 
     @Future
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column
     private Date leaveDate;
 
     @Future
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column
     private Date returnDate;
 
