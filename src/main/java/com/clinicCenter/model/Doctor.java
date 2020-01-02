@@ -5,12 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Data
-//@Builder
 @Entity
 @DiscriminatorValue("DO")
 public class Doctor extends User {
@@ -42,6 +43,8 @@ public class Doctor extends User {
     @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "doctor_examination_types", joinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "type_id", referencedColumnName = "id"))
@@ -50,4 +53,8 @@ public class Doctor extends User {
     @ManyToOne
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "refDoctor")
+    private  Set<AnnualLeaveRequest> annualLeaveRequest;
 }

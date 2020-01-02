@@ -3,6 +3,8 @@ package com.clinicCenter.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.print.Doc;
@@ -10,7 +12,6 @@ import java.util.Collection;
 import java.util.Set;
 
 @Data
-//@Builder
 @Entity
 public class MedicalExaminationType {
 
@@ -34,6 +35,8 @@ public class MedicalExaminationType {
     @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToMany(mappedBy = "medicalExaminationTypes")
     @JsonIgnore
     private Set<Doctor> doctors;

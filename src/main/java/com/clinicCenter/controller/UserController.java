@@ -98,4 +98,9 @@ public class UserController {
     public Collection<UserMapperTwo> getSearchedDoctors(@PathVariable Long selectedOption, @PathVariable Long id){
         return userService.getSearchedDoctors(selectedOption, id);
     }
+
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable Long id){
+        return userService.getById(id);
+    }
 }

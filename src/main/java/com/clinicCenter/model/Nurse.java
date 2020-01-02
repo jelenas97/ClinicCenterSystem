@@ -1,15 +1,19 @@
 package com.clinicCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.Set;
 
 @Data
-@Builder
 @Entity
+@NoArgsConstructor
 @DiscriminatorValue("NU")
 public class Nurse extends User {
 
@@ -36,4 +40,8 @@ public class Nurse extends User {
     /*private Clinic worksInClinic;
     private Set<Recipe> validatedRecipes;
     private Set<Patient> allClinicPatients;*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "refNurse")
+    private Set<AnnualLeaveRequest> annualLeaveRequests;
 }
