@@ -38,16 +38,18 @@ public class Doctor extends User {
         return true;
     }
 
-    @OneToMany
+    @OneToMany(mappedBy = "doctor")
     @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "doctor_examination_types", joinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "type_id", referencedColumnName = "id"))
+    @JsonIgnore
     private Set<MedicalExaminationType> medicalExaminationTypes;
 
     @ManyToOne
     @JoinColumn(name = "clinic_id")
+    @JsonIgnore
     private Clinic clinic;
 }

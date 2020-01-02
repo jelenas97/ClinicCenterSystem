@@ -42,9 +42,11 @@ public class Clinic {
 
     @ManyToOne
     @JoinColumn(name = "CCA_Id")
+    @JsonIgnore
     private ClinicCenterAdministrator administrator;
 
-    @OneToMany
+    @OneToMany(mappedBy = "clinic")
+    @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 
     @OneToMany(mappedBy = "clinic")

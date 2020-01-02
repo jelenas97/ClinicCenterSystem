@@ -1,5 +1,6 @@
 package com.clinicCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,6 +55,7 @@ public class Patient extends User {
         this.setEnabled(false);
     }
 
-    @OneToMany
+    @OneToMany(mappedBy = "patient")
+    @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 }

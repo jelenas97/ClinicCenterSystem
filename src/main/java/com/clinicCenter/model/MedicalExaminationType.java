@@ -15,7 +15,6 @@ import java.util.Set;
 public class MedicalExaminationType {
 
     public MedicalExaminationType() {
-
     }
 
     @Id
@@ -34,8 +33,9 @@ public class MedicalExaminationType {
     @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 
+    /*
     @ManyToMany(mappedBy = "medicalExaminationTypes")
     @JsonIgnore
-    private Set<Doctor> doctors;
+    private Set<Doctor> doctors;*/
 
 }
