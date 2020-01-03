@@ -26,4 +26,6 @@ public interface ClinicRepository extends JpaRepository<Clinic,Long> {
     @Query(value = "SELECT c.id, c.name, c.description, c.city, c.address, c.clinic_average_rating FROM clinic c where c.id in (SELECT d.clinic_id FROM users d where d.id in (SELECT dbe.doctor_id FROM doctor_examination_types dbe where dbe.type_id = :type_idd))", nativeQuery = true)
     Set<ClinicMapper> getSearchedClinics(@Param("type_idd") Long type_idd);
 
+    @Query(value = "SELECT * FROM db.clinic c Where c.name = :clinicName", nativeQuery = true)
+    Clinic findByName(String clinicName);
 }

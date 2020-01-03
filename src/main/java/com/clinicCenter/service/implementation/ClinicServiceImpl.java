@@ -45,5 +45,10 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicRepository.getSearchedClinics(typeName);
     }
 
+    @Override
+    public Clinic findByName(String clinicName) {
+        return clinicRepository.findByName(clinicName);
+    }
+
 
 }

@@ -1,9 +1,6 @@
 package com.clinicCenter.service.implementation;
 
-import com.clinicCenter.model.Patient;
-import com.clinicCenter.model.User;
-import com.clinicCenter.model.UserMapper;
-import com.clinicCenter.model.UserMapperTwo;
+import com.clinicCenter.model.*;
 import com.clinicCenter.repository.UserRepository;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +72,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id) {
         return userRepository.getSearchedDoctors(selectedOption, id);
+    }
+
+    @Override
+    public void saveDoctor(Doctor doctor) {
+        userRepository.save(doctor);
     }
 
 

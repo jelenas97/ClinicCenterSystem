@@ -1,9 +1,6 @@
 package com.clinicCenter.service;
 
-import com.clinicCenter.model.Patient;
-import com.clinicCenter.model.User;
-import com.clinicCenter.model.UserMapper;
-import com.clinicCenter.model.UserMapperTwo;
+import com.clinicCenter.model.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +25,8 @@ public interface UserService {
     ArrayList<User> getDoctors();
 
     Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id);
+
+    void saveDoctor(Doctor doctor);
 }
 
 

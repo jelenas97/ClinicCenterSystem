@@ -52,4 +52,14 @@ public class Doctor extends User {
     @JoinColumn(name = "clinic_id")
     @JsonIgnore
     private Clinic clinic;
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "examinationRequests=" + examinationRequests +
+                ", medicalExaminationTypes=" + medicalExaminationTypes +
+                ", clinic=" + clinic +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

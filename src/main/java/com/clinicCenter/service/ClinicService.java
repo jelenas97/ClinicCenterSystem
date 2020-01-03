@@ -13,4 +13,6 @@ public interface ClinicService {
     void rateClinic(Long id, Integer number);
 
     Set<ClinicMapper> getSearchedClinics(Long typeName);
+
+    Clinic findByName(String clinicName);
 }
