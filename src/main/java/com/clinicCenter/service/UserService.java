@@ -29,6 +29,8 @@ public interface UserService {
     void saveDoctor(Doctor doctor);
 
     void removeDoctor(Long id);
+
+    ArrayList<User> getDoctorsFromClinic(Long id);
 }
 
 

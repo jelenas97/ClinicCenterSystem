@@ -8,6 +8,7 @@ import com.clinicCenter.service.UserService;
 import com.clinicCenter.service.implementation.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.method.P;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -94,10 +95,9 @@ public class UserController {
         return this.userService.getDoctors();
     }
 
-    @GetMapping("/auth/getDoctorsFromClinic")
-    public ArrayList<User> getDoctorsFromClinic() {
-        System.out.println("daj mi doktore");
-        return this.userService.getDoctors();
+    @GetMapping("/auth/getDoctorsFromClinic/{id}")
+    public ArrayList<User> getDoctorsFromClinic(@PathVariable Long id) {
+        return this.userService.getDoctorsFromClinic(id);
     }
 
     @DeleteMapping("/auth/removeDoctor/{id}")
@@ -261,6 +261,7 @@ public class UserController {
 
             }
         });
+        //doctor.getExaminationRequests().add(new MedicalExaminationRequest());
         System.out.println(doctor);
         userService.saveDoctor(doctor);
     }

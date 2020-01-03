@@ -1,5 +1,6 @@
 package com.clinicCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,7 @@ public class ClinicAdministrator extends User {
 
     @ManyToOne
     @JoinColumn(name = "clinic_id")
+    @JsonIgnore
     private Clinic clinic;
 
 }

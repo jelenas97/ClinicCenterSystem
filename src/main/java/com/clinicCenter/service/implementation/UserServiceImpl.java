@@ -86,5 +86,10 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public ArrayList<User> getDoctorsFromClinic(Long id) {
+        return userRepository.getDoctorsFromClinic(id);
+    }
+
 
 }
