@@ -27,6 +27,8 @@ public interface UserService {
     Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id);
 
     void saveDoctor(Doctor doctor);
+
+    void removeDoctor(Long id);
 }
 
 

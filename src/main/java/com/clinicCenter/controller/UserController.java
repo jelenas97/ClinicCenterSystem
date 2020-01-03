@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @PutMapping("/medicalStaffProfile")
-    public int updateMedicalStaff( @RequestBody UserMapper user) {
+    public int updateMedicalStaff(@RequestBody UserMapper user) {
         return userService.updateUser(user);
     }
 
@@ -89,28 +89,39 @@ public class UserController {
     }
 
     @GetMapping("auth/getDoctors")
-    public ArrayList<User> getDoctors(){
+    public ArrayList<User> getDoctors() {
         System.out.println("daj mi doktore");
         return this.userService.getDoctors();
     }
 
+    @GetMapping("/auth/getDoctorsFromClinic")
+    public ArrayList<User> getDoctorsFromClinic() {
+        System.out.println("daj mi doktore");
+        return this.userService.getDoctors();
+    }
+
+    @DeleteMapping("/auth/removeDoctor/{id}")
+    public void removeDoctor(@PathVariable Long id){
+        userService.removeDoctor(id);
+    }
+
     @PutMapping("auth/rateDoctor/{id}/{number}")
-    public void rateDoctor(@PathVariable Long id, @PathVariable Integer number){
+    public void rateDoctor(@PathVariable Long id, @PathVariable Integer number) {
         userService.rateDoctor(id, number);
     }
 
     @GetMapping("auth/getSearchedDoctors/{selectedOption}/{id}")
-    public Collection<UserMapperTwo> getSearchedDoctors(@PathVariable Long selectedOption, @PathVariable Long id){
+    public Collection<UserMapperTwo> getSearchedDoctors(@PathVariable Long selectedOption, @PathVariable Long id) {
         return userService.getSearchedDoctors(selectedOption, id);
     }
 
     @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable Long id){
+    public User getUserById(@PathVariable Long id) {
         return userService.getById(id);
     }
 
     @PostMapping("/addDoctor/{clinicName}")
-    public void addDoctor(@RequestBody Doctor doctor, @PathVariable String clinicName){
+    public void addDoctor(@RequestBody Doctor doctor, @PathVariable String clinicName) {
         Clinic clinic = clinicService.findByName(clinicName);
         System.out.println("ovo je iz baze " + clinic.getName() + clinic.getId());
         doctor.setClinic(clinic);

@@ -40,10 +40,9 @@ public class Clinic {
     @Column
     private Integer timesRated = 0;
 
-    @ManyToOne
-    @JoinColumn(name = "CCA_Id")
+    @OneToMany(mappedBy = "clinic")
     @JsonIgnore
-    private ClinicCenterAdministrator administrator;
+    private Set<ClinicAdministrator> clinicAdministrators;
 
     @OneToMany(mappedBy = "clinic")
     @JsonIgnore

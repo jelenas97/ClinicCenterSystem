@@ -35,13 +35,8 @@ public class ClinicAdministrator extends User {
         return true;
     }
 
-    //@ManyToOne
-    //@JoinColumn(name = "clinic_id")
-    //private Clinic clinic;
-    /*
-    For clinic administrator
-    ako imamo klase za sve zahteve
-    private Collection<ExaminationRequest> examinationRequests;
-    private Collection<OperationRequest> operationRequests;
-     */
+    @ManyToOne
+    @JoinColumn(name = "clinic_id")
+    private Clinic clinic;
+
 }

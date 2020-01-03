@@ -41,13 +41,5 @@ public class ClinicCenterAdministrator extends User {
     public boolean isEnabled() {
         return true;
     }
-    /*
-    For clinic center administrator
-    ako imamo klase za zahteve
-    private Collection<RegisterRequest> registerRequests;
-     */
 
-    @OneToMany(mappedBy = "administrator")
-    @JsonIgnore
-    private Set<Clinic> clinics;
 }

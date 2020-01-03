@@ -79,5 +79,12 @@ public class UserServiceImpl implements UserService {
         userRepository.save(doctor);
     }
 
+    @Override
+    public void removeDoctor(Long id) {
+        userRepository.deleteFromUserAuthority(id);
+        userRepository.deleteFromDoctorExaminationType(id);
+        userRepository.deleteById(id);
+    }
+
 
 }

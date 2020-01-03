@@ -45,4 +45,14 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query(value = "SELECT u.id, u.first_name, u.last_name, u.country, u.average_rating FROM users u WHERE u.clinic_id = :id and u.id in (SELECT det.doctor_id FROM doctor_examination_types det WHERE det.type_id = :selectedOption)", nativeQuery = true)
     Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM db.user_authority WHERE user_id = :id", nativeQuery = true)
+    void deleteFromUserAuthority(Long id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM db.doctor_examination_types WHERE doctor_id = :id", nativeQuery = true)
+    void deleteFromDoctorExaminationType(Long id);
 }
