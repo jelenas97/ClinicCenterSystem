@@ -111,4 +111,26 @@ public abstract class User implements UserDetails {
     public Long getId() {
         return this.id;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "type='" + type + '\'' +
+                ", id=" + id +
+                ", enabled=" + enabled +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", phone='" + phone + '\'' +
+                ", ssn=" + ssn +
+                ", lastPasswordResetDate=" + lastPasswordResetDate +
+                ", timesRated=" + timesRated +
+                ", averageRating=" + averageRating +
+                ", authorities=" + authorities +
+                '}';
+    }
 }

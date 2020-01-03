@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data
+//@Builder
 @Entity
 @DiscriminatorValue("DO")
 public class Doctor extends User {
@@ -59,4 +60,14 @@ public class Doctor extends User {
     @JsonIgnore
     @OneToMany(mappedBy = "refDoctor")
     private  Set<AnnualLeaveRequest> annualLeaveRequest;
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "examinationRequests=" + examinationRequests +
+                ", medicalExaminationTypes=" + medicalExaminationTypes +
+                ", clinic=" + clinic +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }
