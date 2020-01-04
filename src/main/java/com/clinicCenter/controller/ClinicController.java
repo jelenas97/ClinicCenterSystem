@@ -35,4 +35,14 @@ public class ClinicController {
         return clinicService.getSearchedClinics(typeName);
     }
 
+    @GetMapping("/auth/getAdminsClinic/{id}")
+    public Clinic getAdminsClinic(@PathVariable Long id){
+        return clinicService.getAdminsClinic(id);
+    }
+
+    @PutMapping("/auth/updateClinic")
+    public void updateClinic(@RequestBody Clinic clinic){
+        clinicService.updateClinic(clinic);
+    }
+
 }

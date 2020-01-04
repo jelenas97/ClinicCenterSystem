@@ -15,4 +15,8 @@ public interface ClinicService {
     Set<ClinicMapper> getSearchedClinics(Long typeName);
 
     Clinic findByName(String clinicName);
+
+    Clinic getAdminsClinic(Long id);
+
+    void updateClinic(Clinic clinic);
 }

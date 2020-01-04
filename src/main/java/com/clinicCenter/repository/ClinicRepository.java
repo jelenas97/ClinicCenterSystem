@@ -28,4 +28,12 @@ public interface ClinicRepository extends JpaRepository<Clinic,Long> {
 
     @Query(value = "SELECT * FROM db.clinic c Where c.name = :clinicName", nativeQuery = true)
     Clinic findByName(String clinicName);
+
+    @Query(value = "SELECT * FROM db.clinic c WHERE c.id = (SELECT u.clinic_id FROM db.users u WHERE u.id = :id)", nativeQuery = true)
+    Clinic getAdminsClinic(Long id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE db.clinic SET name = :namee, description = :description, city = :city, address = :address, clinic_average_rating = :clinicAverageRating where id = :id", nativeQuery = true)
+    void updateClinic(Long id, String namee, String description, String city, String address, Double clinicAverageRating);
 }

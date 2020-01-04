@@ -50,5 +50,15 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicRepository.findByName(clinicName);
     }
 
+    @Override
+    public Clinic getAdminsClinic(Long id) {
+        return clinicRepository.getAdminsClinic(id);
+    }
+
+    @Override
+    public void updateClinic(Clinic clinic) {
+        clinicRepository.updateClinic(clinic.getId(), clinic.getName(), clinic.getDescription(), clinic.getCity(), clinic.getAddress(), clinic.getClinicAverageRating());
+    }
+
 
 }
