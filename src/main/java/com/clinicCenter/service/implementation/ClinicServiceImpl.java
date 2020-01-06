@@ -40,12 +40,6 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
-    public Set<ClinicMapper> getSearchedClinics(Long typeName) {
-        System.out.println(typeName + "ajssssssssssss");
-        return clinicRepository.getSearchedClinics(typeName);
-    }
-
-    @Override
     public Clinic findByName(String clinicName) {
         return clinicRepository.findByName(clinicName);
     }
@@ -58,6 +52,27 @@ public class ClinicServiceImpl implements ClinicService {
     @Override
     public void updateClinic(Clinic clinic) {
         clinicRepository.updateClinic(clinic.getId(), clinic.getName(), clinic.getDescription(), clinic.getCity(), clinic.getAddress(), clinic.getClinicAverageRating());
+    }
+
+    @Override
+    public Set<ClinicMapper> getSearchedClinics(Long typeName) {
+        System.out.println(typeName + "ajssssssssssss");
+        return clinicRepository.getSearchedClinics(typeName);
+    }
+
+    @Override
+    public Set<ClinicMapper> getSearchedClinicsTwo(Long typeName, Double clinicRating) {
+        return clinicRepository.getSearchedClinicsTwo(typeName, clinicRating);
+    }
+
+    @Override
+    public Set<ClinicMapper> getSearchedClinicsThree(Long typeName, String clinicName) {
+        return clinicRepository.getSearchedClinicsThree(typeName, clinicName);
+    }
+
+    @Override
+    public Set<ClinicMapper> getSearchedClinicsFour(Long typeName, String clinicName, Double clinicRating) {
+        return clinicRepository.getSearchedClinicsFour(typeName, clinicName, clinicRating);
     }
 
 

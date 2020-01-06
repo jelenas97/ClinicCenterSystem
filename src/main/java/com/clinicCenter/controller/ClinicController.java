@@ -30,9 +30,19 @@ public class ClinicController {
         clinicService.rateClinic(id, number);
     }
 
-    @GetMapping("auth/getSearchedClinics/{typeName}")
-    public Set<ClinicMapper> getSearchedClinics(@PathVariable Long typeName) {
-        return clinicService.getSearchedClinics(typeName);
+    @GetMapping("auth/getSearchedClinics/{typeName}/{clinicName}/{clinicRating}")
+    public Set<ClinicMapper> getSearchedClinics(@PathVariable Long typeName, @PathVariable String clinicName, @PathVariable Double clinicRating) {
+        System.out.println("Ovo je clinic name iz saercha " + clinicName);
+        System.out.println("Ovo je rating clinice iz searcha " + clinicRating);
+        if(clinicName.equals(" ") && clinicRating == 0.0){
+            return clinicService.getSearchedClinics(typeName);
+        } else if(clinicName.equals(" ")) {
+            return clinicService.getSearchedClinicsTwo(typeName, clinicRating);
+        } else if(clinicRating == 0.0){
+            return clinicService.getSearchedClinicsThree(typeName, clinicName);
+        } else {
+            return clinicService.getSearchedClinicsFour(typeName, clinicName, clinicRating);
+        }
     }
 
     @GetMapping("/auth/getAdminsClinic/{id}")

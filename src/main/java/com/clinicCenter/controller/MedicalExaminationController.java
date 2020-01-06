@@ -16,8 +16,8 @@ public class MedicalExaminationController {
     @Autowired
     private MedicalExaminationService medicalExaminationService;
 
-    @PutMapping("auth/sendMedicalExamRequest/{typeId}/{date}/{clinicId}/{doctorId}")
-    public void sendMedicalExamRequest(@PathVariable Long typeId, @PathVariable Date date, @PathVariable Long clinicId, @PathVariable Long doctorId){
-        medicalExaminationService.sendRequest(typeId, date, clinicId, doctorId);
+    @PutMapping("auth/sendMedicalExamRequest/{typeId}/{date}/{clinicId}/{doctorId}/{patientId}")
+    public void sendMedicalExamRequest(@PathVariable Long typeId, @PathVariable Date date, @PathVariable Long clinicId, @PathVariable Long doctorId, @PathVariable Long patientId) {
+        medicalExaminationService.sendRequest(typeId, date, clinicId, doctorId, patientId);
     }
 }

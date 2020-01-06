@@ -29,17 +29,17 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     private UserRepository userRepository;
 
     @Override
-    public void sendRequest(Long typeId, Date date, Long clinicId, Long doctorId) {
+    public void sendRequest(Long typeId, Date date, Long clinicId, Long doctorId, Long patientId) {
         MedicalExaminationType type = medicalExaminationTypeRepository.findById(typeId).get();
         System.out.println("preuzet tip id : " + type.getId());
         Clinic clinic = clinicRepository.findById(clinicId).get();
         System.out.println("preuzet clinic id : " + clinic.getId());
-        Doctor doctor = (Doctor) userRepository.findById(doctorId).get();
+        User doctor = userRepository.findById(doctorId).get();
         System.out.println("preuzet doktor id : " + doctor.getId());
-        //Patient patient = (Patient) userRepository.findById(patientId).get();
+        User patient = userRepository.findById(patientId).get();
+        System.out.println("preuzet pacijent id : " + patient.getId());
 
-        MedicalExaminationRequest newReq = new MedicalExaminationRequest(type, date, clinic, doctor);
-        //newReq.setPatient(patient);
+        MedicalExaminationRequest newReq = new MedicalExaminationRequest(type, date, clinic, (Doctor)doctor, (Patient)patient);
         medicalExaminationRequestRepository.save(newReq);
     }
 }
