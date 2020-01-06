@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data
-//@Builder
 @Entity
 @AllArgsConstructor
 public class Clinic {
@@ -40,16 +39,5 @@ public class Clinic {
     @Column
     private Integer timesRated = 0;
 
-    @OneToMany(mappedBy = "clinic")
-    @JsonIgnore
-    private Set<ClinicAdministrator> clinicAdministrators;
-
-    @OneToMany(mappedBy = "clinic")
-    @JsonIgnore
-    private Set<MedicalExaminationRequest> examinationRequests;
-
-    @OneToMany(mappedBy = "clinic")
-    @JsonIgnore
-    private Set<Doctor> doctors;
 }
 

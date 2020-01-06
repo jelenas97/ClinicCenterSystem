@@ -12,7 +12,6 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data
-//@Builder
 @Entity
 @DiscriminatorValue("DO")
 public class Doctor extends User {
@@ -52,9 +51,9 @@ public class Doctor extends User {
     @JsonIgnore
     private Set<MedicalExaminationType> medicalExaminationTypes;
 
-    @ManyToOne
-    @JoinColumn(name = "clinic_id")
     @JsonIgnore
+    @JoinColumn(name = "clinic_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Clinic clinic;
 
     @JsonIgnore

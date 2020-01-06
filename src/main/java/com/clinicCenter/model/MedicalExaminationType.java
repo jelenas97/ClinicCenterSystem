@@ -30,14 +30,14 @@ public class MedicalExaminationType {
     private Double price;
 
     @OneToMany
-    @JoinColumn(name = "met_id", referencedColumnName = "id")
     @JsonIgnore
+    @JoinColumn(name = "met_id", referencedColumnName = "id")
     private Set<MedicalExaminationRequest> examinationRequests;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @ManyToMany(mappedBy = "medicalExaminationTypes")
     @JsonIgnore
+    @ManyToMany(mappedBy = "medicalExaminationTypes")
     private Set<Doctor> doctors;
 
 }

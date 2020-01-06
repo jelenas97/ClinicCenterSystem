@@ -9,6 +9,7 @@ import java.util.Set;
 public interface ClinicService {
     void save(Clinic clinic);
     Collection<Clinic> getAllClinics();
+    Clinic getById(Long id);
 
     void rateClinic(Long id, Integer number);
 
