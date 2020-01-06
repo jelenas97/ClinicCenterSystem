@@ -14,5 +14,6 @@ public interface MedicalExaminationRoomService {
 
     int updateRoom(MedicalExaminationRoom room);
 
+    void save(MedicalExaminationRoom room);
 
 }

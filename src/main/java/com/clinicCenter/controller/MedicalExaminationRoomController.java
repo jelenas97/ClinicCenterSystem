@@ -11,25 +11,30 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-public class MedicalExaminationRoomControler {
+public class MedicalExaminationRoomController {
     @Autowired
     private MedicalExaminationRoomService medicalExaminationRoomService;
 
-    @GetMapping("/rooms")
+    @GetMapping("/medicalExamRooms")
     public List<MedicalExaminationRoom> getAll(){
         List<MedicalExaminationRoom> rooms = medicalExaminationRoomService.getAll();
         return rooms;
     }
 
-    @DeleteMapping(value = "/rooms/removeRoom/{id}")
+    @DeleteMapping(value = "/medicalExamRooms/removeRoom/{id}")
     public void removeById(@PathVariable Long id) {
         MedicalExaminationRoom room = this.medicalExaminationRoomService.getById(id);
         this.medicalExaminationRoomService.removeById(id);
     }
 
-    @PutMapping("/rooms")
+    @PutMapping("/medicalExamRooms")
     public int updateMedicalExamRoom( @RequestBody MedicalExaminationRoom room) {
         return medicalExaminationRoomService.updateRoom(room);
+    }
+
+    @PostMapping("/medicalExamRooms")
+    public void addMedicalExamRoom(@RequestBody MedicalExaminationRoom room){
+        medicalExaminationRoomService.save(room);
     }
 
 }

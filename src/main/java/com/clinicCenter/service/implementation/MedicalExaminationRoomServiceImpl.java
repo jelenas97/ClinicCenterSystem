@@ -35,4 +35,9 @@ public class MedicalExaminationRoomServiceImpl implements MedicalExaminationRoom
     public int updateRoom(MedicalExaminationRoom room) {
         return this.medicalExaminationRoomRepository.updateRoom(room.getId(), room.getName(), room.getNumber());
     }
+
+    @Override
+    public void save(MedicalExaminationRoom room) {
+        this.medicalExaminationRoomRepository.save(room);
+    }
 }
