@@ -261,7 +261,6 @@ public class UserController {
 
             }
         });
-        //doctor.getExaminationRequests().add(new MedicalExaminationRequest());
         System.out.println(doctor);
         userService.saveDoctor(doctor);
     }
