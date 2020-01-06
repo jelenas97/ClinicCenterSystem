@@ -21,4 +21,18 @@ public class MedicalExaminationRoomServiceImpl implements MedicalExaminationRoom
         return this.medicalExaminationRoomRepository.findAll();
     }
 
+    @Override
+    public MedicalExaminationRoom getById(Long id) {
+        return this.medicalExaminationRoomRepository.getOne(id);
+    }
+
+    @Override
+    public void removeById(Long id) {
+        this.medicalExaminationRoomRepository.deleteById(id);
+    }
+
+    @Override
+    public int updateRoom(MedicalExaminationRoom room) {
+        return this.medicalExaminationRoomRepository.updateRoom(room.getId(), room.getName(), room.getNumber());
+    }
 }

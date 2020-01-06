@@ -5,9 +5,7 @@ import com.clinicCenter.model.MedicalExaminationType;
 import com.clinicCenter.service.MedicalExaminationRoomService;
 import com.clinicCenter.service.MedicalExaminationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,17 @@ public class MedicalExaminationRoomControler {
     public List<MedicalExaminationRoom> getAll(){
         List<MedicalExaminationRoom> rooms = medicalExaminationRoomService.getAll();
         return rooms;
+    }
+
+    @DeleteMapping(value = "/rooms/removeRoom/{id}")
+    public void removeById(@PathVariable Long id) {
+        MedicalExaminationRoom room = this.medicalExaminationRoomService.getById(id);
+        this.medicalExaminationRoomService.removeById(id);
+    }
+
+    @PutMapping("/rooms")
+    public int updateMedicalExamRoom( @RequestBody MedicalExaminationRoom room) {
+        return medicalExaminationRoomService.updateRoom(room);
     }
 
 }

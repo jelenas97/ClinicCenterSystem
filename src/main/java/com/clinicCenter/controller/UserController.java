@@ -118,7 +118,7 @@ public class UserController {
         doctor.setType("DO");
         doctor.setAverageRating(0.0);
         doctor.setTimesRated(0);
-        doctor.setMedicalExaminationTypes(new Set<MedicalExaminationType>() {
+        /*doctor.setMedicalExaminationTypes(new Set<MedicalExaminationType>() {
             @Override
             public int size() {
                 return 0;
@@ -249,7 +249,7 @@ public class UserController {
             public void clear() {
 
             }
-        });
+        });*/
         System.out.println(doctor);
         userService.saveDoctor(doctor);
     }

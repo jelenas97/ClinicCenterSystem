@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ArrayList<User> getDoctors() {
-        return this.userRepository.getDoctors();
+        return userRepository.getDoctors();
     }
 
     @Override
