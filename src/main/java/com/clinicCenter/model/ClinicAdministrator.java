@@ -36,9 +36,9 @@ public class ClinicAdministrator extends User {
         return true;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "clinic_id")
-    @JsonIgnore
     private Clinic clinic;
 
 }

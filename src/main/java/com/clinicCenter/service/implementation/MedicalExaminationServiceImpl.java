@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 @Service
 public class MedicalExaminationServiceImpl implements MedicalExaminationService {
@@ -41,5 +43,10 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
         MedicalExaminationRequest newReq = new MedicalExaminationRequest(type, date, clinic, (Doctor)doctor, (Patient)patient);
         medicalExaminationRequestRepository.save(newReq);
+    }
+
+    @Override
+    public Collection<MedicalExaminationRequest> getAllExaminationRequests(Long adminId) {
+        return medicalExaminationRequestRepository.getRequestForClinic(adminId);
     }
 }

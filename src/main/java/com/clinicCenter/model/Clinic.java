@@ -40,12 +40,11 @@ public class Clinic {
     @Column
     private Integer timesRated = 0;
 
-    @OneToMany(mappedBy = "clinic")
     @JsonIgnore
+    @OneToMany(mappedBy = "clinic")
     private Set<ClinicAdministrator> clinicAdministrators;
 
     @OneToMany(mappedBy = "clinic")
-    @JsonIgnore
     private Set<MedicalExaminationRequest> examinationRequests;
 
     @OneToMany(mappedBy = "clinic")
