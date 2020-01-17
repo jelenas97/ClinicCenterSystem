@@ -27,6 +27,11 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
+    public Clinic getById(Long id) {
+        return clinicRepository.getOne(id);
+    }
+
+    @Override
     public void rateClinic(Long id, Integer number) {
         System.out.println(number);
         Clinic clinic = clinicRepository.findById(id).get();

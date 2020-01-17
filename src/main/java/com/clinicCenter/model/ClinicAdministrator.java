@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -36,9 +33,9 @@ public class ClinicAdministrator extends User {
         return true;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "clinic_id")
     @JsonIgnore
+    @JoinColumn(name = "clinic_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Clinic clinic;
 
 }

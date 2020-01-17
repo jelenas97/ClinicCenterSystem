@@ -16,6 +16,9 @@ public class Medicament {
     private Long id;
 
     @Column(nullable = false)
+    private Integer code;
+
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
@@ -25,5 +28,5 @@ public class Medicament {
     private String description;
 
     @Column(nullable = true)
-    private Boolean onPrescription; //da li je na recept
+    private Boolean onPrescription;
 }

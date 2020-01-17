@@ -1,10 +1,37 @@
 package com.clinicCenter.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import com.clinicCenter.model.*;
+import com.clinicCenter.service.AuthorityService;
+import com.clinicCenter.service.ClinicService;
+import com.clinicCenter.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 @RestController
+@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class DoctorController {
+
+    private final UserService userService;
+    private final ClinicService clinicService;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthorityService authorityService;
+
+    @PostMapping("/addDoctor/{id}")
+    public void addDoctor(@RequestBody Doctor doctor, @PathVariable Long id) {
+        Clinic clinic = clinicService.getById(id);
+        List<Authority> authorities = authorityService.findByName("ROLE_DOCTOR");
+        doctor.setType("DO");
+        doctor.setTimesRated(0);
+        doctor.setEnabled(true);
+        doctor.setClinic(clinic);
+        doctor.setAverageRating(0.0);
+        doctor.setAuthorities(authorities);
+        doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
+        userService.saveDoctor(doctor);
+    }
 
 }
