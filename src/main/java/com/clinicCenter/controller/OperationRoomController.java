@@ -43,8 +43,7 @@ public class OperationRoomController {
     @GetMapping("/operationRooms/search")
     @ResponseBody
     public Set<OperationRoom> getSearched(@RequestParam(name = "name") String name, @RequestParam(name = "number") String number) {
-        System.out.println("OVO JE BROJ");
-        System.out.println(number);
+
         Set<OperationRoom> rooms = null;
         if(number.equals("undefined") || number.equals("null")) {
             rooms = operationRoomService.getRoomsName(name);
