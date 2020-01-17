@@ -1,5 +1,6 @@
 package com.clinicCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Operation {
     private Date date;
     private Double duration;
 
+    @JsonIgnore
     @ManyToOne
     private OperationRoom room;
     //private Set<Doctor> doctors;

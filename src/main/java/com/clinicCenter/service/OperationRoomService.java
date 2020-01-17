@@ -4,6 +4,7 @@ import com.clinicCenter.model.MedicalExaminationRoom;
 import com.clinicCenter.model.OperationRoom;
 
 import java.util.List;
+import java.util.Set;
 
 public interface OperationRoomService {
 
@@ -17,4 +18,7 @@ public interface OperationRoomService {
 
     void save(OperationRoom room);
 
+    Set<OperationRoom> getRooms(String name, Integer number);
+
+    Set<OperationRoom> getRoomsName(String name);
 }

@@ -25,9 +25,9 @@ public class OperationRoom {
     @Column(nullable = false)
     private Integer number;
 
+    @JsonIgnore
     @OneToMany
     @JoinColumn(name = "or_id", referencedColumnName = "id")
-    @JsonIgnore
     private Set<Operation> operations;
 
 }

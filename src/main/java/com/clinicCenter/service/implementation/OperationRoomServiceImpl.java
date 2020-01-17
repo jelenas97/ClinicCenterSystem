@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OperationRoomServiceImpl implements OperationRoomService {
@@ -41,5 +42,15 @@ public class OperationRoomServiceImpl implements OperationRoomService {
     @Override
     public void save(OperationRoom room) {
         this.operationRoomRepository.save(room);
+    }
+
+    @Override
+    public Set<OperationRoom> getRooms(String name, Integer number) {
+        return this.operationRoomRepository.getSearched(name.toLowerCase(), number);
+    }
+
+    @Override
+    public Set<OperationRoom> getRoomsName(String name) {
+        return this.operationRoomRepository.getSearchedByName(name.toLowerCase());
     }
 }
