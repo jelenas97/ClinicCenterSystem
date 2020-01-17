@@ -1,12 +1,25 @@
 package com.clinicCenter.model;
-
-import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.*;
+
 @Data
-@Builder
+@Entity
 public class Diagnosis {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private Long code;
+
+    @Column(nullable = false)
+    private Long group;
+
+    @Column(nullable = false)
     private String description;
 }
