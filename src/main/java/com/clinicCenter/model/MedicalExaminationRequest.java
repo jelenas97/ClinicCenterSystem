@@ -19,11 +19,12 @@ public class MedicalExaminationRequest {
 
     }
 
-    public MedicalExaminationRequest(MedicalExaminationType type, Date date, Clinic clinic, Doctor doctor){
+    public MedicalExaminationRequest(MedicalExaminationType type, Date date, Clinic clinic, Doctor doctor, Patient patient){
         this.type = type;
         this.date = date;
         this.clinic = clinic;
         this.doctor = doctor;
+        this.patient = patient;
         this.discount = 0.0;
         this.duration = 30.0;
         this.price = 1000.0;

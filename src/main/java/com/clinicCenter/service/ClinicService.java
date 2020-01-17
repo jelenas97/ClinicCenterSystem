@@ -19,4 +19,10 @@ public interface ClinicService {
     Clinic getAdminsClinic(Long id);
 
     void updateClinic(Clinic clinic);
+
+    Set<ClinicMapper> getSearchedClinicsTwo(Long typeName, Double clinicRating);
+
+    Set<ClinicMapper> getSearchedClinicsThree(Long typeName, String clinicName);
+
+    Set<ClinicMapper> getSearchedClinicsFour(Long typeName, String clinicName, Double clinicRating);
 }
