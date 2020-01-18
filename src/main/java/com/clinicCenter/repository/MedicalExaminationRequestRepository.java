@@ -8,6 +8,6 @@ import java.util.Collection;
 
 public interface MedicalExaminationRequestRepository extends JpaRepository<MedicalExaminationRequest, Long> {
 
-    @Query(value = "SELECT * FROM db.medical_examination_request dber WHERE dber.clinic_id in (SELECT u.clinic_id FROM db.users u WHERE u.id = :adminId)", nativeQuery = true)
+    @Query(value = "SELECT * FROM medical_examination_request dber WHERE dber.clinic_id in (SELECT u.clinic_id FROM users u WHERE u.id = :adminId)", nativeQuery = true)
     Collection<MedicalExaminationRequest> getRequestForClinic(Long adminId);
 }

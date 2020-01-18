@@ -49,4 +49,9 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     public Collection<MedicalExaminationRequest> getAllExaminationRequests(Long adminId) {
         return medicalExaminationRequestRepository.getRequestForClinic(adminId);
     }
+
+    @Override
+    public MedicalExaminationRequest getById(Long requestId) {
+        return medicalExaminationRequestRepository.findById(requestId).get();
+    }
 }

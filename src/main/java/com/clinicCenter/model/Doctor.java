@@ -40,9 +40,9 @@ public class Doctor extends User {
         return true;
     }
 
-    @OneToMany(mappedBy = "doctor")
+    /*@OneToMany(mappedBy = "doctor")
     @JsonIgnore
-    private Set<MedicalExaminationRequest> examinationRequests;
+    private Set<MedicalExaminationRequest> examinationRequests;*/
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -59,15 +59,15 @@ public class Doctor extends User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "refDoctor")
-    private  Set<AnnualLeaveRequest> annualLeaveRequest;
+    private Set<AnnualLeaveRequest> annualLeaveRequest;
 
-    @Override
+    /*@Override
     public String toString() {
         return "Doctor{" +
-                "examinationRequests=" + examinationRequests +
+                "examinationRequests=" +
                 ", medicalExaminationTypes=" + medicalExaminationTypes +
                 ", clinic=" + clinic +
                 ", type='" + type + '\'' +
                 '}';
-    }
+    }*/
 }

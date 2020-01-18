@@ -10,4 +10,6 @@ public interface MedicalExaminationService {
     void sendRequest(Long typeId, Date date, Long clinicId, Long doctorId, Long patientId);
 
     Collection<MedicalExaminationRequest> getAllExaminationRequests(Long adminId);
+
+    MedicalExaminationRequest getById(Long requestId);
 }

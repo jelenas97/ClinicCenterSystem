@@ -29,10 +29,10 @@ public class MedicalExaminationType {
     @Column(nullable = false)
     private Double price;
 
-    @OneToMany
+    /*@OneToMany
     @JoinColumn(name = "met_id", referencedColumnName = "id")
     @JsonIgnore
-    private Set<MedicalExaminationRequest> examinationRequests;
+    private Set<MedicalExaminationRequest> examinationRequests;*/
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

@@ -40,15 +40,15 @@ public class Clinic {
     @Column
     private Integer timesRated = 0;
 
-    @JsonIgnore
+    /*@JsonIgnore
     @OneToMany(mappedBy = "clinic")
-    private Set<ClinicAdministrator> clinicAdministrators;
+    private Set<ClinicAdministrator> clinicAdministrators;*/
 
-    @OneToMany(mappedBy = "clinic")
+    /*@OneToMany(mappedBy = "clinic")
     private Set<MedicalExaminationRequest> examinationRequests;
 
     @OneToMany(mappedBy = "clinic")
     @JsonIgnore
-    private Set<Doctor> doctors;
+    private Set<Doctor> doctors;*/
 }
 

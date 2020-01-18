@@ -25,4 +25,9 @@ public class MedicalExaminationController {
     public Collection<MedicalExaminationRequest> getAllExaminationRequests(@PathVariable Long adminId) {
         return medicalExaminationService.getAllExaminationRequests(adminId);
     }
+
+    @GetMapping("getMedicalExaminationById/{requestId}")
+    public MedicalExaminationRequest getMedicalExaminationRequestById(@PathVariable Long requestId){
+        return medicalExaminationService.getById(requestId);
+    }
 }

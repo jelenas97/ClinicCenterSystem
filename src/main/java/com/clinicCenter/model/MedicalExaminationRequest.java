@@ -40,19 +40,19 @@ public class MedicalExaminationRequest {
     @Column
     private Double duration;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    @JsonIgnore
+    //@JsonIgnore
     private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
-    @JsonIgnore
+    //@JsonIgnore
     private Doctor doctor;
 
     @Column
