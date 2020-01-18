@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-//@Builder
 @Entity
 @AllArgsConstructor
 public class MedicalExaminationRequest {
@@ -40,27 +39,27 @@ public class MedicalExaminationRequest {
     @Column
     private Double duration;
 
-    @ManyToOne
-    @JoinColumn(name = "clinic_id")
     @JsonIgnore
+    @JoinColumn(name = "clinic_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Clinic clinic;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
     @JsonIgnore
+    @JoinColumn(name = "patient_id")
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id")
     @JsonIgnore
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     @Column
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "met_id")
     @JsonIgnore
+    @JoinColumn(name = "met_id")
     private MedicalExaminationType type;
 
     @Column

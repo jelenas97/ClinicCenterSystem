@@ -63,7 +63,7 @@ public class RegistrationRequestController {
                 registrationRequest.getPhone(),
                 registrationRequest.getSsn());
         registrationRequestService.delete(registrationRequest);
-        List<Authority> auth = authService.findByname("ROLE_PATIENT");
+        List<Authority> auth = authService.findByName("ROLE_PATIENT");
         patient.setAuthorities(auth);
         userService.save(patient);
         emailController.sendMail(patient.getEmail(), "http://localhost:4200/activateUser/" + patient.getId());
