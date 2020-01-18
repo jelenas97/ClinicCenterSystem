@@ -2,6 +2,7 @@ package com.clinicCenter.service.implementation;
 
 import com.clinicCenter.model.MedicalExaminationRoom;
 import com.clinicCenter.model.MedicalExaminationType;
+import com.clinicCenter.model.OperationRoom;
 import com.clinicCenter.repository.MedicalExaminationRoomRepository;
 import com.clinicCenter.repository.MedicalExaminationTypeRepository;
 import com.clinicCenter.service.MedicalExaminationRoomService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MedicalExaminationRoomServiceImpl implements MedicalExaminationRoomService {
@@ -39,5 +41,15 @@ public class MedicalExaminationRoomServiceImpl implements MedicalExaminationRoom
     @Override
     public void save(MedicalExaminationRoom room) {
         this.medicalExaminationRoomRepository.save(room);
+    }
+
+    @Override
+    public Set<MedicalExaminationRoom> getRooms(String name, Integer number) {
+        return this.medicalExaminationRoomRepository.getSearched(name.toLowerCase(), number);
+    }
+
+    @Override
+    public Set<MedicalExaminationRoom> getRoomsName(String name) {
+        return this.medicalExaminationRoomRepository.getSearchedByName(name.toLowerCase());
     }
 }
