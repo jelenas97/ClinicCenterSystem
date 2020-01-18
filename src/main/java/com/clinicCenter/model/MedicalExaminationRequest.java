@@ -60,7 +60,6 @@ public class MedicalExaminationRequest {
 
     @ManyToOne
     @JoinColumn(name = "met_id")
-    @JsonIgnore
     private MedicalExaminationType type;
 
     @Column
