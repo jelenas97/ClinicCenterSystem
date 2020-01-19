@@ -119,6 +119,7 @@ public class UserController {
         return userService.getById(id);
     }
 
+/*
     @PostMapping("/addDoctor/{clinicName}")
     public void addDoctor(@RequestBody Doctor doctor, @PathVariable String clinicName) {
         Clinic clinic = clinicService.findByName(clinicName);
@@ -264,7 +265,7 @@ public class UserController {
         System.out.println(doctor);
         userService.saveDoctor(doctor);
     }
-
+*/
     @GetMapping("getAvailableDoctorsFromClinic/{adminId}")
     public Collection<User> getAvailableDoctors(@PathVariable Long adminId){
         return userService.getDoctorsFromClinic(adminId);

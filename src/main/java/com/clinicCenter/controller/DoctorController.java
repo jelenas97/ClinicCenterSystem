@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@RestController
 @RequiredArgsConstructor
+@RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class DoctorController {
 
@@ -20,7 +20,7 @@ public class DoctorController {
     private final PasswordEncoder passwordEncoder;
     private final AuthorityService authorityService;
 
-    @PostMapping("/addDoctor/{id}")
+    @PostMapping("/auth/addDoctor/{id}")
     public void addDoctor(@RequestBody Doctor doctor, @PathVariable Long id) {
         Clinic clinic = clinicService.getById(id);
         List<Authority> authorities = authorityService.findByName("ROLE_DOCTOR");
@@ -32,6 +32,12 @@ public class DoctorController {
         doctor.setAuthorities(authorities);
         doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
         userService.saveDoctor(doctor);
+    }
+
+    @GetMapping("hasExam/{id}")
+    public Boolean hasExam(@PathVariable Long id){
+        Integer howMany = userService.hasExam(id);
+        return howMany > 0;
     }
 
 }

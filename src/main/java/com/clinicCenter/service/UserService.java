@@ -33,6 +33,8 @@ public interface UserService {
     ArrayList<User> getDoctorsFromClinic(Long id);
 
     Collection<UserMapperTwo> getAvailableDoctors(Long adminId);
+
+    Integer hasExam(Long id);
 }
 
 

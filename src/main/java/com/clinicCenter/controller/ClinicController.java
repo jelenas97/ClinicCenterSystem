@@ -3,7 +3,6 @@ package com.clinicCenter.controller;
 import com.clinicCenter.model.Clinic;
 import com.clinicCenter.model.ClinicMapper;
 import com.clinicCenter.service.ClinicService;
-import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

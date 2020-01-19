@@ -97,5 +97,8 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-
+    @Override
+    public Integer hasExam(Long id) {
+        return userRepository.hasExam(id);
+    }
 }

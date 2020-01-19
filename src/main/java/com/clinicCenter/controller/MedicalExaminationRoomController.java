@@ -58,5 +58,3 @@ public class MedicalExaminationRoomController {
         return medicalExaminationRoomService.getClinicRooms(clinicAdminId);
     }
 }
-
-}
