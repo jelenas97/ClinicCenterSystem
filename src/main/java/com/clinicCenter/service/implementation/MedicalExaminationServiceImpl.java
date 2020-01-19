@@ -1,5 +1,6 @@
 package com.clinicCenter.service.implementation;
 
+import com.clinicCenter.controller.EmailController;
 import com.clinicCenter.model.*;
 import com.clinicCenter.repository.*;
 import com.clinicCenter.service.MedicalExaminationService;
@@ -34,6 +35,9 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
     @Autowired
     private MedicalExaminationRoomRepository medicalExaminationRoomRepository;
+
+    @Autowired
+    private EmailController emailController;
 
     @Override
     public void sendRequest(Long typeId, Date date, Long clinicId, Long doctorId, Long patientId) {
@@ -78,5 +82,39 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
         this.medicalExaminationRepository.save(newExam);
 
         this.medicalExaminationRequestRepository.deleteById(requestId);
+
+        String message = "You have scheduled an examination : " +
+                "\n Date : " + newExam.getDate() +
+                "\n Clinic : " + newExam.getClinic().getName() + " , " + newExam.getClinic().getAddress() + " , " + newExam.getClinic().getCity() +
+                "\n Doctor : " + newExam.getDoctor().getFirstName() + " " + newExam.getDoctor().getLastName() +
+                "\n Examination type : " + newExam.getType().getName() +
+                "\n Examination room : " + newExam.getMedicalExaminationRoom().getName() + " " + newExam.getMedicalExaminationRoom().getNumber() +
+                "\n Price : " + newExam.getPrice() +
+                "\n Discount : " + newExam.getDiscount() +
+                "\n Duration : " + newExam.getDuration() +
+                "\n  " +
+                "\n Confirm : " + "http://localhost:4200/confirmScheduledExamination/" + newExam.getId() +
+                "\n Decline : " + "http://localhost:4200/declineScheduledExamination/" + newExam.getId();
+
+        String message2 = "You have an examination scheduled : " +
+                "\n Date : " + newExam.getDate() +
+                "\n Clinic : " + newExam.getClinic().getName() + " , " + newExam.getClinic().getAddress() + " , " + newExam.getClinic().getCity() +
+                "\n Patient : " + newExam.getPatient().getFirstName() + " " + newExam.getPatient().getLastName() +
+                "\n Examination type : " + newExam.getType().getName() +
+                "\n Examination room : " + newExam.getMedicalExaminationRoom().getName() + " " + newExam.getMedicalExaminationRoom().getNumber() +
+                "\n Duration : " + newExam.getDuration();
+
+        emailController.sendMail(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination");
+        emailController.sendMail(doctor.getEmail(), message2, "Automated mail : Confirm or decline scheduled examination");
+    }
+
+    @Override
+    public void confirmScheduledExamination(Long id) {
+        medicalExaminationRepository.confirm(id);
+    }
+
+    @Override
+    public void declineScheduledExamination(Long id) {
+        medicalExaminationRepository.deleteById(id);
     }
 }

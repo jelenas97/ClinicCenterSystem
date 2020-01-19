@@ -41,4 +41,16 @@ public class MedicalExaminationController {
         Date d = simpleDateFormat.parse(date);
         medicalExaminationService.saveExamination(d, price, duration, discount, roomId, clinicId, doctorId, patientId, typeId, requestId);
     }
+
+    @PutMapping("/auth/confirmScheduledExamination/{id}")
+    public void confirmScheduledExamination(@PathVariable Long id){
+        System.out.println("Potvrdjujem pregled");
+        medicalExaminationService.confirmScheduledExamination(id);
+    }
+
+    @DeleteMapping("/auth/declineScheduledExamination/{id}")
+    public void declineScheduledExamination(@PathVariable Long id){
+        System.out.println("Odbijam pregled");
+        medicalExaminationService.declineScheduledExamination(id);
+    }
 }

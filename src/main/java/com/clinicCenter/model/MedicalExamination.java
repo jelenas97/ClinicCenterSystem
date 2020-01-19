@@ -27,6 +27,7 @@ public class MedicalExamination {
         this.doctor = doctor;
         this.patient = patient;
         this.type = type;
+        this.confirmed = false;
     }
 
     @Id
@@ -65,4 +66,6 @@ public class MedicalExamination {
     @JoinColumn(name = "mer_id")
     private MedicalExaminationRoom medicalExaminationRoom;
 
+    @Column
+    private Boolean confirmed = false;
 }
