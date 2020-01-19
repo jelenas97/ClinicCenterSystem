@@ -23,4 +23,7 @@ public interface MedicalExaminationRoomRepository extends JpaRepository<MedicalE
     @Query(value = "SELECT * from db.medical_examination_room mer where lower(mer.name) like %:name% ", nativeQuery = true)
     Set<MedicalExaminationRoom> getSearchedByName(String name);
 
+    @Query(value = "SELECT * FROM db.medical_examination_room mer WHERE mer.clinic_id in (SELECT u.clinic_id FROM db.users u WHERE u.id = :clinicAdminId)", nativeQuery = true)
+    Set<MedicalExaminationRoom> getClinicRooms(Long clinicAdminId);
 }
+

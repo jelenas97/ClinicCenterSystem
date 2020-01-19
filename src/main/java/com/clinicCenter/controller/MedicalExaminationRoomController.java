@@ -14,6 +14,7 @@ import java.util.Set;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class MedicalExaminationRoomController {
+
     @Autowired
     private MedicalExaminationRoomService medicalExaminationRoomService;
 
@@ -51,5 +52,11 @@ public class MedicalExaminationRoomController {
         }
         return rooms;
     }
+
+    @GetMapping("getClinicRooms/{clinicAdminId}")
+    public Set<MedicalExaminationRoom> getClinicRooms(@PathVariable Long clinicAdminId) {
+        return medicalExaminationRoomService.getClinicRooms(clinicAdminId);
+    }
+}
 
 }

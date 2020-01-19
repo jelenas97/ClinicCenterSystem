@@ -84,14 +84,14 @@ public class AnnualLeaveAndAbsenceController {
         emailController.sendMail(user.getEmail(),"Hello Dear, "+ user.getFirstName() + " " + user.getLastName() +
                                                         " your request for " + request.getFlag() + " from " +request.getLeaveDate()
                                                         +" until "+ request.getReturnDate()
-                                                        + " is approved. Have a great time!");
+                                                        + " is approved. Have a great time!", "Automated mail");
     }
 
 
     @PostMapping("/sendRejectMail")
     public void sendRejectMail(@RequestBody AnnualLeaveRequest request){
         User user = userService.getById(request.getUserId());
-        emailController.sendMail(user.getEmail(),"e boli me uvo ne moze");
+        emailController.sendMail(user.getEmail(),"e boli me uvo ne moze", "Automated mail");
     }
 
     @DeleteMapping("/deleteRequest/{id}")

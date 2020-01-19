@@ -21,13 +21,13 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     @Async
-    public void sendNotification(String email, String message) throws MailException, InterruptedException{
+    public void sendNotification(String email, String message, String subject) throws MailException, InterruptedException{
         System.out.println("Sending email...");
 
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(email);
         mail.setFrom(env.getProperty("spring.mail.username"));
-        mail.setSubject("Automated mail");
+        mail.setSubject(subject);
         mail.setText(message);
         javaMailSender.send(mail);
 

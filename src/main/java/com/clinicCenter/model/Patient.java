@@ -55,7 +55,7 @@ public class Patient extends User {
         this.setEnabled(false);
     }
 
+    /*@OneToMany(mappedBy = "patient")
     @JsonIgnore
-    @OneToMany(mappedBy = "patient")
-    private Set<MedicalExaminationRequest> examinationRequests;
+    private Set<MedicalExaminationRequest> examinationRequests;*/
 }

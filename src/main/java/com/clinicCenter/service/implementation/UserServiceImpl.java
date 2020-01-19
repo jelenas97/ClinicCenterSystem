@@ -91,5 +91,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.getDoctorsFromClinic(id);
     }
 
+    @Override
+    public Collection<UserMapperTwo> getAvailableDoctors(Long adminId) {
+        //return userRepository.getAvailableDoctors(adminId);
+        return null;
+    }
+
 
 }

@@ -52,4 +52,10 @@ public class MedicalExaminationRoomServiceImpl implements MedicalExaminationRoom
     public Set<MedicalExaminationRoom> getRoomsName(String name) {
         return this.medicalExaminationRoomRepository.getSearchedByName(name.toLowerCase());
     }
+
+    @Override
+    public Set<MedicalExaminationRoom> getClinicRooms(Long clinicAdminId) {
+        return medicalExaminationRoomRepository.getClinicRooms(clinicAdminId);
+    }
 }
+

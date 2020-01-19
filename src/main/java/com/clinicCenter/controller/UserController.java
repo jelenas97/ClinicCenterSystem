@@ -3,6 +3,7 @@ package com.clinicCenter.controller;
 import com.clinicCenter.model.*;
 import com.clinicCenter.security.TokenUtils;
 import com.clinicCenter.security.auth.JwtAuthenticationRequest;
+import com.clinicCenter.service.AuthorityService;
 import com.clinicCenter.service.ClinicService;
 import com.clinicCenter.service.UserService;
 import com.clinicCenter.service.implementation.CustomUserDetailsService;
@@ -20,10 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -43,6 +41,7 @@ public class UserController {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
+
 
     @GetMapping(value = "/auth/medicalStaffProfile/{id}")
     public User getById(@PathVariable Long id) {
@@ -118,5 +117,156 @@ public class UserController {
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable Long id) {
         return userService.getById(id);
+    }
+
+    @PostMapping("/addDoctor/{clinicName}")
+    public void addDoctor(@RequestBody Doctor doctor, @PathVariable String clinicName) {
+        Clinic clinic = clinicService.findByName(clinicName);
+        System.out.println("ovo je iz baze " + clinic.getName() + clinic.getId());
+        doctor.setClinic(clinic);
+        doctor.setEnabled(true);
+        doctor.setType("DO");
+        doctor.setAverageRating(0.0);
+        doctor.setTimesRated(0);
+        doctor.setMedicalExaminationTypes(new Set<MedicalExaminationType>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<MedicalExaminationType> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(MedicalExaminationType medicalExaminationType) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends MedicalExaminationType> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+        });
+        //doctor.getExaminationRequests().add(new MedicalExaminationRequest());
+        doctor.setAnnualLeaveRequest(new Set<AnnualLeaveRequest>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<AnnualLeaveRequest> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(AnnualLeaveRequest annualLeaveRequest) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends AnnualLeaveRequest> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+        });
+        System.out.println(doctor);
+        userService.saveDoctor(doctor);
+    }
+
+    @GetMapping("getAvailableDoctorsFromClinic/{adminId}")
+    public Collection<User> getAvailableDoctors(@PathVariable Long adminId){
+        return userService.getDoctorsFromClinic(adminId);
     }
 }

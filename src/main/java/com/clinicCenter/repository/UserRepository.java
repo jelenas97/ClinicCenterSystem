@@ -58,4 +58,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query(value = "SELECT * FROM db.users u WHERE u.type = 'DO' and u.clinic_id in (SELECT clinic_id FROM db.users uu WHERE uu.id = :id)", nativeQuery = true)
     ArrayList<User> getDoctorsFromClinic(Long id);
+
+    /*@Query(value = "SELECT * FROM db.users u WHERE u.type = 'DO' and u.clinic_id in (SELECT clinic_id FROM db.users uu WHERE uu.id = :adminId)", nativeQuery = true)
+    Collection<UserMapperTwo> getAvailableDoctors(Long adminId);*/
 }

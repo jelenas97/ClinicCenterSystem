@@ -26,9 +26,14 @@ public class MedicalExaminationRoom {
     @Column(nullable = false)
     private Integer number;
 
+    /*
     @OneToMany
     @JoinColumn(name = "mer_id", referencedColumnName = "id")
     @JsonIgnore
-    private Set<MedicalExamination> exams;
+    private Set<MedicalExamination> exams;*/
+
+    @ManyToOne
+    @JoinColumn(name = "clinic_id")
+    private Clinic clinic;
 
 }

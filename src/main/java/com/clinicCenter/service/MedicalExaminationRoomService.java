@@ -22,4 +22,6 @@ public interface MedicalExaminationRoomService {
 
     Set<MedicalExaminationRoom> getRoomsName(String name);
 
+    Set<MedicalExaminationRoom> getClinicRooms(Long clinicAdminId);
 }
+
