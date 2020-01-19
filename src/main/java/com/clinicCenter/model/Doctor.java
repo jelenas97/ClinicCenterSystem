@@ -61,13 +61,9 @@ public class Doctor extends User {
     @OneToMany(mappedBy = "refDoctor")
     private Set<AnnualLeaveRequest> annualLeaveRequest;
 
-    /*@Override
-    public String toString() {
-        return "Doctor{" +
-                "examinationRequests=" +
-                ", medicalExaminationTypes=" + medicalExaminationTypes +
-                ", clinic=" + clinic +
-                ", type='" + type + '\'' +
-                '}';
-    }*/
+    @Column(name = "start_work")
+    private Integer startWork;
+
+    @Column(name = "end_work")
+    private Integer endWork;
 }
