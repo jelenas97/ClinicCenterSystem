@@ -21,6 +21,7 @@ public class DoctorController {
     private final PasswordEncoder passwordEncoder;
     private final AuthorityService authorityService;
 
+
     @PostMapping("/auth/addDoctor/{id}")
     public void addDoctor(@RequestBody Doctor doctor, @PathVariable Long id) {
         Clinic clinic = clinicService.getById(id);
@@ -48,7 +49,7 @@ public class DoctorController {
 
     @GetMapping("hasExam/{id}")
     public Boolean hasExam(@PathVariable Long id){
-        Integer howMany = userService.hasExam(id);
+        Integer howMany = doctorService.hasExam(id);
         return howMany > 0;
     }
 

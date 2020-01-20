@@ -35,4 +35,9 @@ public class DoctorServiceImpl implements DoctorService {
     public Set<UserMapperTwo> getDoctorsExtended(String firstName, String lastName, double rating, Integer typeId, Integer clinicId) {
         return doctorRepository.getSearchedExtended(firstName.toLowerCase(),lastName.toLowerCase(),rating,typeId,clinicId);
     }
+
+    @Override
+    public Integer hasExam(Long id) {
+        return doctorRepository.hasExam(id);
+    }
 }

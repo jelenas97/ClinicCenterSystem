@@ -13,4 +13,6 @@ public interface DoctorService {
     Doctor getById(Long id);
 
     Set<UserMapperTwo> getDoctorsExtended(String firstName, String lastName, double rating, Integer typeId, Integer clinicId);
+    Integer hasExam(Long id);
+
 }
