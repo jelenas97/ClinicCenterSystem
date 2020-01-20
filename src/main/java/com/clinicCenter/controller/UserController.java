@@ -42,7 +42,6 @@ public class UserController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-
     @GetMapping(value = "/auth/medicalStaffProfile/{id}")
     public User getById(@PathVariable Long id) {
         return userService.getById(id);

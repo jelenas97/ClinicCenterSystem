@@ -3,6 +3,7 @@ package com.clinicCenter.controller;
 import com.clinicCenter.model.*;
 import com.clinicCenter.service.AuthorityService;
 import com.clinicCenter.service.ClinicService;
+import com.clinicCenter.service.DoctorService;
 import com.clinicCenter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +16,7 @@ import java.util.*;
 @CrossOrigin(origins = "http://localhost:4200")
 public class DoctorController {
 
-    private final UserService userService;
+    private final DoctorService doctorService;
     private final ClinicService clinicService;
     private final PasswordEncoder passwordEncoder;
     private final AuthorityService authorityService;
@@ -31,7 +32,18 @@ public class DoctorController {
         doctor.setAverageRating(0.0);
         doctor.setAuthorities(authorities);
         doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
-        userService.saveDoctor(doctor);
+        doctorService.save(doctor);
+    }
+
+    @GetMapping("/getSearchedDoctorsExtended/search")
+    @ResponseBody
+    public Set<UserMapperTwo> getSearched(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "rating") double rating, @RequestParam(name = "type") Integer typeId,
+                                          @RequestParam(name = "clinic") Integer clinicId) {
+
+        Set<UserMapperTwo> doctors = null;
+        doctors = doctorService.getDoctorsExtended(firstName,lastName,rating,typeId,clinicId);
+
+        return doctors;
     }
 
     @GetMapping("hasExam/{id}")
