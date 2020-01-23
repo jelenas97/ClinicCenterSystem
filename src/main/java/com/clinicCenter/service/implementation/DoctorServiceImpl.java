@@ -1,12 +1,14 @@
 package com.clinicCenter.service.implementation;
 
 import com.clinicCenter.model.Doctor;
+import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapperTwo;
 import com.clinicCenter.repository.DoctorRepository;
 import com.clinicCenter.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -39,5 +41,10 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Integer hasExam(Long id) {
         return doctorRepository.hasExam(id);
+    }
+
+    @Override
+    public ArrayList<Doctor> getSearchedDoctorsFromClinic(String firstName, String lastName, double rating, Integer caId) {
+        return doctorRepository.getSearchedFromClinic(firstName.toLowerCase(), lastName.toLowerCase(), rating, caId);
     }
 }

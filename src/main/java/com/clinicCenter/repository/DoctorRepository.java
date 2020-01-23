@@ -1,11 +1,13 @@
 package com.clinicCenter.repository;
 
 import com.clinicCenter.model.Doctor;
+import com.clinicCenter.model.User;
 import com.clinicCenter.model.UserMapperTwo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 @Repository
@@ -15,4 +17,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     @Query(value = "SELECT COUNT(*) FROM db.medical_examination me WHERE me.confirmed = 1 and me.doctor_id = :id", nativeQuery = true)
     Integer hasExam(Long id);
+
+    @Query(value = "SELECT * FROM db.users u WHERE lower(u.first_name) like %:firstName% and lower(u.last_name) like %:lastName% and u.average_rating >= :rating and u.type = 'DO' and u.clinic_id in (SELECT clinic_id FROM db.users uu WHERE uu.id = :caId)", nativeQuery = true)
+    ArrayList<Doctor> getSearchedFromClinic(String firstName, String lastName, double rating, Integer caId);
 }
