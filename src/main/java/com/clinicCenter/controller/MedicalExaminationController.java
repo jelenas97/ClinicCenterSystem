@@ -5,6 +5,7 @@ import com.clinicCenter.model.MedicalExaminationRoom;
 import com.clinicCenter.service.MedicalExaminationRoomService;
 import com.clinicCenter.service.MedicalExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.JsonPath;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +44,7 @@ public class MedicalExaminationController {
                                 @PathVariable Long typeId, @PathVariable Long requestId) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date d = simpleDateFormat.parse(date);
-        medicalExaminationService.saveExamination(d, price, duration, discount, roomId, clinicId, doctorId, patientId, typeId, requestId);
+        medicalExaminationService.saveExamination(d, price, duration, discount, roomId, clinicId, doctorId, patientId, typeId, requestId, false);
     }
 
     @PutMapping("/auth/confirmScheduledExamination/{id}")
@@ -67,7 +68,7 @@ public class MedicalExaminationController {
             List<MedicalExaminationRoom> availableRooms = medicalExaminationRoomService.getAvailableRooms(r.getClinic().getId(), r.getDate());
             try {
                 medicalExaminationService.saveExamination(r.getDate(), r.getPrice(), r.getDuration(), r.getDiscount(), availableRooms.get(0).getId(),
-                        r.getClinic().getId(), r.getDoctor().getId(), r.getPatient().getId(), r.getType().getId(), r.getId());
+                        r.getClinic().getId(), r.getDoctor().getId(), r.getPatient().getId(), r.getType().getId(), r.getId(), false);
 
             } catch (IndexOutOfBoundsException ioobe) {
                 List<MedicalExaminationRoom> availableRooms2;
@@ -80,11 +81,20 @@ public class MedicalExaminationController {
                     newDate = c.getTime();
                     availableRooms2 = medicalExaminationRoomService.getAvailableRooms(r.getClinic().getId(), newDate);
                     addDays++;
-                } while( availableRooms2.size() == 0);
+                } while (availableRooms2.size() == 0);
                 medicalExaminationService.saveExamination(newDate, r.getPrice(), r.getDuration(), r.getDiscount(), availableRooms2.get(0).getId(),
-                        r.getClinic().getId(), r.getDoctor().getId(), r.getPatient().getId(), r.getType().getId(), r.getId());
+                        r.getClinic().getId(), r.getDoctor().getId(), r.getPatient().getId(), r.getType().getId(), r.getId(), false);
 
             }
         }
+    }
+
+
+    @PostMapping("savePredefinedMedicalExamination/{date}/{typeId}/{duration}/{price}/{doctorId}/{clinicId}/{roomId}/{discount}")
+    public void savePredefinedMedicalExamination(@PathVariable String date, @PathVariable Long typeId, @PathVariable Double duration, @PathVariable Double price,
+                                                 @PathVariable Long doctorId, @PathVariable Long clinicId, @PathVariable Long roomId, @PathVariable Double discount) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = simpleDateFormat.parse(date);
+        medicalExaminationService.saveExamination(d, price, duration, discount, roomId, clinicId, doctorId, null, typeId, null, true);
     }
 }

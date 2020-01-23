@@ -24,7 +24,7 @@ public interface UserService {
 
     ArrayList<User> getDoctors();
 
-    Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id);
+    Collection<User> getSearchedDoctors(Long selectedOption, Long id);
 
     void saveDoctor(Doctor doctor);
 

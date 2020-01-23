@@ -17,7 +17,7 @@ public class MedicalExamination {
 
 
     public MedicalExamination(Date date, Double price, Double duration, Double discount, MedicalExaminationRoom room,
-                              Doctor doctor, Patient patient, Clinic clinic, MedicalExaminationType type) {
+                              Doctor doctor, Patient patient, Clinic clinic, MedicalExaminationType type, Boolean predefined) {
         this.date = date;
         this.price = price;
         this.duration = duration;
@@ -28,6 +28,7 @@ public class MedicalExamination {
         this.patient = patient;
         this.type = type;
         this.confirmed = false;
+        this.predefined = predefined;
     }
 
     @Id
@@ -68,4 +69,7 @@ public class MedicalExamination {
 
     @Column
     private Boolean confirmed = false;
+
+    @Column
+    private Boolean predefined = false;
 }
