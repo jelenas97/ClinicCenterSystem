@@ -1,14 +1,12 @@
 package com.clinicCenter.service.implementation;
 
 import com.clinicCenter.model.MedicalExaminationRoom;
-import com.clinicCenter.model.MedicalExaminationType;
-import com.clinicCenter.model.OperationRoom;
 import com.clinicCenter.repository.MedicalExaminationRoomRepository;
-import com.clinicCenter.repository.MedicalExaminationTypeRepository;
 import com.clinicCenter.service.MedicalExaminationRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -56,6 +54,11 @@ public class MedicalExaminationRoomServiceImpl implements MedicalExaminationRoom
     @Override
     public Set<MedicalExaminationRoom> getClinicRooms(Long clinicAdminId) {
         return medicalExaminationRoomRepository.getClinicRooms(clinicAdminId);
+    }
+
+    @Override
+    public List<MedicalExaminationRoom> getAvailableRooms(Long id, Date date) {
+        return medicalExaminationRoomRepository.getAvailableRooms(id, date);
     }
 }
 

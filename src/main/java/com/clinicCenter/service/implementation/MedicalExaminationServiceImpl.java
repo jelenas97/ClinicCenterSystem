@@ -4,16 +4,10 @@ import com.clinicCenter.controller.EmailController;
 import com.clinicCenter.model.*;
 import com.clinicCenter.repository.*;
 import com.clinicCenter.service.MedicalExaminationService;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.print.Doc;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MedicalExaminationServiceImpl implements MedicalExaminationService {
@@ -116,5 +110,15 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     @Override
     public void declineScheduledExamination(Long id) {
         medicalExaminationRepository.deleteById(id);
+    }
+
+    @Override
+    public void removeMedicalExaminationRequestById(Long i) {
+        medicalExaminationRequestRepository.deleteById(i);
+    }
+
+    @Override
+    public List<MedicalExaminationRequest> getAllExamsRequests() {
+        return medicalExaminationRequestRepository.findAll();
     }
 }

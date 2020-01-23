@@ -2,10 +2,9 @@ package com.clinicCenter.service;
 
 import com.clinicCenter.model.MedicalExaminationRequest;
 
-import java.text.ParseException;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 public interface MedicalExaminationService {
     void sendRequest(Long typeId, Date date, Long clinicId, Long doctorId, Long patientId);
@@ -19,4 +18,8 @@ public interface MedicalExaminationService {
     void confirmScheduledExamination(Long id);
 
     void declineScheduledExamination(Long id);
+
+    void removeMedicalExaminationRequestById(Long i);
+
+    List<MedicalExaminationRequest> getAllExamsRequests();
 }
