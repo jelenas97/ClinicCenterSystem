@@ -1,5 +1,6 @@
 package com.clinicCenter.controller;
 
+import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRequest;
 import com.clinicCenter.model.MedicalExaminationRoom;
 import com.clinicCenter.service.MedicalExaminationRoomService;
@@ -96,5 +97,15 @@ public class MedicalExaminationController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date d = simpleDateFormat.parse(date);
         medicalExaminationService.saveExamination(d, price, duration, discount, roomId, clinicId, doctorId, null, typeId, null, true);
+    }
+
+    @GetMapping("getAllPredefinedExaminations")
+    public Collection<MedicalExamination> getAllPredefinedMedicalExaminations() {
+        return medicalExaminationService.getAllPredefinedMedicalExaminations();
+    }
+
+    @PutMapping("schedulePredefinedMedicalExamination/{examinationId}/{patientId}")
+    public void schedulePredefinedMedicalExamination(@PathVariable Long examinationId, @PathVariable Long patientId) {
+        medicalExaminationService.schedulePredefinedMedicalExamination(examinationId, patientId);
     }
 }

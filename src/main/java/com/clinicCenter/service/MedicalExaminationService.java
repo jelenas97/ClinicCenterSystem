@@ -1,5 +1,6 @@
 package com.clinicCenter.service;
 
+import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRequest;
 
 import java.util.Collection;
@@ -22,4 +23,8 @@ public interface MedicalExaminationService {
     void removeMedicalExaminationRequestById(Long i);
 
     List<MedicalExaminationRequest> getAllExamsRequests();
+
+    Collection<MedicalExamination> getAllPredefinedMedicalExaminations();
+
+    void schedulePredefinedMedicalExamination(Long examinationId, Long patientId);
 }

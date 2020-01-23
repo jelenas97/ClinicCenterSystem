@@ -129,4 +129,29 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     public List<MedicalExaminationRequest> getAllExamsRequests() {
         return medicalExaminationRequestRepository.findAll();
     }
+
+    @Override
+    public Collection<MedicalExamination> getAllPredefinedMedicalExaminations() {
+        return medicalExaminationRepository.getAllPredefinedMedicalExaminations();
+    }
+
+    @Override
+    public void schedulePredefinedMedicalExamination(Long examinationId, Long patientId) {
+        medicalExaminationRepository.schedulePredefinedMedicalExamination(examinationId, patientId);
+        MedicalExamination examination = medicalExaminationRepository.findById(examinationId).get();
+
+        String message = "You have scheduled an examination : " +
+                "\n Date : " + examination.getDate() +
+                "\n Clinic : " + examination.getClinic().getName() + " , " + examination.getClinic().getAddress() + " , " + examination.getClinic().getCity() +
+                "\n Doctor : " + examination.getDoctor().getFirstName() + " " + examination.getDoctor().getLastName() +
+                "\n Examination type : " + examination.getType().getName() +
+                "\n Examination room : " + examination.getMedicalExaminationRoom().getName() + " " + examination.getMedicalExaminationRoom().getNumber() +
+                "\n Price : " + examination.getPrice() +
+                "\n Discount : " + examination.getDiscount() +
+                "\n Duration : " + examination.getDuration() +
+                "\n  ";
+
+        emailController.sendMail(examination.getPatient().getEmail(), message, "Automated mail : You have scheduled examination");
+
+    }
 }
