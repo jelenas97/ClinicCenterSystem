@@ -1,5 +1,6 @@
 package com.clinicCenter.service;
 
+import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRequest;
 
 import java.text.ParseException;
@@ -19,4 +20,6 @@ public interface MedicalExaminationService {
     void confirmScheduledExamination(Long id);
 
     void declineScheduledExamination(Long id);
+
+    Collection<MedicalExamination> getAllExaminationsFromRoom(Long roomId);
 }

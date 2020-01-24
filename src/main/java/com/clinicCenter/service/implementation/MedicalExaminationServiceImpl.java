@@ -117,4 +117,9 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     public void declineScheduledExamination(Long id) {
         medicalExaminationRepository.deleteById(id);
     }
+
+    @Override
+    public Collection<MedicalExamination> getAllExaminationsFromRoom(Long roomId) {
+        return medicalExaminationRepository.getAllFromRoom(roomId);
+    }
 }

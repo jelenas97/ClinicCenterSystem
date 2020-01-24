@@ -1,5 +1,6 @@
 package com.clinicCenter.controller;
 
+import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRequest;
 import com.clinicCenter.service.MedicalExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,10 @@ public class MedicalExaminationController {
     public void declineScheduledExamination(@PathVariable Long id){
         System.out.println("Odbijam pregled");
         medicalExaminationService.declineScheduledExamination(id);
+    }
+
+    @GetMapping("medicalExaminations/{roomId}")
+    public Collection<MedicalExamination> getExaminationsFromRoom(@PathVariable Long roomId) {
+        return medicalExaminationService.getAllExaminationsFromRoom(roomId);
     }
 }
