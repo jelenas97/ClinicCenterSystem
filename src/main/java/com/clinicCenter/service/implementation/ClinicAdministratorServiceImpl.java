@@ -23,6 +23,7 @@ public class ClinicAdministratorServiceImpl implements ClinicAdministratorServic
 
     @Override
     public void save(ClinicAdministrator clinicAdministrator) {
+        clinicAdministrator.setPasswordChanged(false);
         clinicAdministratorRepository.save(clinicAdministrator);
     }
 

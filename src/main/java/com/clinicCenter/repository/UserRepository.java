@@ -29,7 +29,11 @@ public interface UserRepository extends JpaRepository<User,Long> {
     int activateUser(Long id);
 
 
-    //@Query("SELECT * FROM user where user.email = email ")
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.passwordChanged = TRUE WHERE u.id = :id")
+    int changedPassword(Long id);
+
     User findByEmail(String email);
 
     @Query(value = "SELECT concat(first_name,\" \",last_name) from User u WHERE (u.type='CA')", nativeQuery = true)
