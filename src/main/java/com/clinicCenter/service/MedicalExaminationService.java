@@ -20,6 +20,8 @@ public interface MedicalExaminationService {
 
     void declineScheduledExamination(Long id);
 
+    Collection<MedicalExamination> getAllExaminationsFromRoom(Long roomId);
+
     void removeMedicalExaminationRequestById(Long i);
 
     List<MedicalExaminationRequest> getAllExamsRequests();

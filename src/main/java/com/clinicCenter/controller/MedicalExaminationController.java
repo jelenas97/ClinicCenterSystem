@@ -60,6 +60,11 @@ public class MedicalExaminationController {
         medicalExaminationService.declineScheduledExamination(id);
     }
 
+    @GetMapping("medicalExaminations/{roomId}")
+    public Collection<MedicalExamination> getExaminationsFromRoom(@PathVariable Long roomId) {
+        return medicalExaminationService.getAllExaminationsFromRoom(roomId);
+    }
+
     @Scheduled(cron = "59 59 23 * * ?")
     public void automaticSchedule() {
         System.out.println("Automatska fja");
