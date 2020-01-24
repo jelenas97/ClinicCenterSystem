@@ -1,9 +1,8 @@
 package com.clinicCenter.service;
 
 import com.clinicCenter.model.MedicalExaminationRoom;
-import com.clinicCenter.model.MedicalExaminationType;
-import com.clinicCenter.model.OperationRoom;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -23,5 +22,7 @@ public interface MedicalExaminationRoomService {
     Set<MedicalExaminationRoom> getRoomsName(String name);
 
     Set<MedicalExaminationRoom> getClinicRooms(Long clinicAdminId);
+
+    List<MedicalExaminationRoom> getAvailableRooms(Long id, Date date);
 }
 

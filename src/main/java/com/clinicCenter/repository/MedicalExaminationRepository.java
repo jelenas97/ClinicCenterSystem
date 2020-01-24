@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+
 public interface MedicalExaminationRepository extends JpaRepository<MedicalExamination, Long> {
 
     @Transactional
@@ -13,4 +15,11 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
     @Query(value = "UPDATE db.medical_examination SET confirmed = true WHERE id = :id", nativeQuery = true)
     void confirm(Long id);
 
+    @Query(value = "SELECT * FROM db.medical_examination me WHERE me.predefined = true and me.confirmed = false", nativeQuery = true)
+    Collection<MedicalExamination> getAllPredefinedMedicalExaminations();
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE db.medical_examination SET confirmed = true, patient_id = :patientId WHERE id = :examinationId", nativeQuery = true)
+    void schedulePredefinedMedicalExamination(Long examinationId, Long patientId);
 }

@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id) {
+    public Collection<User> getSearchedDoctors(Long selectedOption, Long id) {
         return userRepository.getSearchedDoctors(selectedOption, id);
     }
 

@@ -126,7 +126,7 @@ public class UserController {
     }
 
     @GetMapping("auth/getSearchedDoctors/{selectedOption}/{id}")
-    public Collection<UserMapperTwo> getSearchedDoctors(@PathVariable Long selectedOption, @PathVariable Long id) {
+    public Collection<User> getSearchedDoctors(@PathVariable Long selectedOption, @PathVariable Long id) {
         return userService.getSearchedDoctors(selectedOption, id);
     }
 
