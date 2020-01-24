@@ -43,8 +43,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query("UPDATE User u SET u.averageRating = :averageRating2, u.timesRated = :timesRated WHERE u.id = :id")
     void updateRating(Long id, double averageRating2, int timesRated);
 
-    @Query(value = "SELECT u.id, u.first_name, u.last_name, u.country, u.average_rating FROM users u WHERE u.clinic_id = :id and u.id in (SELECT det.doctor_id FROM doctor_examination_types det WHERE det.type_id = :selectedOption)", nativeQuery = true)
-    Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id);
+    @Query(value = "SELECT * FROM users u WHERE u.clinic_id = :id and u.id in (SELECT det.doctor_id FROM doctor_examination_types det WHERE det.type_id = :selectedOption)", nativeQuery = true)
+    Collection<User> getSearchedDoctors(Long selectedOption, Long id);
 
     @Modifying
     @Transactional
