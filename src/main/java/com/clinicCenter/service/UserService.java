@@ -14,6 +14,8 @@ public interface UserService {
 
     int updateUser(UserMapper user);
 
+    void changePassword(Long id);
+
     void save(Patient patient);
 
     Set<String> getAllAdmins();
