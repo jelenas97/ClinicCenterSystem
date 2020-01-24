@@ -14,6 +14,8 @@ public interface UserService {
 
     int updateUser(UserMapper user);
 
+    void changePassword(Long id);
+
     void save(Patient patient);
 
     Set<String> getAllAdmins();
@@ -24,7 +26,7 @@ public interface UserService {
 
     ArrayList<User> getDoctors();
 
-    Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id);
+    Collection<User> getSearchedDoctors(Long selectedOption, Long id);
 
     void saveDoctor(Doctor doctor);
 

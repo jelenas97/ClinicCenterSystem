@@ -31,6 +31,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.updateUser(user.getEmail(),user.getFirstName(),user.getLastName(),user.getCountry(),user.getCity(),user.getAddress(), user.getPhone());
     }
 
+    @Override
+    public void changePassword(Long id) {
+        userRepository.changedPassword(id);
+    }
+
 
     @Override
     public void save(Patient patient) {
@@ -70,7 +75,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<UserMapperTwo> getSearchedDoctors(Long selectedOption, Long id) {
+    public Collection<User> getSearchedDoctors(Long selectedOption, Long id) {
         return userRepository.getSearchedDoctors(selectedOption, id);
     }
 

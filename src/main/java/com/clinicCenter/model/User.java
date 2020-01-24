@@ -61,6 +61,9 @@ public abstract class User implements UserDetails {
     @Column(nullable = false)
     private Long ssn;
 
+    @Column(name = "passwordChanged")
+    private Boolean passwordChanged;
+
     @Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
 

@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -40,12 +41,29 @@ public class UserController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/auth/medicalStaffProfile/{id}")
     public User getById(@PathVariable Long id) {
         return userService.getById(id);
     }
+
+    @PostMapping(value = "/auth/check-for-change-password")
+    public ResponseEntity<?> changePass(@RequestBody JwtAuthenticationRequest authenticationRequest) {
+        User user = userService.getByEmail(authenticationRequest.getUsername());
+        return ResponseEntity.ok(new UserTokenState(user.getPasswordChanged()));
+    }
+
+    @PostMapping(value = "/auth/change-password")
+    public void changePassword(@RequestBody String[] data) {
+        String newPass = data[1];
+        String email = data[3];
+        User user = userService.getByEmail(email);
+        user.setPassword(passwordEncoder.encode(newPass));
+        user.setPasswordChanged(true);
+        userService.changePassword(user.getId());
+    }
+
 
     @PutMapping("/medicalStaffProfile")
     public int updateMedicalStaff(@RequestBody UserMapper user) {
@@ -54,7 +72,6 @@ public class UserController {
 
     @PutMapping("/auth/activateUser/{id}")
     public void activateUser(@PathVariable Long id) {
-        System.out.println("aktiviran");
         userService.activateUser(id);
     }
 
@@ -77,7 +94,7 @@ public class UserController {
         System.out.println("Radiiiii");
 
         // Vrati token kao odgovor na uspesno autentifikaciju
-        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, ((Authority) user.getAuthorities().iterator().next()).getName()));
+        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, ((Authority) user.getAuthorities().iterator().next()).getName(),user.getPasswordChanged()));
     }
 
     @RequestMapping(value = "/api/whoami", method = RequestMethod.GET)
@@ -109,7 +126,7 @@ public class UserController {
     }
 
     @GetMapping("auth/getSearchedDoctors/{selectedOption}/{id}")
-    public Collection<UserMapperTwo> getSearchedDoctors(@PathVariable Long selectedOption, @PathVariable Long id) {
+    public Collection<User> getSearchedDoctors(@PathVariable Long selectedOption, @PathVariable Long id) {
         return userService.getSearchedDoctors(selectedOption, id);
     }
 
@@ -118,153 +135,6 @@ public class UserController {
         return userService.getById(id);
     }
 
-/*
-    @PostMapping("/addDoctor/{clinicName}")
-    public void addDoctor(@RequestBody Doctor doctor, @PathVariable String clinicName) {
-        Clinic clinic = clinicService.findByName(clinicName);
-        System.out.println("ovo je iz baze " + clinic.getName() + clinic.getId());
-        doctor.setClinic(clinic);
-        doctor.setEnabled(true);
-        doctor.setType("DO");
-        doctor.setAverageRating(0.0);
-        doctor.setTimesRated(0);
-        doctor.setMedicalExaminationTypes(new Set<MedicalExaminationType>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<MedicalExaminationType> iterator() {
-                return null;
-            }
-
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(MedicalExaminationType medicalExaminationType) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends MedicalExaminationType> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-        });
-        //doctor.getExaminationRequests().add(new MedicalExaminationRequest());
-        doctor.setAnnualLeaveRequest(new Set<AnnualLeaveRequest>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<AnnualLeaveRequest> iterator() {
-                return null;
-            }
-
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(AnnualLeaveRequest annualLeaveRequest) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends AnnualLeaveRequest> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-        });
-        System.out.println(doctor);
-        userService.saveDoctor(doctor);
-    }
-*/
     @GetMapping("getAvailableDoctorsFromClinic/{adminId}")
     public Collection<User> getAvailableDoctors(@PathVariable Long adminId){
         return userService.getDoctorsFromClinic(adminId);

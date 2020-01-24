@@ -57,7 +57,7 @@ public class Doctor extends User {
     private Clinic clinic;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "refDoctor")
+    @OneToMany(mappedBy = "refDoctor", fetch = FetchType.EAGER)
     private Set<AnnualLeaveRequest> annualLeaveRequest;
 
     @Column(name = "start_work")

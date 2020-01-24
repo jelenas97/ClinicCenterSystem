@@ -53,4 +53,15 @@ public class DoctorController {
         return howMany > 0;
     }
 
+
+    @GetMapping("/getSearchedDoctorsFromClinic/search")
+    @ResponseBody
+    public ArrayList<Doctor> getSearchedFromClinic(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "rating") double rating,
+                                          @RequestParam(name = "id") Integer caId) {
+
+        ArrayList<Doctor> doctors = null;
+        doctors = doctorService.getSearchedDoctorsFromClinic(firstName,lastName,rating,caId);
+
+        return doctors;
+    }
 }
