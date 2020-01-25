@@ -154,4 +154,9 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
         emailController.sendMail(examination.getPatient().getEmail(), message, "Automated mail : You have scheduled examination");
 
     }
+
+    @Override
+    public Collection<MedicalExamination> getAllExaminationsFromDoctor(Long id) {
+        return medicalExaminationRepository.getAllFromDoctor(id);
+    }
 }
