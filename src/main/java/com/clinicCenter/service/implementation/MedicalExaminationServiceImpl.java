@@ -156,6 +156,21 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     }
 
     @Override
+    public Collection<MedicalExamination> getAllExaminationsPatientCanRate(Long patientId) {
+        return medicalExaminationRepository.getAllExaminationsPatientCanRate(patientId);
+    }
+
+    @Override
+    public void rateDoctor(Long examId) {
+        medicalExaminationRepository.rateDoctor(examId);
+    }
+
+    @Override
+    public void rateClinic(Long examId) {
+        medicalExaminationRepository.rateClinic(examId);
+    }
+
+    @Override
     public Collection<MedicalExamination> getAllExaminationsFromRoom(Long roomId) {
         return medicalExaminationRepository.getAllFromRoom(roomId);
     }

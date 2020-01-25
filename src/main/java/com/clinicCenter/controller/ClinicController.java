@@ -3,6 +3,7 @@ package com.clinicCenter.controller;
 import com.clinicCenter.model.Clinic;
 import com.clinicCenter.model.ClinicMapper;
 import com.clinicCenter.service.ClinicService;
+import com.clinicCenter.service.MedicalExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,9 @@ public class ClinicController {
     @Autowired
     private ClinicService clinicService;
 
+    @Autowired
+    private MedicalExaminationService medicalExaminationService;
+
     @PostMapping("/createClinic")
     public void saveClinic(@RequestBody Clinic clinic){
         clinicService.save(clinic);
@@ -24,9 +28,10 @@ public class ClinicController {
     @GetMapping("/auth/getAllClinics")
     public Collection<Clinic> getAllClinics() {System.out.println("klinike"); return clinicService.getAllClinics();}
 
-    @PutMapping("/auth/rateClinic/{id}/{number}")
-    public void rateClinics(@PathVariable Long id, @PathVariable Integer number){
-        clinicService.rateClinic(id, number);
+    @PutMapping("/auth/rateClinic/{examId}/{number}/{clinicId}")
+    public void rateClinics(@PathVariable Long clinicId, @PathVariable Integer number, @PathVariable Long examId){
+        clinicService.rateClinic(clinicId, number);
+        medicalExaminationService.rateClinic(examId);
     }
 
     @GetMapping("auth/getSearchedClinics/{typeName}/{clinicName}/{clinicRating}")

@@ -113,4 +113,9 @@ public class MedicalExaminationController {
     public void schedulePredefinedMedicalExamination(@PathVariable Long examinationId, @PathVariable Long patientId) {
         medicalExaminationService.schedulePredefinedMedicalExamination(examinationId, patientId);
     }
+
+    @GetMapping("getAllExaminationsPatientCanRate/{patientId}")
+    public Collection<MedicalExamination> getAllExaminationsPatientCanRate(@PathVariable Long patientId) {
+        return medicalExaminationService.getAllExaminationsPatientCanRate(patientId);
+    }
 }
