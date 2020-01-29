@@ -8,4 +8,5 @@ public interface DiagnosisService {
 
     void save(Diagnosis diagnosis);
     List<Diagnosis> getAll();
+    Diagnosis getById(Long id);
 }

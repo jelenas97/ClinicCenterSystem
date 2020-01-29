@@ -29,4 +29,6 @@ public interface MedicalExaminationService {
     Collection<MedicalExamination> getAllPredefinedMedicalExaminations();
 
     void schedulePredefinedMedicalExamination(Long examinationId, Long patientId);
+
+    Collection<MedicalExamination> getAllExaminationsFromDoctor(Long id);
 }
