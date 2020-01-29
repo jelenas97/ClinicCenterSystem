@@ -5,8 +5,10 @@ import com.clinicCenter.security.TokenUtils;
 import com.clinicCenter.security.auth.JwtAuthenticationRequest;
 import com.clinicCenter.service.AuthorityService;
 import com.clinicCenter.service.ClinicService;
+import com.clinicCenter.service.MedicalExaminationService;
 import com.clinicCenter.service.UserService;
 import com.clinicCenter.service.implementation.CustomUserDetailsService;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.method.P;
@@ -33,6 +35,9 @@ public class UserController {
 
     @Autowired
     private ClinicService clinicService;
+
+    @Autowired
+    private MedicalExaminationService medicalExaminationService;
 
     @Autowired
     TokenUtils tokenUtils;
@@ -120,9 +125,10 @@ public class UserController {
         userService.removeDoctor(id);
     }
 
-    @PutMapping("auth/rateDoctor/{id}/{number}")
-    public void rateDoctor(@PathVariable Long id, @PathVariable Integer number) {
-        userService.rateDoctor(id, number);
+    @PutMapping("auth/rateDoctor/{examId}/{number}/{doctorId}")
+    public void rateDoctor(@PathVariable Long examId, @PathVariable Integer number, @PathVariable Long doctorId) {
+        userService.rateDoctor(doctorId, number);
+        medicalExaminationService.rateDoctor(examId);
     }
 
     @GetMapping("auth/getSearchedDoctors/{selectedOption}/{id}")

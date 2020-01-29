@@ -72,4 +72,9 @@ public class MedicalExamination {
 
     @Column
     private Boolean predefined = false;
+
+    @Column
+    private Boolean doctorRated = false;
+
+    @Column Boolean clinicRated = false;
 }

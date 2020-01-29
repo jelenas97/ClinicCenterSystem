@@ -5,6 +5,7 @@ import com.clinicCenter.dto.ClinicAdministratorDto;
 import com.clinicCenter.model.*;
 import com.clinicCenter.service.AuthorityService;
 import com.clinicCenter.service.ClinicAdministratorService;
+import com.clinicCenter.service.ClinicCenterAdminService;
 import com.clinicCenter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.message.StringFormattedMessage;
@@ -25,6 +26,7 @@ public class ClinicAdminController {
     private final PasswordEncoder passwordEncoder;
     private final AuthorityService authorityService;
     private final ClinicAdministratorService clinicAdministratorService;
+    private final ClinicCenterAdminService clinicCenterAdminService;
 
     @GetMapping("/getAllClinicAdmins")
     public Set<ClinicAdministratorDto> getAll(){
@@ -56,5 +58,16 @@ public class ClinicAdminController {
         clinicAdministrator.setClinic(clinic);
         clinicAdministrator.setAuthorities(authorities);
         clinicAdministratorService.save(clinicAdministrator);
+    }
+
+    @PostMapping("/addClinicCenterAdmin")
+    public void save(@RequestBody ClinicCenterAdministrator clinicCenterAdministrator){
+        List<Authority> authorities = authorityService.findByName("ROLE_CLINIC_CENTER_ADMIN");
+        String passwordEnc = passwordEncoder.encode(clinicCenterAdministrator.getPassword());
+
+        clinicCenterAdministrator.setPassword(passwordEnc);
+        clinicCenterAdministrator.setEnabled(true);
+        clinicCenterAdministrator.setAuthorities(authorities);
+        clinicCenterAdminService.saveClinicCenterAdmin(clinicCenterAdministrator);
     }
 }

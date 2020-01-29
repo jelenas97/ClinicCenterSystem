@@ -16,4 +16,10 @@ public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
     public ClinicCenterAdministrator getById(Long id) {
         return clinicCenterAdminRepository.getOne(id);
     }
+
+    @Override
+    public void saveClinicCenterAdmin(ClinicCenterAdministrator clinicCenterAdministrator) {
+        clinicCenterAdministrator.setPasswordChanged(false);
+        clinicCenterAdminRepository.save(clinicCenterAdministrator);
+    }
 }
