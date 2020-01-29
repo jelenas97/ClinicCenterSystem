@@ -3,8 +3,11 @@ package com.clinicCenter.controller;
 import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRequest;
 import com.clinicCenter.model.MedicalExaminationRoom;
+import com.clinicCenter.model.User;
 import com.clinicCenter.service.MedicalExaminationRoomService;
 import com.clinicCenter.service.MedicalExaminationService;
+import com.clinicCenter.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.JsonPath;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,14 +18,13 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
+@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class MedicalExaminationController {
 
-    @Autowired
-    private MedicalExaminationService medicalExaminationService;
-
-    @Autowired
-    private MedicalExaminationRoomService medicalExaminationRoomService;
+    private final UserService userService;
+    private final MedicalExaminationService medicalExaminationService;
+    private final MedicalExaminationRoomService medicalExaminationRoomService;
 
     @PutMapping("auth/sendMedicalExamRequest/{typeId}/{date}/{clinicId}/{doctorId}/{patientId}")
     public void sendMedicalExamRequest(@PathVariable Long typeId, @PathVariable Date date, @PathVariable Long clinicId, @PathVariable Long doctorId, @PathVariable Long patientId) {
@@ -37,6 +39,13 @@ public class MedicalExaminationController {
     @GetMapping("getMedicalExaminationById/{requestId}")
     public MedicalExaminationRequest getMedicalExaminationRequestById(@PathVariable Long requestId) {
         return medicalExaminationService.getById(requestId);
+    }
+
+    @GetMapping("medicalExaminations/doctor/{id}")
+    public Collection<MedicalExamination> getExaminationsFromRoom(@PathVariable Long id) {
+        User user = userService.getById(id);
+        Collection<MedicalExamination> list = medicalExaminationService.getAllExaminationsFromDoctor(id);
+        return medicalExaminationService.getAllExaminationsFromDoctor(id);
     }
 
     @PutMapping("saveExamination/{date}/{price}/{duration}/{discount}/{roomId}/{clinicId}/{doctorId}/{patientId}/{typeId}/{requestId}")

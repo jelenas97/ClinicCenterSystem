@@ -23,4 +23,9 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     public List<Diagnosis> getAll() {
         return diagnosisRepository.findAll();
     }
+
+    @Override
+    public Diagnosis getById(Long id) {
+        return diagnosisRepository.getOne(id);
+    }
 }
