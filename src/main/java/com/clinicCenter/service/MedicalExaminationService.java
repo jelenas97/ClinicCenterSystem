@@ -35,4 +35,6 @@ public interface MedicalExaminationService {
     void rateDoctor(Long examId);
 
     void rateClinic(Long examId);
+
+    Collection<MedicalExamination> getAllExaminationsFromDoctor(Long id);
 }
