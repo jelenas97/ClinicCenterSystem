@@ -43,4 +43,9 @@ public class PatientController {
         return patients;
     }
 
+    @GetMapping("/getPatient/{id}")
+    public Patient getById(@PathVariable Long id){
+        return patientService.getById(id);
+    }
+
 }

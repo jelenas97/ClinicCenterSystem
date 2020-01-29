@@ -11,4 +11,6 @@ public interface PatientService {
     ArrayList<Patient> getSearchedPatients(String firstName, String lastName);
 
     ArrayList<Patient> getSearchedPatients1(String firstName, String lastName, Long ssn);
+
+    Patient getById(Long id);
 }

@@ -30,4 +30,9 @@ public class PatientServiceImpl implements PatientService {
     public ArrayList<Patient> getSearchedPatients1(String firstName, String lastName, Long ssn) {
         return patientRepository.searchPatients1(firstName.toLowerCase(),lastName.toLowerCase(),ssn);
     }
+
+    @Override
+    public Patient getById(Long id) {
+        return patientRepository.findById(id).get();
+    }
 }
