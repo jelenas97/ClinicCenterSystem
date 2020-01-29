@@ -42,7 +42,7 @@ public class MedicalExaminationController {
     }
 
     @GetMapping("medicalExaminations/doctor/{id}")
-    public Collection<MedicalExamination> getExaminationsFromRoom(@PathVariable Long id) {
+    public Collection<MedicalExamination> getExaminationsFromRoomDoctor(@PathVariable Long id) {
         User user = userService.getById(id);
         Collection<MedicalExamination> list = medicalExaminationService.getAllExaminationsFromDoctor(id);
         return medicalExaminationService.getAllExaminationsFromDoctor(id);
