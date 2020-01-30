@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 
@@ -45,4 +46,7 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
 
     @Query(value = "SELECT * FROM db.medical_examination me WHERE me.doctor_id = :id", nativeQuery = true)
     Collection<MedicalExamination> getAllFromDoctor(Long id);
+
+    @Query(value = "SELECT * FROM db.medical_examination me WHERE me.doctor_id = :doctorId AND me.date BETWEEN :date1 AND :date2", nativeQuery = true)
+    Collection<MedicalExamination> getDoctorsExaminationsByIdAndDate(Long doctorId, Date date1, Date date2);
 }
