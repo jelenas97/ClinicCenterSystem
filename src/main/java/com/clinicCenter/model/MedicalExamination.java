@@ -13,7 +13,8 @@ import java.util.Date;
 @Entity
 public class MedicalExamination {
 
-    public MedicalExamination() {}
+    public MedicalExamination() {
+    }
 
 
     public MedicalExamination(Date date, Double price, Double duration, Double discount, MedicalExaminationRoom room,
@@ -76,5 +77,6 @@ public class MedicalExamination {
     @Column
     private Boolean doctorRated = false;
 
-    @Column Boolean clinicRated = false;
+    @Column
+    Boolean clinicRated = false;
 }
