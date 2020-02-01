@@ -127,4 +127,10 @@ public class MedicalExaminationController {
     public Collection<MedicalExamination> getAllExaminationsPatientCanRate(@PathVariable Long patientId) {
         return medicalExaminationService.getAllExaminationsPatientCanRate(patientId);
     }
+
+    @GetMapping("medicalExaminationsDaily/{id}")
+    public List<Integer> getExaminationsFromRoomClinic(@PathVariable Long id) {
+        List<Integer> list = medicalExaminationService.getAllExaminationsDaily(id);
+        return list;
+    }
 }
