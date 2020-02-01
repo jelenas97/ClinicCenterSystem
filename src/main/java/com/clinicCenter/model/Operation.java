@@ -22,6 +22,7 @@ public class Operation {
     private Date date;
     private Double duration;
 
+    /*
     @JsonIgnore
     @ManyToOne
     private OperationRoom room;
