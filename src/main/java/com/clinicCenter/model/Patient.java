@@ -1,22 +1,21 @@
 package com.clinicCenter.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.parameters.P;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Data
-//@Builder
 @Entity
+@AllArgsConstructor
 @DiscriminatorValue("PA")
 public class Patient extends User {
+
+    @OneToOne
+    private MedicalRecord medicalRecord;
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -55,7 +54,4 @@ public class Patient extends User {
         this.setEnabled(false);
     }
 
-    /*@OneToMany(mappedBy = "patient")
-    @JsonIgnore
-    private Set<MedicalExaminationRequest> examinationRequests;*/
 }

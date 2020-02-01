@@ -77,4 +77,6 @@ public class MedicalExamination {
     private Boolean doctorRated = false;
 
     @Column Boolean clinicRated = false;
+
+    @Column Boolean finished = false;
 }
