@@ -1,7 +1,6 @@
 package com.clinicCenter.controller;
 
-import com.clinicCenter.model.Doctor;
-import com.clinicCenter.model.OperationRoom;
+import com.clinicCenter.dto.PatientDto;
 import com.clinicCenter.model.Patient;
 import com.clinicCenter.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -18,9 +18,8 @@ public class PatientController {
     private PatientService patientService;
 
     @GetMapping("/allPatients")
-    public List<Patient> getAll(){
-        List<Patient> patients = patientService.getAll();
-        return patients;
+    public Set<PatientDto> getAll(){
+        return  patientService.getAll();
     }
 
     @GetMapping("/allPatients/search1")
