@@ -181,6 +181,11 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     }
 
     @Override
+    public MedicalExamination getExamById(Long examId) {
+        return medicalExaminationRepository.getOne(examId);
+    }
+
+    @Override
     public Collection<MedicalExamination> getAllExaminationsFromRoom(Long roomId) {
         return medicalExaminationRepository.getAllFromRoom(roomId);
     }
