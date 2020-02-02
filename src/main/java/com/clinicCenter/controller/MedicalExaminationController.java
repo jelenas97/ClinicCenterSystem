@@ -207,4 +207,9 @@ public class MedicalExaminationController {
 
         return availableTerms;
     }
+
+    @GetMapping("getMedicalExam/{examId}")
+    public MedicalExamination getMedicalExam(@PathVariable Long examId) {
+        return medicalExaminationService.getExamById(examId);
+    }
 }
