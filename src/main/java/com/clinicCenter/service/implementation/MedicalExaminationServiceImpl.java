@@ -182,7 +182,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
     @Override
     public MedicalExamination getExamById(Long examId) {
-        return medicalExaminationRepository.getOne(examId);
+        return medicalExaminationRepository.findById(examId).get();
     }
 
     @Override
