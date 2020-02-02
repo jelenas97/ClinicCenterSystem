@@ -1,15 +1,11 @@
 package com.clinicCenter.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.print.Doc;
 import java.util.Date;
 
 @Data
-//@Builder
 @Entity
 public class MedicalExamination {
 
@@ -77,4 +73,7 @@ public class MedicalExamination {
     private Boolean doctorRated = false;
 
     @Column Boolean clinicRated = false;
+
+    @Column Boolean finished = false;
+
 }

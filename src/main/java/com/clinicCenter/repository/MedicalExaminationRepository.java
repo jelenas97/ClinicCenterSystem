@@ -47,6 +47,9 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
     @Query(value = "SELECT * FROM db.medical_examination me WHERE me.doctor_id = :id", nativeQuery = true)
     Collection<MedicalExamination> getAllFromDoctor(Long id);
 
+    @Query(value = "SELECT * FROM db.medical_examination me WHERE me.doctor_id = :doctorId AND me.date BETWEEN :date1 AND :date2", nativeQuery = true)
+    Collection<MedicalExamination> getDoctorsExaminationsByIdAndDate(Long doctorId, Date date1, Date date2);
+
     @Query(value = "SELECT count(me.id) FROM db.medical_examination me WHERE me.clinic_id = (SELECT u.clinic_id FROM db.users u where u.id = :id) and me.date between :start and :end", nativeQuery = true)
     int getExamsBetween(Long id, Date start, Date end);
 }

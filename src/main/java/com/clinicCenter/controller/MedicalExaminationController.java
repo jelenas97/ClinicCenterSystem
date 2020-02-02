@@ -1,9 +1,6 @@
 package com.clinicCenter.controller;
 
-import com.clinicCenter.model.MedicalExamination;
-import com.clinicCenter.model.MedicalExaminationRequest;
-import com.clinicCenter.model.MedicalExaminationRoom;
-import com.clinicCenter.model.User;
+import com.clinicCenter.model.*;
 import com.clinicCenter.service.MedicalExaminationRoomService;
 import com.clinicCenter.service.MedicalExaminationService;
 import com.clinicCenter.service.UserService;
@@ -26,9 +23,29 @@ public class MedicalExaminationController {
     private final MedicalExaminationService medicalExaminationService;
     private final MedicalExaminationRoomService medicalExaminationRoomService;
 
-    @PutMapping("auth/sendMedicalExamRequest/{typeId}/{date}/{clinicId}/{doctorId}/{patientId}")
-    public void sendMedicalExamRequest(@PathVariable Long typeId, @PathVariable Date date, @PathVariable Long clinicId, @PathVariable Long doctorId, @PathVariable Long patientId) {
-        medicalExaminationService.sendRequest(typeId, date, clinicId, doctorId, patientId);
+    @PutMapping("auth/sendMedicalExamRequest/{typeId}/{date}/{clinicId}/{doctorId}/{patientId}/{selectedTerm}")
+    public void sendMedicalExamRequest(@PathVariable Long typeId, @PathVariable Date date, @PathVariable Long clinicId,
+                                       @PathVariable Long doctorId, @PathVariable Long patientId, @PathVariable String selectedTerm) {
+        System.out.println(date);
+        System.out.println(selectedTerm);
+        String[] time = selectedTerm.split(":");
+        String hours = time[0];
+        String minutes = time[1];
+        System.out.println(hours);
+        System.out.println(minutes);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+        cal.set(Calendar.MINUTE, Integer.parseInt(minutes));
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        Date d = cal.getTime();
+        System.out.println(d);
+
+        medicalExaminationService.sendRequest(typeId, d, clinicId, doctorId, patientId);
     }
 
     @GetMapping("auth/getAllExaminationRequests/{adminId}")
@@ -48,13 +65,31 @@ public class MedicalExaminationController {
         return medicalExaminationService.getAllExaminationsFromDoctor(id);
     }
 
-    @PutMapping("saveExamination/{date}/{price}/{duration}/{discount}/{roomId}/{clinicId}/{doctorId}/{patientId}/{typeId}/{requestId}")
+    @PutMapping("saveExamination/{date}/{price}/{duration}/{discount}/{roomId}/{clinicId}/{doctorId}/{patientId}/{typeId}/{requestId}/{selectedTerm}")
     public void saveExamination(@PathVariable String date, @PathVariable Double price, @PathVariable Double duration, @PathVariable Double discount,
                                 @PathVariable Long roomId, @PathVariable Long clinicId, @PathVariable Long doctorId, @PathVariable Long patientId,
-                                @PathVariable Long typeId, @PathVariable Long requestId) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                @PathVariable Long typeId, @PathVariable Long requestId, @PathVariable String selectedTerm) throws ParseException {
+        date = date.replace('_', '-');
+        System.out.println(date);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date d = simpleDateFormat.parse(date);
-        medicalExaminationService.saveExamination(d, price, duration, discount, roomId, clinicId, doctorId, patientId, typeId, requestId, false);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+
+        String[] time = selectedTerm.split(":");
+        String hours = time[0];
+        String minutes = time[1];
+
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+        cal.set(Calendar.MINUTE, Integer.parseInt(minutes));
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        Date dd = cal.getTime();
+
+
+        medicalExaminationService.saveExamination(dd, price, duration, discount, roomId, clinicId, doctorId, patientId, typeId, requestId, false);
     }
 
     @PutMapping("/auth/confirmScheduledExamination/{id}")
@@ -126,6 +161,51 @@ public class MedicalExaminationController {
     @GetMapping("getAllExaminationsPatientCanRate/{patientId}")
     public Collection<MedicalExamination> getAllExaminationsPatientCanRate(@PathVariable Long patientId) {
         return medicalExaminationService.getAllExaminationsPatientCanRate(patientId);
+    }
+
+    @GetMapping("getAvailableTermsForDoctor/{doctorId}/{date}")
+    public Collection<String> getAvailableTermsForDoctor(@PathVariable Long doctorId, @PathVariable String date) throws ParseException {
+        date = date.replace('_', '/');
+        Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(date1);
+        c.add(Calendar.DATE, 1); //same with c.add(Calendar.DAY_OF_MONTH, 1);
+        Date date2 = c.getTime();
+
+        Doctor doctor = (Doctor) userService.getById(doctorId);
+        Collection<MedicalExamination> examinationsForDoctor = medicalExaminationService.getDoctorsExaminationsByIdAndDate(doctorId, date1, date2);
+
+        Collection<String> availableTerms = new ArrayList<String>();
+
+        int startWork = doctor.getStartWork();
+        int endWork = doctor.getEndWork();
+        int iterations = (endWork - startWork);
+
+        for (int i = startWork; i < endWork; i++) {
+            for (int j = 0; j < 5; j += 3) {
+                String part1 = "";
+                if (i < 10) {
+                    part1 = "0";
+                } else {
+                    part1 = "";
+                }
+                availableTerms.add(part1 + i + ":" + j + "0");
+            }
+        }
+
+        System.out.println("Svi termini za ovog doktora su " + availableTerms);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
+        for (MedicalExamination examination : examinationsForDoctor) {
+            String dateAndTime = formatter.format(examination.getDate());
+            String time = dateAndTime.split(" ")[1].substring(0, 5);
+            availableTerms.remove(time);
+        }
+
+        System.out.println("Svi slobodni termini za ovog doktora su" + availableTerms);
+
+        return availableTerms;
     }
 
     @GetMapping("medicalExaminationsDaily/{id}")

@@ -1,12 +1,17 @@
 package com.clinicCenter.service;
 
+import com.clinicCenter.dto.PatientDto;
 import com.clinicCenter.model.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public interface PatientService {
-    List<Patient> getAll();
+
+    void save(Patient patient);
+
+    Set<PatientDto> getAll();
 
     ArrayList<Patient> getSearchedPatients(String firstName, String lastName);
 
