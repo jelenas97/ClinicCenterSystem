@@ -1,11 +1,13 @@
 package com.clinicCenter.service;
 
+import com.clinicCenter.dto.MedicalReportDto;
 import com.clinicCenter.model.MedicalReport;
 
-import java.util.List;
+import java.util.Set;
 
 public interface MedicalReportService {
     void save(MedicalReport medicalReport);
-    MedicalReport getById(Long id);
-    List<MedicalReport> getAllByPatientId(Long id);
+    void update(MedicalReport medicalReport);
+    MedicalReportDto getById(Long id);
+    Set<MedicalReportDto> getAllByPatientId(Long id);
 }

@@ -14,8 +14,6 @@ public interface MedicalExaminationService {
 
     MedicalExaminationRequest getById(Long requestId);
 
-    MedicalExamination getMedicalExamById(Long id);
-
     void saveExamination(Date date, Double price, Double duration, Double discount, Long roomId, Long clinicId, Long doctorId, Long patientId, Long typeId, Long requestId, Boolean predefined);
 
     void confirmScheduledExamination(Long id);

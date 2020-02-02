@@ -1,11 +1,13 @@
 package com.clinicCenter.controller;
 
+import com.clinicCenter.dto.MedicalReportDto;
 import com.clinicCenter.model.*;
 import com.clinicCenter.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,7 +26,7 @@ public class MedicalReportController {
         Diagnosis diagnosis = null;
         Medicament medicament = null;
 
-        MedicalExamination medicalExamination = medicalExaminationService.getMedicalExamById(id);
+        MedicalExamination medicalExamination = medicalExaminationService.getExamById(id);
 
         if(medicalReport.getDiagnosisId() != null) {
             diagnosis = diagnosisService.getById(medicalReport.getDiagnosisId());
@@ -50,13 +52,20 @@ public class MedicalReportController {
     }
 
     @GetMapping("/editMedicalReport/{id}")
-    public MedicalReport editById(@PathVariable Long id){
-        MedicalReport medicalReport = medicalReportService.getById(id);
-        return medicalReportService.getById(id);
+    public MedicalReportDto editById(@PathVariable Long id){
+        MedicalReportDto medicalReport = medicalReportService.getById(id);
+        return medicalReport;
     }
 
     @GetMapping("/medicalHistory/{id}")
-    public List<MedicalReport> getAll(@PathVariable Long id){
-        return medicalReportService.getAllByPatientId(id);
+    public Set<MedicalReportDto> getAll(@PathVariable Long id){
+        Set<MedicalReportDto> medicalReports = medicalReportService.getAllByPatientId(id);
+        return medicalReports;
+    }
+
+    @PutMapping("/saveEditedMedicalReport/{id}")
+    public void saveEdited(@RequestBody MedicalReport medicalReport, @PathVariable Long id){
+        medicalReport.setId(id);
+        medicalReportService.update(medicalReport);
     }
 }
