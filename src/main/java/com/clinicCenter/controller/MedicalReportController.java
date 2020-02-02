@@ -19,12 +19,12 @@ public class MedicalReportController {
     private final DiagnosisService diagnosisService;
     private final MedicamentService medicamentService;
     private final MedicalReportService medicalReportService;
-    private final MedicalRecordHistoryService medicalRecordHistoryService;
+    //private final MedicalRecordHistoryService medicalRecordHistoryService;
 
     @PostMapping("/medicalReport")
     public void save(@RequestBody MedicalReport medicalReport){
         MedicalReport newMedicalReport = new MedicalReport();
-        MedicalRecordHistory medicalRecordHistory = new MedicalRecordHistory();
+        //MedicalRecordHistory medicalRecordHistory = new MedicalRecordHistory();
         Diagnosis diagnosis = null;
         Medicament medicament = null;
         Doctor doctor = doctorService.getById(medicalReport.getDoctorId());
