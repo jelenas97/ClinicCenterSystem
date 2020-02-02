@@ -33,6 +33,8 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     @Autowired
     private EmailController emailController;
 
+    int[] daysInAMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
     @Override
     public void sendRequest(Long typeId, Date date, Long clinicId, Long doctorId, Long patientId) {
         MedicalExaminationType type = medicalExaminationTypeRepository.findById(typeId).get();
@@ -202,6 +204,29 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     public Collection<MedicalExamination> getDoctorsExaminationsByIdAndDate(Long doctorId, Date date1, Date date2) {
         return medicalExaminationRepository.getDoctorsExaminationsByIdAndDate(doctorId, date1, date2);
     }
+
+    @Override
+    public List<Integer> getAllExaminationsMonthly(Long id) {
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i = 0; i < 4; i++) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            cal.set(Calendar.MINUTE, 59);
+            cal.set(Calendar.HOUR, 23);
+            cal.add(Calendar.MONTH, 0 - i);
+            cal.set(Calendar.DATE, this.daysInAMonth[cal.get(Calendar.MONTH)]);
+            Date end = cal.getTime();
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(new Date());
+            cal2.set(Calendar.MINUTE, 0);
+            cal2.set(Calendar.HOUR, 0);
+            cal2.set(Calendar.DATE, 1);
+            cal2.add(Calendar.MONTH, 0 - i);
+            Date start = cal2.getTime();
+            int broj = this.medicalExaminationRepository.getExamsBetween(id, start, end);
+            list.add(broj);
+        }
+        return list;    }
 
     @Override
     public Collection<MedicalExamination> getAllExaminationsFromRoom(Long roomId) {

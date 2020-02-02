@@ -41,4 +41,6 @@ public interface MedicalExaminationService {
     List<Integer> getAllExaminationsDaily(Long id);
 
     Collection<MedicalExamination> getDoctorsExaminationsByIdAndDate(Long doctorId, Date date1, Date date2);
+
+    List<Integer> getAllExaminationsMonthly(Long id);
 }

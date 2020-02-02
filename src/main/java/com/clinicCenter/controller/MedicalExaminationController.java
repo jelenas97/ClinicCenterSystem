@@ -209,8 +209,14 @@ public class MedicalExaminationController {
     }
 
     @GetMapping("medicalExaminationsDaily/{id}")
-    public List<Integer> getExaminationsFromRoomClinic(@PathVariable Long id) {
+    public List<Integer> getExaminationsFromClinicDaily(@PathVariable Long id) {
         List<Integer> list = medicalExaminationService.getAllExaminationsDaily(id);
+        return list;
+    }
+
+    @GetMapping("medicalExaminationsMonthly/{id}")
+    public List<Integer> getExaminationsFromClinicMonthly(@PathVariable Long id) {
+        List<Integer> list = medicalExaminationService.getAllExaminationsMonthly(id);
         return list;
     }
 }
