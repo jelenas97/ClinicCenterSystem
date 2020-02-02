@@ -52,4 +52,7 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
 
     @Query(value = "SELECT count(me.id) FROM db.medical_examination me WHERE me.clinic_id = (SELECT u.clinic_id FROM db.users u where u.id = :id) and me.date between :start and :end", nativeQuery = true)
     int getExamsBetween(Long id, Date start, Date end);
+
+    @Query(value = "SELECT ifnull(sum(me.price),0) FROM db.medical_examination me WHERE me.clinic_id = (SELECT u.clinic_id FROM db.users u where u.id = :id) and me.date between :start and :end", nativeQuery = true)
+    Long getIncomeBetween(Long id, Date start, Date end);
 }
