@@ -7,27 +7,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class MedicalReportController {
 
-    private final DoctorService doctorService;
     private final RecipeService recipeService;
-    private final PatientService patientService;
     private final DiagnosisService diagnosisService;
     private final MedicamentService medicamentService;
     private final MedicalReportService medicalReportService;
-    private final MedicalRecordHistoryService medicalRecordHistoryService;
+    private final MedicalExaminationService medicalExaminationService;
 
-    @PostMapping("/medicalReport")
-    public void save(@RequestBody MedicalReport medicalReport){
+    @PostMapping("/medicalReport/{id}")
+    public void save(@RequestBody MedicalReport medicalReport, @PathVariable Long id){
         MedicalReport newMedicalReport = new MedicalReport();
-        MedicalRecordHistory medicalRecordHistory = new MedicalRecordHistory();
         Diagnosis diagnosis = null;
         Medicament medicament = null;
-        Doctor doctor = doctorService.getById(medicalReport.getDoctorId());
+
+        MedicalExamination medicalExamination = medicalExaminationService.getMedicalExamById(id);
 
         if(medicalReport.getDiagnosisId() != null) {
             diagnosis = diagnosisService.getById(medicalReport.getDiagnosisId());
@@ -41,18 +40,25 @@ public class MedicalReportController {
             recipe.setDescription(medicalReport.getTherapy());
             recipe.setValidated(false);
             recipeService.save(recipe);
-
         }
 
-        newMedicalReport.setDoctor(doctor);
+        newMedicalReport.setMedicalExamination(medicalExamination);
         newMedicalReport.setDiagnosis(diagnosis);
         newMedicalReport.setMedicament(medicament);
         newMedicalReport.setReport(medicalReport.getReport());
         newMedicalReport.setTherapy(medicalReport.getTherapy());
 
-
-
-
         medicalReportService.save(newMedicalReport);
+    }
+
+    @GetMapping("/editMedicalReport/{id}")
+    public MedicalReport editById(@PathVariable Long id){
+        MedicalReport medicalReport = medicalReportService.getById(id);
+        return medicalReportService.getById(id);
+    }
+
+    @GetMapping("/medicalHistory/{id}")
+    public List<MedicalReport> getAll(@PathVariable Long id){
+        return medicalReportService.getAllByPatientId(id);
     }
 }

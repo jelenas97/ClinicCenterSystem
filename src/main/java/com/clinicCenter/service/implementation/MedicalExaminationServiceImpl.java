@@ -59,6 +59,11 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     }
 
     @Override
+    public MedicalExamination getMedicalExamById(Long id) {
+        return medicalExaminationRepository.findById(id).get();
+    }
+
+    @Override
     public void saveExamination(Date date, Double price, Double duration, Double discount, Long roomId, Long clinicId, Long doctorId, Long patientId, Long typeId, Long requestId, Boolean predefined) {
 
         MedicalExaminationType type = medicalExaminationTypeRepository.findById(typeId).get();
