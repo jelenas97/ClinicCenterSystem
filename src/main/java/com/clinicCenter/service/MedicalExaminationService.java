@@ -41,4 +41,6 @@ public interface MedicalExaminationService {
     Collection<MedicalExamination> getAllExaminationsFromDoctor(Long id);
 
     Collection<MedicalExamination> getDoctorsExaminationsByIdAndDate(Long doctorId, Date date1, Date date2);
+
+    MedicalExamination getExamById(Long examId);
 }
