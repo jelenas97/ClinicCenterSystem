@@ -2,11 +2,13 @@ package com.clinicCenter.repository;
 
 import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRoom;
+import com.clinicCenter.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
@@ -49,4 +51,6 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
 
     @Query(value = "SELECT * FROM db.medical_examination me WHERE me.doctor_id = :doctorId AND me.date BETWEEN :date1 AND :date2", nativeQuery = true)
     Collection<MedicalExamination> getDoctorsExaminationsByIdAndDate(Long doctorId, Date date1, Date date2);
+
+
 }

@@ -8,4 +8,5 @@ public interface OperationRequestService {
     void save(OperationRequest request);
     Collection<OperationRequest> getAllOperationRequests();
 
+    OperationRequest getOperationRequestById(Long requestId);
 }

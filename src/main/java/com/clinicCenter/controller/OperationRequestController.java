@@ -48,4 +48,9 @@ public class OperationRequestController {
     public Collection<OperationRequest> getAllOperationRequests() {
         return operationRequestService.getAllOperationRequests();
     }
+
+    @GetMapping("getMedicalOperationById/{requestId}")
+    public OperationRequest getOperationRequestById(@PathVariable Long requestId) {
+        return operationRequestService.getOperationRequestById(requestId);
+    }
 }

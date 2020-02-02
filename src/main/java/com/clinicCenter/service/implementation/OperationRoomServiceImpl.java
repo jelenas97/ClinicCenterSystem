@@ -9,6 +9,7 @@ import com.clinicCenter.service.OperationRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -52,5 +53,10 @@ public class OperationRoomServiceImpl implements OperationRoomService {
     @Override
     public Set<OperationRoom> getRoomsName(String name) {
         return this.operationRoomRepository.getSearchedByName(name.toLowerCase());
+    }
+
+    @Override
+    public Collection<OperationRoom> getClinicOperationRooms(Long clinicId) {
+        return operationRoomRepository.getClinicOperationRooms(clinicId);
     }
 }

@@ -30,4 +30,8 @@ public class OperationRoom {
     @JoinColumn(name = "or_id", referencedColumnName = "id")
     private Set<Operation> operations;
 
+    @ManyToOne
+    @JoinColumn(name = "clinic_id", referencedColumnName = "id")
+    private Clinic clinic;
+
 }

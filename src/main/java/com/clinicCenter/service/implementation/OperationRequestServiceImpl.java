@@ -2,7 +2,6 @@ package com.clinicCenter.service.implementation;
 
 import com.clinicCenter.model.OperationRequest;
 import com.clinicCenter.repository.OperationRequestRepository;
-import com.clinicCenter.repository.OperationRoomRepository;
 import com.clinicCenter.service.OperationRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,11 @@ public class OperationRequestServiceImpl implements OperationRequestService {
     @Override
     public Collection<OperationRequest> getAllOperationRequests() {
         return operationRequestRepository.findAll();
+    }
+
+    @Override
+    public OperationRequest getOperationRequestById(Long requestId) {
+         return operationRequestRepository.findById(requestId).get();
     }
 
     @Override
