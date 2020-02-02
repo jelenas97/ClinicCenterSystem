@@ -14,7 +14,6 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class MedicalRecord {
 
     @Id
@@ -33,8 +32,4 @@ public class MedicalRecord {
     @Column
     private Double diopter;
 
-    //private Set<Medicament> medicamentAllergy;
-    //private Set<MedicalReport> illnessHistory;
-    //private Set<MedicalExamination> examinationHistory;
-    //private Set<Operation> operationHistory;
 }

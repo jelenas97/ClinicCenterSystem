@@ -47,4 +47,6 @@ public interface MedicalExaminationService {
     List<Integer> getAllExaminationsYearly(Long id);
 
     List<Long> getIncomes(Long id);
+
+    MedicalExamination getExamById(Long examId);
 }

@@ -160,6 +160,7 @@ public class MedicalExaminationController {
 
     @GetMapping("getAllExaminationsPatientCanRate/{patientId}")
     public Collection<MedicalExamination> getAllExaminationsPatientCanRate(@PathVariable Long patientId) {
+        Collection<MedicalExamination> medicalExaminations = medicalExaminationService.getAllExaminationsPatientCanRate(patientId);
         return medicalExaminationService.getAllExaminationsPatientCanRate(patientId);
     }
 
@@ -230,5 +231,10 @@ public class MedicalExaminationController {
     public List<Long> getIncomes(@PathVariable Long id) {
         List<Long> list = medicalExaminationService.getIncomes(id);
         return list;
+    }
+
+    @GetMapping("getMedicalExam/{examId}")
+    public MedicalExamination getMedicalExam(@PathVariable Long examId) {
+        return medicalExaminationService.getExamById(examId);
     }
 }
