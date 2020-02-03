@@ -105,8 +105,8 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
                     "\n Examination room : " + newExam.getMedicalExaminationRoom().getName() + " " + newExam.getMedicalExaminationRoom().getNumber() +
                     "\n Duration : " + newExam.getDuration();
 
-            emailController.sendMail(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination");
-            emailController.sendMail(doctor.getEmail(), message2, "Automated mail : Confirm or decline scheduled examination");
+            emailController.sendMail(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination.");
+            emailController.sendMail(doctor.getEmail(), message2, "Automated mail : Scheduled examination.");
 
         }
 
@@ -208,6 +208,11 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     @Override
     public MedicalExamination getExamById(Long examId) {
         return medicalExaminationRepository.findById(examId).get();
+    }
+
+    @Override
+    public Collection<User> getAvailableDoctorsForOperation(Date date1, Date date2, Long clinicId, Long doctorId) {
+        return userRepository.getAvailableDoctorsForOperation(date1, date2, clinicId, doctorId);
     }
 
     @Override

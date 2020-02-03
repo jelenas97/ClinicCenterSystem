@@ -2,6 +2,7 @@ package com.clinicCenter.service;
 
 import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRequest;
+import com.clinicCenter.model.User;
 
 import java.util.Collection;
 import java.util.Date;
@@ -49,4 +50,6 @@ public interface MedicalExaminationService {
     List<Long> getIncomes(Long id);
 
     MedicalExamination getExamById(Long examId);
+
+    Collection<User> getAvailableDoctorsForOperation(Date date1, Date date2, Long clinicId, Long doctorId);
 }

@@ -3,6 +3,7 @@ package com.clinicCenter.service;
 import com.clinicCenter.model.MedicalExaminationRoom;
 import com.clinicCenter.model.OperationRoom;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -21,4 +22,6 @@ public interface OperationRoomService {
     Set<OperationRoom> getRooms(String name, Integer number);
 
     Set<OperationRoom> getRoomsName(String name);
+
+    Collection<OperationRoom> getClinicOperationRooms(Long clinicId);
 }

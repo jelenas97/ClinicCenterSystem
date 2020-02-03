@@ -51,7 +51,6 @@ public class Doctor extends User {
     @JsonIgnore
     private Set<MedicalExaminationType> medicalExaminationTypes;
 
-    @JsonIgnore
     @JoinColumn(name = "clinic_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Clinic clinic;

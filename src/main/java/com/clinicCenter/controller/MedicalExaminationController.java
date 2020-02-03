@@ -237,4 +237,41 @@ public class MedicalExaminationController {
     public MedicalExamination getMedicalExam(@PathVariable Long examId) {
         return medicalExaminationService.getExamById(examId);
     }
+
+    @GetMapping("getAvailableDoctorsForOperation/{date}/{term}/{clinicId}/{doctorId}")
+    public Collection<User> getAvailableDoctorsForOperation(@PathVariable String date, @PathVariable String term,
+                                                            @PathVariable Long clinicId, @PathVariable Long doctorId) throws ParseException {
+        System.out.println(date);
+        System.out.println(term);
+
+        date = date.replace('_', '/');
+        Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date1);
+        System.out.println(date1);
+
+        String[] time = term.split(":");
+        String hours = time[0];
+        String minutes = time[1];
+
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+        cal.set(Calendar.MINUTE, Integer.parseInt(minutes) - 2);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        Date dd = cal.getTime();
+        System.out.println(dd);
+
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+        cal.set(Calendar.MINUTE, Integer.parseInt(minutes) + 2);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        Date ddd = cal.getTime();
+        System.out.println(ddd);
+
+        return medicalExaminationService.getAvailableDoctorsForOperation(dd, ddd, clinicId, doctorId);
+    }
+
 }

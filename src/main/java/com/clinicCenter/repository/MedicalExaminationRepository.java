@@ -2,11 +2,13 @@ package com.clinicCenter.repository;
 
 import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRoom;
+import com.clinicCenter.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Set;

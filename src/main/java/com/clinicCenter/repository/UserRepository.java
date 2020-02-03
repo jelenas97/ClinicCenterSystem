@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 @Repository
@@ -65,6 +66,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query(value = "SELECT COUNT(*) FROM db.medical_examination me WHERE me.confirmed = 1 and me.doctor_id = :id", nativeQuery = true)
     Integer hasExam(Long id);
+
+    @Query(value = "SELECT * FROM db.users u WHERE u.type = 'DO' AND u.clinic_id = :clinicId AND u.id != :doctorId AND u.id not in (SELECT me.doctor_id FROM db.medical_examination me WHERE me.date BETWEEN :date1 AND :date2)", nativeQuery = true)
+    ArrayList<User> getAvailableDoctorsForOperation(Date date1, Date date2, Long clinicId, Long doctorId);
 
     /*@Query(value = "SELECT * FROM db.users u WHERE u.type = 'DO' and u.clinic_id in (SELECT clinic_id FROM db.users uu WHERE uu.id = :adminId)", nativeQuery = true)
     Collection<UserMapperTwo> getAvailableDoctors(Long adminId);*/

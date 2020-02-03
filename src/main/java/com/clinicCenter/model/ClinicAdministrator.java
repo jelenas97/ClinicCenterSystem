@@ -33,7 +33,6 @@ public class ClinicAdministrator extends User {
         return true;
     }
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "clinic_id")
     private Clinic clinic;

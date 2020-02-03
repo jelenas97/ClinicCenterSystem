@@ -10,6 +10,7 @@ import com.clinicCenter.service.UserService;
 import com.clinicCenter.service.implementation.CustomUserDetailsService;
 import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.method.P;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -56,6 +57,9 @@ public class UserController {
     @PostMapping(value = "/auth/check-for-change-password")
     public ResponseEntity<?> changePass(@RequestBody JwtAuthenticationRequest authenticationRequest) {
         User user = userService.getByEmail(authenticationRequest.getUsername());
+        if(user == null) {
+            return new ResponseEntity<>("", HttpStatus.UNAUTHORIZED);
+        }
         return ResponseEntity.ok(new UserTokenState(user.getPasswordChanged()));
     }
 
@@ -99,7 +103,7 @@ public class UserController {
         System.out.println("Radiiiii");
 
         // Vrati token kao odgovor na uspesno autentifikaciju
-        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, ((Authority) user.getAuthorities().iterator().next()).getName(),user.getPasswordChanged()));
+        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, ((Authority) user.getAuthorities().iterator().next()).getName(), user.getPasswordChanged()));
     }
 
     @RequestMapping(value = "/api/whoami", method = RequestMethod.GET)
@@ -121,7 +125,7 @@ public class UserController {
     }
 
     @DeleteMapping("/auth/removeDoctor/{id}")
-    public void removeDoctor(@PathVariable Long id){
+    public void removeDoctor(@PathVariable Long id) {
         userService.removeDoctor(id);
     }
 
@@ -142,7 +146,7 @@ public class UserController {
     }
 
     @GetMapping("getAvailableDoctorsFromClinic/{adminId}")
-    public Collection<User> getAvailableDoctors(@PathVariable Long adminId){
+    public Collection<User> getAvailableDoctors(@PathVariable Long adminId) {
         return userService.getDoctorsFromClinic(adminId);
     }
 }
