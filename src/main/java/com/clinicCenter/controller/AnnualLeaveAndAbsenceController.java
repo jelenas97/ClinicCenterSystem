@@ -5,10 +5,7 @@ import com.clinicCenter.model.AnnualLeaveRequest;
 import com.clinicCenter.model.Doctor;
 import com.clinicCenter.model.Nurse;
 import com.clinicCenter.model.User;
-import com.clinicCenter.service.AnnualLeaveRequestService;
-import com.clinicCenter.service.DoctorService;
-import com.clinicCenter.service.NurseService;
-import com.clinicCenter.service.UserService;
+import com.clinicCenter.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,75 +20,51 @@ import java.util.List;
 public class AnnualLeaveAndAbsenceController {
 
     private final UserService userService;
-    private final NurseService nurseService;
-    private final DoctorService doctorService;
-    private final EmailController emailController;
+    private final EmailService emailService;
     private final AnnualLeaveRequestService annualLeaveRequestService;
-
-    @PostMapping("/absence")
-    public void saveAbsence(@RequestBody AnnualLeaveRequest annualLeaveRequest) throws ParseException {
-
-            Long userId = annualLeaveRequest.getUserId();
-            User user = userService.getById(userId);
-
-            if(user.getType().equals("DO")){
-                Doctor d = doctorService.getById(userId);
-                annualLeaveRequest.setRefDoctor(d);
-            }else{
-                Nurse n = nurseService.getById(userId);
-                annualLeaveRequest.setRefNurse(n);
-            }
-
-            annualLeaveRequest.setUserId(userId);
-            annualLeaveRequest.setFlag("absence");
-            annualLeaveRequestService.save(annualLeaveRequest);
-    }
 
     @PostMapping("/vacation")
     public void saveAnnualLeave(@RequestBody AnnualLeaveRequest annualLeaveRequest){
 
             Long userId = annualLeaveRequest.getUserId();
             User user = userService.getById(userId);
-
-            if(user.getType().equals("DO")){
-                Doctor d = doctorService.getById(userId);
-                annualLeaveRequest.setRefDoctor(d);
-            }else{
-                Nurse n = nurseService.getById(userId);
-                annualLeaveRequest.setRefNurse(n);
-            }
-
-            annualLeaveRequest.setUserId(userId);
-            annualLeaveRequest.setFlag("vacation");
+            annualLeaveRequest.setUser(user);
             annualLeaveRequestService.save(annualLeaveRequest);
     }
 
-    @GetMapping("/vacationRequests")
-    public List<AnnualLeaveRequest> getAllVacations(){
-        List<AnnualLeaveRequest> requests = annualLeaveRequestService.getAllVacationRequests();
+    @GetMapping("/vacationRequests/{id}")
+    public List<AnnualLeaveRequest> getAllVacations(@PathVariable Long id){
+        List<AnnualLeaveRequest> requests = annualLeaveRequestService.getAllVacationRequestsByAdminId(id);
         return requests;
     }
 
-    @GetMapping("/absenceRequests")
-    public List<AnnualLeaveRequest> getAllAbsences(){
-        List<AnnualLeaveRequest> requests = annualLeaveRequestService.getAllAbsenceRequests();
+    @GetMapping("/absenceRequests/{id}")
+    public List<AnnualLeaveRequest> getAllAbsences(@PathVariable Long id){
+        List<AnnualLeaveRequest> requests = annualLeaveRequestService.getAllAbsenceRequestsByAdminId(id);
         return requests;
     }
 
     @PostMapping("/sendApproveMail")
     public void sendApproveMail(@RequestBody AnnualLeaveRequest request){
         User user = userService.getById(request.getUserId());
-        emailController.sendMail(user.getEmail(),"Hello Dear, "+ user.getFirstName() + " " + user.getLastName() +
+        emailService.sendMailToUser(user.getEmail(),"Hello Dear, "+ user.getFirstName() + " " + user.getLastName() +
                                                         " your request for " + request.getFlag() + " from " +request.getLeaveDate()
                                                         +" until "+ request.getReturnDate()
                                                         + " is approved. Have a great time!", "Automated mail");
+        annualLeaveRequestService.delete(request.getId());
     }
 
 
-    @PostMapping("/sendRejectMail")
-    public void sendRejectMail(@RequestBody AnnualLeaveRequest request){
-        User user = userService.getById(request.getUserId());
-        emailController.sendMail(user.getEmail(),"e boli me uvo ne moze", "Automated mail");
+    @PostMapping("/sendRejectMail/{id}")
+    public void sendRejectMail(@RequestBody String reason, @PathVariable Long id){
+        AnnualLeaveRequest request = annualLeaveRequestService.getById(id);
+        User user = request.getUser();
+        emailService.sendMailToUser(user.getEmail(), "Hello Dear, "+ user.getFirstName() + " " + user.getLastName() +
+                                                            " your request for " + request.getFlag() + " from " +request.getLeaveDate()
+                                                            +" until "+ request.getReturnDate() + " is unfortunately rejeceted " +
+                                                            " because "+reason, "Automated mail");
+        annualLeaveRequestService.delete(request.getId());
+
     }
 
     @DeleteMapping("/deleteRequest/{id}")

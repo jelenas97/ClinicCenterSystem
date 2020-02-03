@@ -10,9 +10,13 @@ import java.util.List;
 @Repository
 public interface AnnualLeaveRequestRepository extends JpaRepository<AnnualLeaveRequest,Long> {
 
-    @Query( value = "from AnnualLeaveRequest as a where a.flag='vacation'")
-    List<AnnualLeaveRequest> getAllVacationRequest();
+    @Query( value = "select * from db.annual_leave_request a where a.flag='vacation' and a.user_id in " +
+            "(select u.id from db.users u where u.clinic_id = " +
+            "(select uu.clinic_id from db.users uu where uu.id = :id))", nativeQuery = true)
+    List<AnnualLeaveRequest> getAllVacationRequest(Long id);
 
-    @Query("from AnnualLeaveRequest as a where a.flag='absence'")
-    List<AnnualLeaveRequest> getAllAbsenceRequest();
+    @Query(value = " select * from db.annual_leave_request as a where a.flag='absence' and a.user_id in " +
+                    "(select u.id from db.users u where u.clinic_id = " +
+                    "(select uu.clinic_id from db.users uu where uu.id = :id))" , nativeQuery = true)
+    List<AnnualLeaveRequest> getAllAbsenceRequest(Long id);
 }

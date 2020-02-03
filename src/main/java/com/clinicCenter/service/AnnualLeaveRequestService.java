@@ -5,9 +5,10 @@ import com.clinicCenter.model.AnnualLeaveRequest;
 import java.util.List;
 
 public interface AnnualLeaveRequestService {
-    void save(AnnualLeaveRequest annualLeaveRequest);
     void delete(Long id);
-    List<AnnualLeaveRequest> getAllVacationRequests();
-    List<AnnualLeaveRequest> getAllAbsenceRequests();
+    AnnualLeaveRequest getById(Long id);
+    void save(AnnualLeaveRequest annualLeaveRequest);
+    List<AnnualLeaveRequest> getAllVacationRequestsByAdminId(Long id);
+    List<AnnualLeaveRequest> getAllAbsenceRequestsByAdminId(Long id);
 
 }
