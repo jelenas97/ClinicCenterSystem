@@ -1,5 +1,6 @@
 package com.clinicCenter.controller;
 
+import com.clinicCenter.model.MedicalExaminationRequest;
 import com.clinicCenter.model.MedicalExaminationRoom;
 import com.clinicCenter.model.OperationRequest;
 import com.clinicCenter.service.MedicalExaminationRoomService;
@@ -7,11 +8,13 @@ import com.clinicCenter.service.MedicalExaminationService;
 import com.clinicCenter.service.OperationRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Collection;
+import java.util.List;
 
 
 @RestController
@@ -52,5 +55,11 @@ public class OperationRequestController {
     @GetMapping("getMedicalOperationById/{requestId}")
     public OperationRequest getOperationRequestById(@PathVariable Long requestId) {
         return operationRequestService.getOperationRequestById(requestId);
+    }
+
+    @Scheduled(cron = "59 59 23 * * ?")
+    public void automaticSchedule() {
+        System.out.println("Automatska fja");
+        operationRequestService.automaticSchedule();
     }
 }

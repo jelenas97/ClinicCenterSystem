@@ -61,10 +61,13 @@ public class OperationServiceImpl implements OperationService {
                 "\n Duration : " + newOperation.getDuration();
 
         emailController.sendMail(patient.getEmail(), message, "Automated mail : Scheduled operation");
-        for (Doctor doc : doctors) {
-            emailController.sendMail(doc.getEmail(), message2, "Automated mail : Scheduled operation");
+        if (doctors != null ) {
+            for (Doctor doc : doctors) {
+                emailController.sendMail(doc.getEmail(), message2, "Automated mail : Scheduled operation");
 
+            }
         }
+
 
     }
 }

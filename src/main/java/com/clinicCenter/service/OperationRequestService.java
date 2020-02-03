@@ -9,4 +9,6 @@ public interface OperationRequestService {
     Collection<OperationRequest> getAllOperationRequests();
 
     OperationRequest getOperationRequestById(Long requestId);
+
+    void automaticSchedule();
 }

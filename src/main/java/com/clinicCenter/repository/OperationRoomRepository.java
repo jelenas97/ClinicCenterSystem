@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -26,4 +28,7 @@ public interface OperationRoomRepository extends JpaRepository<OperationRoom,Lon
 
     @Query(value = "SELECT * FROM db.operation_room orr WHERE orr.clinic_id = :clinicId", nativeQuery = true)
     Collection<OperationRoom> getClinicOperationRooms(Long clinicId);
+
+    @Query(value = "SELECT * FROM db.operation_room oroom WHERE oroom.clinic_id = :id and :datee not in (SELECT o.date FROM db.operation o)", nativeQuery = true)
+    List<OperationRoom> getAvailableRooms(Long id, Date datee);
 }

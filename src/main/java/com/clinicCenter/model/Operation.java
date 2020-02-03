@@ -45,6 +45,10 @@ public class Operation {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
+    @ManyToOne
+    @JoinColumn(name = "or_id")
+    private OperationRoom operationRoom;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "doctors_at_operation", joinColumns = @JoinColumn(name = "operation_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "id"))
@@ -60,5 +64,6 @@ public class Operation {
         this.patient = patient;
         this.clinic = clinic;
         this.doctors = doctors;
+        this.operationRoom = operationRoom;
     }
 }
