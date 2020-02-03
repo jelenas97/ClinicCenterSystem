@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -51,6 +52,11 @@ public class OperationRoomController {
             rooms = operationRoomService.getRooms(name, Integer.parseInt(number));
         }
         return rooms;
+    }
+
+    @GetMapping("getClinicOperationRooms/{clinicId}")
+    public Collection<OperationRoom> getClinicOperationRooms(@PathVariable Long clinicId) {
+        return operationRoomService.getClinicOperationRooms(clinicId);
     }
 
 }

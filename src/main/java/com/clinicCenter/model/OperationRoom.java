@@ -25,9 +25,9 @@ public class OperationRoom {
     @Column(nullable = false)
     private Integer number;
 
-    @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "or_id", referencedColumnName = "id")
-    private Set<Operation> operations;
+
+    @ManyToOne
+    @JoinColumn(name = "clinic_id", referencedColumnName = "id")
+    private Clinic clinic;
 
 }
