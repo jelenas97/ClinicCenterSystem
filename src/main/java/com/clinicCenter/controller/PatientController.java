@@ -25,21 +25,13 @@ public class PatientController {
     @GetMapping("/allPatients/search1")
     @ResponseBody
     public ArrayList<Patient> getSearchedFromPatients1(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName) {
-
-        ArrayList<Patient> patients = null;
-        patients = patientService.getSearchedPatients(firstName,lastName);
-
-        return patients;
+         return patientService.getSearchedPatients(firstName,lastName);
     }
 
     @GetMapping("/allPatients/search2")
     @ResponseBody
     public ArrayList<Patient> getSearchedFromPatients2(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "lastName") String lastName, @RequestParam(name = "ssn") Long ssn) {
-
-        ArrayList<Patient> patients = null;
-        patients = patientService.getSearchedPatients1(firstName, lastName, ssn);
-
-        return patients;
+        return patientService.getSearchedPatients1(firstName, lastName, ssn);
     }
 
     @GetMapping("/getPatient/{id}")

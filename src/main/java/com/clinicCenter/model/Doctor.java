@@ -39,9 +39,6 @@ public class Doctor extends User {
         return true;
     }
 
-    /*@OneToMany(mappedBy = "doctor")
-    @JsonIgnore
-    private Set<MedicalExaminationRequest> examinationRequests;*/
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -55,10 +52,6 @@ public class Doctor extends User {
     @JoinColumn(name = "clinic_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Clinic clinic;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "refDoctor", fetch = FetchType.EAGER)
-    private Set<AnnualLeaveRequest> annualLeaveRequest;
 
     @Column(name = "start_work")
     private Integer startWork;
