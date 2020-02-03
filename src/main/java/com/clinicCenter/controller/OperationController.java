@@ -1,15 +1,17 @@
 package com.clinicCenter.controller;
 
+import com.clinicCenter.model.Doctor;
 import com.clinicCenter.model.OperationRequest;
 import com.clinicCenter.service.OperationService;
+import com.clinicCenter.service.UserService;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,9 +21,14 @@ public class OperationController {
     @Autowired
     private OperationService operationService;
 
-    @PostMapping("saveOperation/{roomId}/{date}/{price}/{discount}/{requestId}/{selectedTerm}")
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("saveOperation/{roomId}/{date}/{price}/{discount}/{requestId}/{selectedTerm}/{doctors}")
     public void saveOperation(@PathVariable Long roomId, @PathVariable String date, @PathVariable Double price, @PathVariable Double discount,
-                              @PathVariable Long requestId, @PathVariable String selectedTerm, @RequestBody OperationRequest operationRequest) throws ParseException {
+                              @PathVariable Long requestId, @PathVariable String selectedTerm, @RequestBody OperationRequest operationRequest,
+                              @PathVariable Long[] doctors) throws ParseException {
+        System.out.println("Ovo su doktori koji jos dolaze na operaciju" + Arrays.toString(doctors));
         date = date.replace('_', '-');
         System.out.println(date);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -41,6 +48,19 @@ public class OperationController {
 
         Date dd = cal.getTime();
 
-        operationService.saveOperation(operationRequest, dd, price, discount, roomId, requestId);
+        Set<Doctor> doctors1 = new HashSet<>();
+        doctors1.add(operationRequest.getDoctor());
+        System.out.println("glavni lekar" + operationRequest.getDoctor().getId());
+        System.out.println("posle glavni lekar" + doctors1.size());
+
+        for (Long id : doctors) {
+            doctors1.add((Doctor) userService.getById(id));
+            System.out.println(" lekar" + id);
+            System.out.println("posle  lekar" + doctors1.size());
+        }
+        System.out.println("ovde je koliko ima elemenata u doktorima" + doctors1.size());
+        operationService.saveOperation(operationRequest, dd, price, discount, roomId, requestId, doctors1);
+
+
     }
 }

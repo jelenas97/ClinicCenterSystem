@@ -103,8 +103,8 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
                     "\n Examination room : " + newExam.getMedicalExaminationRoom().getName() + " " + newExam.getMedicalExaminationRoom().getNumber() +
                     "\n Duration : " + newExam.getDuration();
 
-            emailController.sendMail(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination");
-            emailController.sendMail(doctor.getEmail(), message2, "Automated mail : Confirm or decline scheduled examination");
+            emailController.sendMail(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination.");
+            emailController.sendMail(doctor.getEmail(), message2, "Automated mail : Scheduled examination.");
 
         }
 
