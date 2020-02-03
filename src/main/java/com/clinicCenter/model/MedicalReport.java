@@ -1,9 +1,12 @@
 package com.clinicCenter.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -31,11 +34,11 @@ public class MedicalReport {
 
     @OneToOne
     @JsonIgnore
-    private Doctor doctor;
+    private Medicament medicament;
 
     @OneToOne
     @JsonIgnore
-    private Medicament medicament;
+    private MedicalExamination medicalExamination;
 
     @Column
     private String therapy;
@@ -48,6 +51,7 @@ public class MedicalReport {
 
     @Transient
     private Long medicamentId;
+
 
 
 }

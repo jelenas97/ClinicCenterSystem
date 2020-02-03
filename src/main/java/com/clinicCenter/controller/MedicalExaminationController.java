@@ -160,6 +160,7 @@ public class MedicalExaminationController {
 
     @GetMapping("getAllExaminationsPatientCanRate/{patientId}")
     public Collection<MedicalExamination> getAllExaminationsPatientCanRate(@PathVariable Long patientId) {
+        Collection<MedicalExamination> medicalExaminations = medicalExaminationService.getAllExaminationsPatientCanRate(patientId);
         return medicalExaminationService.getAllExaminationsPatientCanRate(patientId);
     }
 
@@ -206,6 +207,30 @@ public class MedicalExaminationController {
         System.out.println("Svi slobodni termini za ovog doktora su" + availableTerms);
 
         return availableTerms;
+    }
+
+    @GetMapping("medicalExaminationsDaily/{id}")
+    public List<Integer> getExaminationsFromClinicDaily(@PathVariable Long id) {
+        List<Integer> list = medicalExaminationService.getAllExaminationsDaily(id);
+        return list;
+    }
+
+    @GetMapping("medicalExaminationsMonthly/{id}")
+    public List<Integer> getExaminationsFromClinicMonthly(@PathVariable Long id) {
+        List<Integer> list = medicalExaminationService.getAllExaminationsMonthly(id);
+        return list;
+    }
+
+    @GetMapping("medicalExaminationsYearly/{id}")
+    public List<Integer> getExaminationsFromClinicYearly(@PathVariable Long id) {
+        List<Integer> list = medicalExaminationService.getAllExaminationsYearly(id);
+        return list;
+    }
+
+    @GetMapping("getClinicIncomes/{id}")
+    public List<Long> getIncomes(@PathVariable Long id) {
+        List<Long> list = medicalExaminationService.getIncomes(id);
+        return list;
     }
 
     @GetMapping("getMedicalExam/{examId}")
