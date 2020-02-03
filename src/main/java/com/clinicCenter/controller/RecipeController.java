@@ -31,7 +31,6 @@ public class RecipeController {
         Recipe recipe = recipeService.getById(id);
         recipe.setValidated(true);
         recipeService.save(recipe);
-        System.out.println(recipe.getDescription());
     }
 
     @DeleteMapping ("/allRecipes/removeRecipe/{id}")

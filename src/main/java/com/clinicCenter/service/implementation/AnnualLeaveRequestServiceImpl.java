@@ -26,13 +26,18 @@ public class AnnualLeaveRequestServiceImpl implements AnnualLeaveRequestService 
     }
 
     @Override
-    public List<AnnualLeaveRequest> getAllVacationRequests() {
-        return annualLeaveRequestRepository.getAllVacationRequest();
+    public AnnualLeaveRequest getById(Long id) {
+        return annualLeaveRequestRepository.findById(id).get();
     }
 
     @Override
-    public List<AnnualLeaveRequest> getAllAbsenceRequests() {
-        return annualLeaveRequestRepository.getAllAbsenceRequest();
+    public List<AnnualLeaveRequest> getAllVacationRequestsByAdminId(Long id) {
+        return annualLeaveRequestRepository.getAllVacationRequest(id);
+    }
+
+    @Override
+    public List<AnnualLeaveRequest> getAllAbsenceRequestsByAdminId(Long id) {
+        return annualLeaveRequestRepository.getAllAbsenceRequest(id);
     }
 
 

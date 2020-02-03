@@ -1,7 +1,10 @@
 package com.clinicCenter.service.implementation;
 
 
+import com.clinicCenter.controller.UserController;
 import com.clinicCenter.service.EmailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.MailException;
@@ -19,6 +22,9 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private Environment env;
 
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
+
+
     @Override
     @Async
     public void sendNotification(String email, String message, String subject) throws MailException, InterruptedException{
@@ -32,5 +38,15 @@ public class EmailServiceImpl implements EmailService {
         javaMailSender.send(mail);
 
         System.out.println("Email sent!");
+    }
+
+    @Override
+    public String sendMailToUser(String email, String message, String subject) {
+        try {
+            sendNotification(email, message, subject);
+        } catch (Exception e) {
+            logger.info("Error sending the mail: " + e.getMessage());
+        }
+        return "success";
     }
 }
