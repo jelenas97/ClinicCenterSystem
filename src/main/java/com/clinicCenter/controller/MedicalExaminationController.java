@@ -140,12 +140,28 @@ public class MedicalExaminationController {
     }
 
 
-    @PostMapping("savePredefinedMedicalExamination/{date}/{typeId}/{duration}/{price}/{doctorId}/{clinicId}/{roomId}/{discount}")
+    @PostMapping("savePredefinedMedicalExamination/{date}/{typeId}/{duration}/{price}/{doctorId}/{roomId}/{discount}/{term}/{clinicId}")
     public void savePredefinedMedicalExamination(@PathVariable String date, @PathVariable Long typeId, @PathVariable Double duration, @PathVariable Double price,
-                                                 @PathVariable Long doctorId, @PathVariable Long clinicId, @PathVariable Long roomId, @PathVariable Double discount) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date d = simpleDateFormat.parse(date);
-        medicalExaminationService.saveExamination(d, price, duration, discount, roomId, clinicId, doctorId, null, typeId, null, true);
+                                                 @PathVariable Long doctorId, @PathVariable Long roomId, @PathVariable Double discount, @PathVariable String term,
+                                                 @PathVariable Long clinicId) throws ParseException {
+        date = date.replace('_', '/');
+        Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date1);
+        System.out.println(date1);
+
+        String[] time = term.split(":");
+        String hours = time[0];
+        String minutes = time[1];
+
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+        cal.set(Calendar.MINUTE, Integer.parseInt(minutes));
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        Date dd = cal.getTime();
+        medicalExaminationService.saveExamination(dd, price, duration, discount, roomId, clinicId, doctorId, null, typeId, null, true);
     }
 
     @GetMapping("getAllPredefinedExaminations")
@@ -166,47 +182,7 @@ public class MedicalExaminationController {
 
     @GetMapping("getAvailableTermsForDoctor/{doctorId}/{date}")
     public Collection<String> getAvailableTermsForDoctor(@PathVariable Long doctorId, @PathVariable String date) throws ParseException {
-        date = date.replace('_', '/');
-        Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(date);
-
-        Calendar c = Calendar.getInstance();
-        c.setTime(date1);
-        c.add(Calendar.DATE, 1); //same with c.add(Calendar.DAY_OF_MONTH, 1);
-        Date date2 = c.getTime();
-
-        Doctor doctor = (Doctor) userService.getById(doctorId);
-        Collection<MedicalExamination> examinationsForDoctor = medicalExaminationService.getDoctorsExaminationsByIdAndDate(doctorId, date1, date2);
-
-        Collection<String> availableTerms = new ArrayList<String>();
-
-        int startWork = doctor.getStartWork();
-        int endWork = doctor.getEndWork();
-        int iterations = (endWork - startWork);
-
-        for (int i = startWork; i < endWork; i++) {
-            for (int j = 0; j < 5; j += 3) {
-                String part1 = "";
-                if (i < 10) {
-                    part1 = "0";
-                } else {
-                    part1 = "";
-                }
-                availableTerms.add(part1 + i + ":" + j + "0");
-            }
-        }
-
-        System.out.println("Svi termini za ovog doktora su " + availableTerms);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
-        for (MedicalExamination examination : examinationsForDoctor) {
-            String dateAndTime = formatter.format(examination.getDate());
-            String time = dateAndTime.split(" ")[1].substring(0, 5);
-            availableTerms.remove(time);
-        }
-
-        System.out.println("Svi slobodni termini za ovog doktora su" + availableTerms);
-
-        return availableTerms;
+        return medicalExaminationService.getAvailableTermsForDoctor(doctorId, date);
     }
 
     @GetMapping("medicalExaminationsDaily/{id}")
@@ -274,4 +250,24 @@ public class MedicalExaminationController {
         return medicalExaminationService.getAvailableDoctorsForOperation(dd, ddd, clinicId, doctorId);
     }
 
+    @GetMapping("canStartExam/{patientId}/{doctorId}")
+    public Boolean canStartExam(@PathVariable Long patientId, @PathVariable Long doctorId) {
+        return medicalExaminationService.canStartExam(patientId, doctorId);
+    }
+
+    @GetMapping("pastExam/{patientId}/{doctorId}")
+    public Boolean pastExam(@PathVariable Long patientId, @PathVariable Long doctorId) {
+        return medicalExaminationService.pastExam(patientId, doctorId);
+    }
+
+
+    @GetMapping("nurseAndPatient/{patientId}/{nurseId}")
+    public Boolean nurseAndPatient(@PathVariable Long patientId, @PathVariable Long nurseId) {
+        return medicalExaminationService.nurseAndPatient(patientId, nurseId);
+    }
+
+    @GetMapping("medicalExamPatientDoctor/{patientId}/{doctorId}")
+    public MedicalExamination examDoctorPatient(@PathVariable Long patientId, @PathVariable Long doctorId) {
+        return medicalExaminationService.examDoctorPatient(patientId, doctorId);
+    }
 }

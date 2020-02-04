@@ -26,4 +26,9 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public void update(MedicalRecord medicalRecord) {
         medicalRecordRepository.save(medicalRecord);
     }
+
+    @Override
+    public MedicalRecord getByPatientId(Long id) {
+        return this.medicalRecordRepository.getByPatientId(id);
+    }
 }
