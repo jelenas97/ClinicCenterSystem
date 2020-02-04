@@ -140,12 +140,28 @@ public class MedicalExaminationController {
     }
 
 
-    @PostMapping("savePredefinedMedicalExamination/{date}/{typeId}/{duration}/{price}/{doctorId}/{clinicId}/{roomId}/{discount}")
+    @PostMapping("savePredefinedMedicalExamination/{date}/{typeId}/{duration}/{price}/{doctorId}/{roomId}/{discount}/{term}/{clinicId}")
     public void savePredefinedMedicalExamination(@PathVariable String date, @PathVariable Long typeId, @PathVariable Double duration, @PathVariable Double price,
-                                                 @PathVariable Long doctorId, @PathVariable Long clinicId, @PathVariable Long roomId, @PathVariable Double discount) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date d = simpleDateFormat.parse(date);
-        medicalExaminationService.saveExamination(d, price, duration, discount, roomId, clinicId, doctorId, null, typeId, null, true);
+                                                 @PathVariable Long doctorId, @PathVariable Long roomId, @PathVariable Double discount, @PathVariable String term,
+                                                 @PathVariable Long clinicId) throws ParseException {
+        date = date.replace('_', '/');
+        Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date1);
+        System.out.println(date1);
+
+        String[] time = term.split(":");
+        String hours = time[0];
+        String minutes = time[1];
+
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+        cal.set(Calendar.MINUTE, Integer.parseInt(minutes));
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        Date dd = cal.getTime();
+        medicalExaminationService.saveExamination(dd, price, duration, discount, roomId, clinicId, doctorId, null, typeId, null, true);
     }
 
     @GetMapping("getAllPredefinedExaminations")

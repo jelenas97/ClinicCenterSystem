@@ -1,6 +1,5 @@
 package com.clinicCenter.service.implementation;
 
-import com.clinicCenter.controller.EmailController;
 import com.clinicCenter.model.*;
 import com.clinicCenter.repository.*;
 import com.clinicCenter.service.EmailService;
@@ -41,7 +40,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     private MedicalExaminationRoomRepository medicalExaminationRoomRepository;
 
     @Autowired
-    private EmailController emailController;
+    private EmailService emailService;
 
     @Autowired
     UserService userService;
@@ -78,10 +77,10 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
         MedicalExaminationType type = medicalExaminationTypeRepository.findById(typeId).get();
         System.out.println("preuzet tip id : " + type.getId());
-        Clinic clinic = clinicRepository.findById(clinicId).get();
-        System.out.println("preuzet clinic id : " + clinic.getId());
         User doctor = userRepository.findById(doctorId).get();
         System.out.println("preuzet doktor id : " + doctor.getId());
+        Clinic clinic = clinicRepository.findById(clinicId).get();
+        System.out.println("preuzet clinic id : " + clinic.getId());
 
         User patient = null;
         if (patientId != null) {
@@ -118,8 +117,8 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
                     "\n Examination room : " + newExam.getMedicalExaminationRoom().getName() + " " + newExam.getMedicalExaminationRoom().getNumber() +
                     "\n Duration : " + newExam.getDuration();
 
-            emailController.sendMail(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination.");
-            emailController.sendMail(doctor.getEmail(), message2, "Automated mail : Scheduled examination.");
+            emailService.sendMailToUser(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination.");
+            emailService.sendMailToUser(doctor.getEmail(), message2, "Automated mail : Scheduled examination.");
 
         }
 
@@ -166,7 +165,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
                 "\n Duration : " + examination.getDuration() +
                 "\n  ";
 
-        emailController.sendMail(examination.getPatient().getEmail(), message, "Automated mail : You have scheduled examination");
+        emailService.sendMailToUser(examination.getPatient().getEmail(), message, "Automated mail : You have scheduled examination");
 
     }
 
