@@ -35,9 +35,6 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private ClinicService clinicService;
-
-    @Autowired
     private MedicalExaminationService medicalExaminationService;
 
     @Autowired

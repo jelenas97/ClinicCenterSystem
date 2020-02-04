@@ -36,12 +36,5 @@ public class Nurse extends User {
     public boolean isEnabled() {
         return true;
     }
-    //to be added
-    /*private Clinic worksInClinic;
-    private Set<Recipe> validatedRecipes;
-    private Set<Patient> allClinicPatients;*/
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "refNurse")
-    private Set<AnnualLeaveRequest> annualLeaveRequests;
 }

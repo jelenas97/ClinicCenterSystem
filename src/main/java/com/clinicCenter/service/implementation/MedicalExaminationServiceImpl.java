@@ -1,8 +1,8 @@
 package com.clinicCenter.service.implementation;
 
-import com.clinicCenter.controller.EmailController;
 import com.clinicCenter.model.*;
 import com.clinicCenter.repository.*;
+import com.clinicCenter.service.EmailService;
 import com.clinicCenter.service.MedicalExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     private MedicalExaminationRoomRepository medicalExaminationRoomRepository;
 
     @Autowired
-    private EmailController emailController;
+    private EmailService emailService;
 
     int[] daysInAMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
@@ -105,8 +105,8 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
                     "\n Examination room : " + newExam.getMedicalExaminationRoom().getName() + " " + newExam.getMedicalExaminationRoom().getNumber() +
                     "\n Duration : " + newExam.getDuration();
 
-            emailController.sendMail(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination.");
-            emailController.sendMail(doctor.getEmail(), message2, "Automated mail : Scheduled examination.");
+            emailService.sendMailToUser(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination");
+            emailService.sendMailToUser(doctor.getEmail(), message2, "Automated mail : Confirm or decline scheduled examination");
 
         }
 
@@ -153,7 +153,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
                 "\n Duration : " + examination.getDuration() +
                 "\n  ";
 
-        emailController.sendMail(examination.getPatient().getEmail(), message, "Automated mail : You have scheduled examination");
+        emailService.sendMailToUser(examination.getPatient().getEmail(), message, "Automated mail : You have scheduled examination");
 
     }
 
