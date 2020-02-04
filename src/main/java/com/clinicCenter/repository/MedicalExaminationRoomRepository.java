@@ -25,8 +25,8 @@ public interface MedicalExaminationRoomRepository extends JpaRepository<MedicalE
     @Query(value = "SELECT * from db.medical_examination_room mer where lower(mer.name) like %:name% ", nativeQuery = true)
     Set<MedicalExaminationRoom> getSearchedByName(String name);
 
-    @Query(value = "SELECT * FROM db.medical_examination_room mer WHERE mer.clinic_id in (SELECT u.clinic_id FROM db.users u WHERE u.id = :clinicAdminId)", nativeQuery = true)
-    Set<MedicalExaminationRoom> getClinicRooms(Long clinicAdminId);
+    @Query(value = "SELECT * FROM db.medical_examination_room mer WHERE mer.clinic_id in (SELECT u.clinic_id FROM db.users u WHERE u.id = :clinicAdminId) AND mer.id NOT IN (SELECT me.mer_id FROM db.medical_examination me WHERE me.date BETWEEN :date1 AND :date2)", nativeQuery = true)
+    Set<MedicalExaminationRoom> getClinicRooms(Long clinicAdminId, Date date1, Date date2);
 
     @Query(value = "SELECT * FROM db.medical_examination_room mer WHERE mer.clinic_id = :id and :datee not in (SELECT me.date FROM db.medical_examination me)", nativeQuery = true)
     List<MedicalExaminationRoom> getAvailableRooms(Long id, Date datee);

@@ -3,6 +3,7 @@ package com.clinicCenter.service;
 import com.clinicCenter.model.MedicalExaminationRoom;
 import com.clinicCenter.model.OperationRoom;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -23,5 +24,5 @@ public interface OperationRoomService {
 
     Set<OperationRoom> getRoomsName(String name);
 
-    Collection<OperationRoom> getClinicOperationRooms(Long clinicId);
+    Collection<OperationRoom> getClinicOperationRooms(Long clinicId, String date, String term) throws ParseException;
 }

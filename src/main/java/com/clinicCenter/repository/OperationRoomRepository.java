@@ -26,8 +26,8 @@ public interface OperationRoomRepository extends JpaRepository<OperationRoom,Lon
     @Query(value = "SELECT * from db.operation_room oper where lower(oper.name) like %:name% ", nativeQuery = true)
     Set<OperationRoom> getSearchedByName(String name);
 
-    @Query(value = "SELECT * FROM db.operation_room orr WHERE orr.clinic_id = :clinicId", nativeQuery = true)
-    Collection<OperationRoom> getClinicOperationRooms(Long clinicId);
+    @Query(value = "SELECT * FROM db.operation_room orr WHERE orr.clinic_id = :clinicId AND orr.id NOT IN (SELECT op.or_id FROM db.operation op WHERE op.date BETWEEN :date1 AND :date2)", nativeQuery = true)
+    Collection<OperationRoom> getClinicOperationRooms(Long clinicId, Date date1, Date date2);
 
     @Query(value = "SELECT * FROM db.operation_room oroom WHERE oroom.clinic_id = :id and :datee not in (SELECT o.date FROM db.operation o)", nativeQuery = true)
     List<OperationRoom> getAvailableRooms(Long id, Date datee);

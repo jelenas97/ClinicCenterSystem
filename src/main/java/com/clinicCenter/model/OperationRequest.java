@@ -34,5 +34,11 @@ public class OperationRequest {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
+    @Transient
+    private Double price;
+
+    @Transient
+    private Double discount;
+
 
 }

@@ -8,6 +8,7 @@ import com.clinicCenter.service.MedicalExaminationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Set;
 
@@ -53,8 +54,9 @@ public class MedicalExaminationRoomController {
         return rooms;
     }
 
-    @GetMapping("getClinicRooms/{clinicAdminId}")
-    public Set<MedicalExaminationRoom> getClinicRooms(@PathVariable Long clinicAdminId) {
-        return medicalExaminationRoomService.getClinicRooms(clinicAdminId);
+    @GetMapping("getClinicRooms/{clinicAdminId}/{date}/{term}")
+    public Set<MedicalExaminationRoom> getClinicRooms(@PathVariable Long clinicAdminId, @PathVariable String date,
+                                                      @PathVariable String term) throws ParseException {
+        return medicalExaminationRoomService.getClinicRooms(clinicAdminId, date, term);
     }
 }
