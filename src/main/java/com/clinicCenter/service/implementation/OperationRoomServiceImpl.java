@@ -9,9 +9,9 @@ import com.clinicCenter.service.OperationRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class OperationRoomServiceImpl implements OperationRoomService {
@@ -56,7 +56,34 @@ public class OperationRoomServiceImpl implements OperationRoomService {
     }
 
     @Override
-    public Collection<OperationRoom> getClinicOperationRooms(Long clinicId) {
-        return operationRoomRepository.getClinicOperationRooms(clinicId);
+    public Collection<OperationRoom> getClinicOperationRooms(Long clinicId, String date, String term) throws ParseException {
+        date = date.replace('_', '/');
+        date = date.split(" ")[0];
+        Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+        System.out.println(date1);
+
+        Calendar cal = Calendar.getInstance();
+
+        String[] time = term.split(":");
+        String hours = time[0];
+        String minutes = time[1];
+
+        cal.setTime(date1);
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+        cal.set(Calendar.MINUTE, Integer.parseInt(minutes) - 2);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        Date dd = cal.getTime();
+        System.out.println(dd);
+
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
+        cal.set(Calendar.MINUTE, Integer.parseInt(minutes) + 2);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        Date ddd = cal.getTime();
+        System.out.println(ddd);
+        return operationRoomRepository.getClinicOperationRooms(clinicId, dd, ddd);
     }
 }
