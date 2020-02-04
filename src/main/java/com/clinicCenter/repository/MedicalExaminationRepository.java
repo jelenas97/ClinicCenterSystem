@@ -4,10 +4,12 @@ import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRoom;
 import com.clinicCenter.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.LockModeType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -69,4 +71,8 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
 
     @Query(value = "SELECT * FROM db.medical_examination me WHERE me.patient_id = :patientId and me.doctor_id = :doctorId and me.date between :start and :end", nativeQuery = true)
     MedicalExamination getStartExam(Date start, Date end, Long patientId, Long doctorId);
+
+    @Lock(LockModeType.PESSIMISTIC_READ)
+    @Override
+    MedicalExamination save(MedicalExamination medicalExamination);
 }
