@@ -1,10 +1,10 @@
 package com.clinicCenter.service.implementation;
 
-import com.clinicCenter.controller.EmailController;
 import com.clinicCenter.model.*;
 import com.clinicCenter.repository.OperationRepository;
 import com.clinicCenter.repository.OperationRequestRepository;
 import com.clinicCenter.repository.OperationRoomRepository;
+import com.clinicCenter.service.EmailService;
 import com.clinicCenter.service.OperationService;
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.asm.Advice;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -28,7 +29,7 @@ public class OperationServiceImpl implements OperationService {
     private OperationRequestRepository operationRequestRepository;
 
     @Autowired
-    private EmailController emailController;
+    private EmailService emailService;
 
     @Override
     public void saveOperation(OperationRequest operationRequest, Date dd, Double price, Double discount, Long roomId, Long requestId, Set<Doctor> doctors) {
@@ -60,14 +61,19 @@ public class OperationServiceImpl implements OperationService {
                 "\n Patient : " + newOperation.getPatient().getFirstName() + " " + newOperation.getPatient().getLastName() +
                 "\n Duration : " + newOperation.getDuration();
 
-        emailController.sendMail(patient.getEmail(), message, "Automated mail : Scheduled operation");
+        emailService.sendMailToUser(patient.getEmail(), message, "Automated mail : Scheduled operation");
         if (doctors != null ) {
             for (Doctor doc : doctors) {
-                emailController.sendMail(doc.getEmail(), message2, "Automated mail : Scheduled operation");
+                emailService.sendMailToUser(doc.getEmail(), message2, "Automated mail : Scheduled operation");
 
             }
         }
 
 
+    }
+
+    @Override
+    public List<Operation> getAllByDoctorId(Long id) {
+        return operationRepository.getAllByDoctorId(id);
     }
 }
