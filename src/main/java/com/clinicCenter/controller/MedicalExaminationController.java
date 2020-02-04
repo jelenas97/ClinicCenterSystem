@@ -166,47 +166,7 @@ public class MedicalExaminationController {
 
     @GetMapping("getAvailableTermsForDoctor/{doctorId}/{date}")
     public Collection<String> getAvailableTermsForDoctor(@PathVariable Long doctorId, @PathVariable String date) throws ParseException {
-        date = date.replace('_', '/');
-        Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(date);
-
-        Calendar c = Calendar.getInstance();
-        c.setTime(date1);
-        c.add(Calendar.DATE, 1); //same with c.add(Calendar.DAY_OF_MONTH, 1);
-        Date date2 = c.getTime();
-
-        Doctor doctor = (Doctor) userService.getById(doctorId);
-        Collection<MedicalExamination> examinationsForDoctor = medicalExaminationService.getDoctorsExaminationsByIdAndDate(doctorId, date1, date2);
-
-        Collection<String> availableTerms = new ArrayList<String>();
-
-        int startWork = doctor.getStartWork();
-        int endWork = doctor.getEndWork();
-        int iterations = (endWork - startWork);
-
-        for (int i = startWork; i < endWork; i++) {
-            for (int j = 0; j < 5; j += 3) {
-                String part1 = "";
-                if (i < 10) {
-                    part1 = "0";
-                } else {
-                    part1 = "";
-                }
-                availableTerms.add(part1 + i + ":" + j + "0");
-            }
-        }
-
-        System.out.println("Svi termini za ovog doktora su " + availableTerms);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
-        for (MedicalExamination examination : examinationsForDoctor) {
-            String dateAndTime = formatter.format(examination.getDate());
-            String time = dateAndTime.split(" ")[1].substring(0, 5);
-            availableTerms.remove(time);
-        }
-
-        System.out.println("Svi slobodni termini za ovog doktora su" + availableTerms);
-
-        return availableTerms;
+        return medicalExaminationService.getAvailableTermsForDoctor(doctorId, date);
     }
 
     @GetMapping("medicalExaminationsDaily/{id}")

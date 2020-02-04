@@ -4,6 +4,7 @@ import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.MedicalExaminationRequest;
 import com.clinicCenter.model.User;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -52,4 +53,6 @@ public interface MedicalExaminationService {
     MedicalExamination getExamById(Long examId);
 
     Collection<User> getAvailableDoctorsForOperation(Date date1, Date date2, Long clinicId, Long doctorId);
+
+    Collection<String> getAvailableTermsForDoctor(Long doctorId, String date) throws ParseException;
 }
