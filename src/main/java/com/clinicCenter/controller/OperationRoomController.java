@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -54,9 +55,10 @@ public class OperationRoomController {
         return rooms;
     }
 
-    @GetMapping("getClinicOperationRooms/{clinicId}")
-    public Collection<OperationRoom> getClinicOperationRooms(@PathVariable Long clinicId) {
-        return operationRoomService.getClinicOperationRooms(clinicId);
+    @GetMapping("getClinicOperationRooms/{clinicId}/{date}/{term}")
+    public Collection<OperationRoom> getClinicOperationRooms(@PathVariable Long clinicId, @PathVariable String date,
+                                                             @PathVariable String term) throws ParseException {
+        return operationRoomService.getClinicOperationRooms(clinicId, date, term);
     }
 
 }

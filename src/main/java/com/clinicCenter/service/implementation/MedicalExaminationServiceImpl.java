@@ -4,9 +4,12 @@ import com.clinicCenter.model.*;
 import com.clinicCenter.repository.*;
 import com.clinicCenter.service.EmailService;
 import com.clinicCenter.service.MedicalExaminationService;
+import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -17,6 +20,12 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
     @Autowired
     private MedicalExaminationRequestRepository medicalExaminationRequestRepository;
+
+    @Autowired
+    private OperationRepository operationRepository;
+
+    @Autowired
+    private OperationRequestRepository operationRequestRepository;
 
     @Autowired
     private MedicalExaminationTypeRepository medicalExaminationTypeRepository;
@@ -32,6 +41,9 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    UserService userService;
 
     int[] daysInAMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
@@ -65,10 +77,10 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
         MedicalExaminationType type = medicalExaminationTypeRepository.findById(typeId).get();
         System.out.println("preuzet tip id : " + type.getId());
-        Clinic clinic = clinicRepository.findById(clinicId).get();
-        System.out.println("preuzet clinic id : " + clinic.getId());
         User doctor = userRepository.findById(doctorId).get();
         System.out.println("preuzet doktor id : " + doctor.getId());
+        Clinic clinic = clinicRepository.findById(clinicId).get();
+        System.out.println("preuzet clinic id : " + clinic.getId());
 
         User patient = null;
         if (patientId != null) {
@@ -105,8 +117,8 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
                     "\n Examination room : " + newExam.getMedicalExaminationRoom().getName() + " " + newExam.getMedicalExaminationRoom().getNumber() +
                     "\n Duration : " + newExam.getDuration();
 
-            emailService.sendMailToUser(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination");
-            emailService.sendMailToUser(doctor.getEmail(), message2, "Automated mail : Confirm or decline scheduled examination");
+            emailService.sendMailToUser(patient.getEmail(), message, "Automated mail : Confirm or decline scheduled examination.");
+            emailService.sendMailToUser(doctor.getEmail(), message2, "Automated mail : Scheduled examination.");
 
         }
 
@@ -272,6 +284,82 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
         cal.add(Calendar.HOUR, -1);
         Date start = cal.getTime();
         return this.medicalExaminationRepository.getStartExam(start,end,patientId,doctorId);
+    }
+
+    @Override
+    public Collection<String> getAvailableTermsForDoctor(Long doctorId, String date) throws ParseException {
+        date = date.replace('_', '/');
+        Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+        System.out.println(date1);
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(date1);
+        c.add(Calendar.DATE, 1); //same with c.add(Calendar.DAY_OF_MONTH, 1);
+        Date date2 = c.getTime();
+        System.out.println(date2);
+
+        Doctor doctor = (Doctor) userService.getById(doctorId);
+        Collection<MedicalExamination> examinationsForDoctor = this.getDoctorsExaminationsByIdAndDate(doctorId, date1, date2);
+        Collection<MedicalExaminationRequest> examinationRequestsForDoctor = medicalExaminationRequestRepository.getDoctorsExaminationRequestsByIdAndDate(doctorId, date1, date2);
+        Collection<Operation> operationsForDoctor = operationRepository.getDoctorsOperationsByIdAndDate(doctorId, date1, date2);
+        Collection<OperationRequest> operationRequestForDoctor = operationRequestRepository.getDoctorsOperationRequests(doctorId, date1, date2);
+        Collection<Operation> operationDoctorAttends = operationRepository.getDoctorsOperationAttend(doctorId, date1, date2);
+        System.out.println("ovo je iz de prisustvuuje" + operationDoctorAttends.size());
+
+        Collection<String> availableTerms = new ArrayList<String>();
+
+        int startWork = doctor.getStartWork();
+        int endWork = doctor.getEndWork();
+
+        for (int i = startWork; i < endWork; i++) {
+            for (int j = 0; j < 5; j += 3) {
+                String part1 = "";
+                if (i < 10) {
+                    part1 = "0";
+                } else {
+                    part1 = "";
+                }
+                availableTerms.add(part1 + i + ":" + j + "0");
+            }
+        }
+
+        System.out.println("Svi termini za ovog doktora su " + availableTerms);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
+        for (MedicalExamination examination : examinationsForDoctor) {
+            String dateAndTime = formatter.format(examination.getDate());
+            String time = dateAndTime.split(" ")[1].substring(0, 5);
+            availableTerms.remove(time);
+        }
+
+        for (MedicalExaminationRequest request : examinationRequestsForDoctor) {
+            String dateAndTime = formatter.format(request.getDate());
+            String time = dateAndTime.split(" ")[1].substring(0, 5);
+            availableTerms.remove(time);
+        }
+
+        for (Operation operation : operationsForDoctor) {
+            String dateAndTime = formatter.format(operation.getDate());
+            String time = dateAndTime.split(" ")[1].substring(0, 5);
+            availableTerms.remove(time);
+        }
+
+        for (OperationRequest operationRequest : operationRequestForDoctor) {
+            String dateAndTime = formatter.format(operationRequest.getDate());
+            String time = dateAndTime.split(" ")[1].substring(0, 5);
+            availableTerms.remove(time);
+        }
+
+        for (Operation operation : operationDoctorAttends) {
+            String dateAndTime = formatter.format(operation.getDate());
+            System.out.println("vrimeeeeee" + dateAndTime);
+            String time = dateAndTime.split(" ")[1].substring(0, 5);
+            availableTerms.remove(time);
+        }
+
+        System.out.println("Svi slobodni termini za ovog doktora su" + availableTerms);
+
+        return availableTerms;
     }
 
     @Override
