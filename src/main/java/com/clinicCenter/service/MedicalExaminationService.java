@@ -55,4 +55,12 @@ public interface MedicalExaminationService {
     Collection<User> getAvailableDoctorsForOperation(Date date1, Date date2, Long clinicId, Long doctorId);
 
     Collection<String> getAvailableTermsForDoctor(Long doctorId, String date) throws ParseException;
+
+    Boolean canStartExam(Long patientId, Long doctorId);
+
+    Boolean pastExam(Long patientId, Long doctorId);
+
+    Boolean nurseAndPatient(Long patientId, Long nurseId);
+
+    MedicalExamination examDoctorPatient(Long patientId, Long doctorId);
 }

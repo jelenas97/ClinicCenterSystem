@@ -3,6 +3,7 @@ package com.clinicCenter.service.implementation;
 import com.clinicCenter.controller.EmailController;
 import com.clinicCenter.model.*;
 import com.clinicCenter.repository.*;
+import com.clinicCenter.service.EmailService;
 import com.clinicCenter.service.MedicalExaminationService;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -225,6 +226,65 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     @Override
     public Collection<User> getAvailableDoctorsForOperation(Date date1, Date date2, Long clinicId, Long doctorId) {
         return userRepository.getAvailableDoctorsForOperation(date1, date2, clinicId, doctorId);
+    }
+
+    @Override
+    public Boolean canStartExam(Long patientId, Long doctorId) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.MINUTE,30);
+        Date end = cal.getTime();
+        cal.add(Calendar.HOUR, -1);
+        Date start = cal.getTime();
+        int broj = this.medicalExaminationRepository.canStartExam(start,end,patientId,doctorId);
+        if(broj == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+
+    }
+
+    @Override
+    public Boolean pastExam(Long patientId, Long doctorId) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        Date end = cal.getTime();
+        int broj = this.medicalExaminationRepository.examInPast(end,patientId,doctorId);
+        if(broj == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean nurseAndPatient(Long patientId, Long nurseId) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        Date end = cal.getTime();
+        int broj = this.medicalExaminationRepository.nurseAndPatient(end,patientId,nurseId);
+        if(broj == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public MedicalExamination examDoctorPatient(Long patientId, Long doctorId) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.MINUTE,30);
+        Date end = cal.getTime();
+        cal.add(Calendar.HOUR, -1);
+        Date start = cal.getTime();
+        return this.medicalExaminationRepository.getStartExam(start,end,patientId,doctorId);
     }
 
     @Override

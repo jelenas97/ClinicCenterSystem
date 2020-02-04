@@ -30,7 +30,7 @@ public class RegistrationRequestController {
     private UserService userService;
 
     @Autowired
-    private EmailController emailController;
+    private EmailService emailService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -66,14 +66,14 @@ public class RegistrationRequestController {
         List<Authority> auth = authService.findByName("ROLE_PATIENT");
         patient.setAuthorities(auth);
         userService.save(patient);
-        emailController.sendMail(patient.getEmail(), "http://localhost:4200/activateUser/" + patient.getId(), "Automated mail : Activate account");
+        emailService.sendMailToUser(patient.getEmail(), "http://localhost:4200/activateUser/" + patient.getId(), "Automated mail : Activate account");
     }
 
     @DeleteMapping(value = "/registrationRequests/removeRequest/{id}/{message}")
     public void removeById(@PathVariable Long id, @PathVariable String message) throws InterruptedException {
         System.out.println(message);
         RegistrationRequest req = registrationRequestService.getById(id);
-        emailController.sendMail(req.getEmail(), message, "Automated mail : Your account has been declined");
+        emailService.sendMailToUser(req.getEmail(), message, "Automated mail : Your account has been declined");
         registrationRequestService.removeById(id);
     }
 }

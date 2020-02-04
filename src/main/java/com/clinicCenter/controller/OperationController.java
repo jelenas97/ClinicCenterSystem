@@ -1,6 +1,7 @@
 package com.clinicCenter.controller;
 
 import com.clinicCenter.model.Doctor;
+import com.clinicCenter.model.Operation;
 import com.clinicCenter.model.OperationRequest;
 import com.clinicCenter.service.OperationService;
 import com.clinicCenter.service.UserService;
@@ -65,6 +66,11 @@ public class OperationController {
         System.out.println("ovde je koliko ima elemenata u doktorima" + doctors1.size());
         operationService.saveOperation(operationRequest, dd, operationRequest.getPrice(), operationRequest.getDiscount(), roomId, requestId, doctors1);
 
+    }
 
+
+    @GetMapping("/medicalOperations/doctor/{id}")
+    public List<Operation> getAll(@PathVariable Long id){
+        return operationService.getAllByDoctorId(id);
     }
 }

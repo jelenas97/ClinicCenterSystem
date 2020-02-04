@@ -7,4 +7,6 @@ public interface MedicalRecordService {
     MedicalRecord getById(Long id);
 
     void update(MedicalRecord medicalRecord);
+
+    MedicalRecord getByPatientId(Long id);
 }

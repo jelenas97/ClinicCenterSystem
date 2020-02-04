@@ -28,16 +28,12 @@ public class MedicalRecordController {
 
     @GetMapping(value = "/showMedicalRecord/{id}")
     public MedicalRecord getById(@PathVariable Long id){
-        Patient patient = patientService.getById(id);
-        MedicalRecord medicalRecord = patient.getMedicalRecord();
-        return medicalRecord;
+        return this.medicalRecordService.getByPatientId(id);
     }
 
     @GetMapping(value = "/editMedicalRecord/basicInfo/{id}")
     public MedicalRecord edit(@PathVariable Long id){
-        Patient patient = patientService.getById(id);
-        MedicalRecord medicalRecord = patient.getMedicalRecord();
-        return medicalRecord;
+        return this.medicalRecordService.getByPatientId(id);
     }
 
     @PutMapping(value = "/editMedicalRecord/basicInfo")

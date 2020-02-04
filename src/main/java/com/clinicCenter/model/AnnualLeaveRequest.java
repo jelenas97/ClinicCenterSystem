@@ -35,16 +35,11 @@ public class AnnualLeaveRequest {
     private String flag;
 
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "refNurse")
-    private Nurse refNurse;
+    @JoinColumn
+    private User user;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "refDoctor")
-    private Doctor refDoctor;
 
-    @Column
+    @Transient
     private Long userId;
 
     @Transient
