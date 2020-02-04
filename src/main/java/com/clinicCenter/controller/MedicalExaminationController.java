@@ -274,4 +274,24 @@ public class MedicalExaminationController {
         return medicalExaminationService.getAvailableDoctorsForOperation(dd, ddd, clinicId, doctorId);
     }
 
+    @GetMapping("canStartExam/{patientId}/{doctorId}")
+    public Boolean canStartExam(@PathVariable Long patientId, @PathVariable Long doctorId) {
+        return medicalExaminationService.canStartExam(patientId, doctorId);
+    }
+
+    @GetMapping("pastExam/{patientId}/{doctorId}")
+    public Boolean pastExam(@PathVariable Long patientId, @PathVariable Long doctorId) {
+        return medicalExaminationService.pastExam(patientId, doctorId);
+    }
+
+
+    @GetMapping("nurseAndPatient/{patientId}/{nurseId}")
+    public Boolean nurseAndPatient(@PathVariable Long patientId, @PathVariable Long nurseId) {
+        return medicalExaminationService.nurseAndPatient(patientId, nurseId);
+    }
+
+    @GetMapping("medicalExamPatientDoctor/{patientId}/{doctorId}")
+    public MedicalExamination examDoctorPatient(@PathVariable Long patientId, @PathVariable Long doctorId) {
+        return medicalExaminationService.examDoctorPatient(patientId, doctorId);
+    }
 }

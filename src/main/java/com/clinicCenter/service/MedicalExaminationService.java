@@ -52,4 +52,12 @@ public interface MedicalExaminationService {
     MedicalExamination getExamById(Long examId);
 
     Collection<User> getAvailableDoctorsForOperation(Date date1, Date date2, Long clinicId, Long doctorId);
+
+    Boolean canStartExam(Long patientId, Long doctorId);
+
+    Boolean pastExam(Long patientId, Long doctorId);
+
+    Boolean nurseAndPatient(Long patientId, Long nurseId);
+
+    MedicalExamination examDoctorPatient(Long patientId, Long doctorId);
 }

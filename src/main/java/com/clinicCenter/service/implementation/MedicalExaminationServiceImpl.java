@@ -216,6 +216,65 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     }
 
     @Override
+    public Boolean canStartExam(Long patientId, Long doctorId) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.MINUTE,30);
+        Date end = cal.getTime();
+        cal.add(Calendar.HOUR, -1);
+        Date start = cal.getTime();
+        int broj = this.medicalExaminationRepository.canStartExam(start,end,patientId,doctorId);
+        if(broj == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+
+    }
+
+    @Override
+    public Boolean pastExam(Long patientId, Long doctorId) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        Date end = cal.getTime();
+        int broj = this.medicalExaminationRepository.examInPast(end,patientId,doctorId);
+        if(broj == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean nurseAndPatient(Long patientId, Long nurseId) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        Date end = cal.getTime();
+        int broj = this.medicalExaminationRepository.nurseAndPatient(end,patientId,nurseId);
+        if(broj == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public MedicalExamination examDoctorPatient(Long patientId, Long doctorId) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.MINUTE,30);
+        Date end = cal.getTime();
+        cal.add(Calendar.HOUR, -1);
+        Date start = cal.getTime();
+        return this.medicalExaminationRepository.getStartExam(start,end,patientId,doctorId);
+    }
+
+    @Override
     public List<Integer> getAllExaminationsMonthly(Long id) {
         List<Integer> list = new ArrayList<Integer>();
         for(int i = 0; i < 4; i++) {

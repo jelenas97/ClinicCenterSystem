@@ -57,4 +57,16 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
 
     @Query(value = "SELECT ifnull(sum(me.price),0) FROM db.medical_examination me WHERE me.clinic_id = (SELECT u.clinic_id FROM db.users u where u.id = :id) and me.date between :start and :end", nativeQuery = true)
     Long getIncomeBetween(Long id, Date start, Date end);
+
+    @Query(value = "SELECT count(me.id) FROM db.medical_examination me WHERE me.patient_id = :patientId and me.doctor_id = :doctorId and me.date between :start and :end", nativeQuery = true)
+    int canStartExam(Date start, Date end, Long patientId, Long doctorId);
+
+    @Query(value = "SELECT count(me.id) FROM db.medical_examination me WHERE me.patient_id = :patientId and me.doctor_id = :doctorId and me.date <= :end", nativeQuery = true)
+    int examInPast(Date end, Long patientId, Long doctorId);
+
+    @Query(value = "SELECT count(me.id) FROM db.medical_examination me WHERE me.patient_id = :patientId and me.clinic_id = (select u.clinic_id from users u where u.id = :nurseId) and me.date <= :end", nativeQuery = true)
+    int nurseAndPatient(Date end, Long patientId, Long nurseId);
+
+    @Query(value = "SELECT * FROM db.medical_examination me WHERE me.patient_id = :patientId and me.doctor_id = :doctorId and me.date between :start and :end", nativeQuery = true)
+    MedicalExamination getStartExam(Date start, Date end, Long patientId, Long doctorId);
 }
