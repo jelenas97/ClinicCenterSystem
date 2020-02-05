@@ -75,4 +75,7 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
     @Lock(LockModeType.PESSIMISTIC_READ)
     @Override
     MedicalExamination save(MedicalExamination medicalExamination);
+
+    @Query(value = "SELECT * FROM db.medical_examination me WHERE me.clinic_id = :clinicId AND me.predefined = TRUE", nativeQuery = true)
+    Collection<MedicalExamination> getClinicsPredefinedExaminations(Long clinicId);
 }
