@@ -11,6 +11,7 @@ import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -75,5 +76,21 @@ public class OperationServiceImpl implements OperationService {
     @Override
     public List<Operation> getAllByDoctorId(Long id) {
         return operationRepository.getAllByDoctorId(id);
+    }
+
+    @Override
+    public Collection<Operation> getAllOperationsPatientCanRate(Long patientId) {
+        Date date = new Date();
+        return operationRepository.getAllOperationsPatientCanRate(patientId, date);
+    }
+
+    @Override
+    public void rateDoctor(Long examId) {
+        operationRepository.rateDoctor(examId);
+    }
+
+    @Override
+    public void rateClinic(Long examId) {
+        operationRepository.rateClinic(examId);
     }
 }

@@ -35,7 +35,7 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
     @Query(value = "UPDATE db.medical_examination SET confirmed = true, patient_id = :patientId WHERE id = :examinationId", nativeQuery = true)
     void schedulePredefinedMedicalExamination(Long examinationId, Long patientId);
 
-    @Query(value = "SELECT * FROM db.medical_examination me WHERE me.patient_id = :patientId and me.confirmed = true", nativeQuery = true)
+    @Query(value = "SELECT * FROM db.medical_examination me WHERE me.patient_id = :patientId and me.finished = true", nativeQuery = true)
     Collection<MedicalExamination> getAllExaminationsPatientCanRate(Long patientId);
 
     @Transactional

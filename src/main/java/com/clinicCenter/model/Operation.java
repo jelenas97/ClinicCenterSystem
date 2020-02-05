@@ -54,6 +54,11 @@ public class Operation {
             inverseJoinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "id"))
     private Set<Doctor> doctors;
 
+    @Column
+    private Boolean doctorRated;
+
+    @Column
+    private Boolean clinicRated;
 
     public Operation(Date dd, Double price, Double discount, Double duration, OperationRoom operationRoom, Doctor doctor, Patient patient, Clinic clinic, Set<Doctor> doctors) {
         this.date = dd;
