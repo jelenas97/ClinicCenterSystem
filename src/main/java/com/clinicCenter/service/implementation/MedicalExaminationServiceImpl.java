@@ -287,7 +287,23 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     }
 
     @Override
+    public Collection<MedicalExamination> getClinicsPredefinedExaminations(Long clinicId) {
+        return medicalExaminationRepository.getClinicsPredefinedExaminations(clinicId);
+    }
+
+
+
+    @Override
     public Collection<String> getAvailableTermsForDoctor(Long doctorId, String date) throws ParseException {
+        return this.terms(doctorId, date, null);
+    }
+
+    @Override
+    public Collection<String> getAvailableTermsForDoctorWithoutRequest(Long doctorId, String date, Long requestId) throws ParseException {
+        return this.terms(doctorId, date, requestId);
+    }
+
+    private Collection<String> terms(Long doctorId, String date, Long requestId) throws ParseException {
         date = date.replace('_', '/');
         Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(date);
         System.out.println(date1);
@@ -333,6 +349,9 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
         }
 
         for (MedicalExaminationRequest request : examinationRequestsForDoctor) {
+            if (request.getId().equals(requestId)) {
+                continue;
+            }
             String dateAndTime = formatter.format(request.getDate());
             String time = dateAndTime.split(" ")[1].substring(0, 5);
             availableTerms.remove(time);

@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.getSearchedDoctors(selectedOption, id);
     }
 
+
     @Override
     public void saveDoctor(Doctor doctor) {
         userRepository.save(doctor);
@@ -106,4 +107,16 @@ public class UserServiceImpl implements UserService {
     public Integer hasExam(Long id) {
         return userRepository.hasExam(id);
     }
+
+    @Override
+    public Collection<User> getDoctorsThatCanDoExam(Long selectedOption, Long id, String date) {
+        return userRepository.getDoctorsThatCanDoExam(selectedOption, id, date);
+    }
+
+    @Override
+    public Collection<User> getDoctorsThatCanDoExamWithoutSelected(Long selectedOption, Long id, String date, Long doctorId) {
+        return userRepository.getDoctorsThatCanDoExamWithoutSelected(selectedOption, id, date, doctorId);
+    }
+
+
 }

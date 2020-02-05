@@ -70,6 +70,12 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "SELECT * FROM db.users u WHERE u.type = 'DO' AND u.clinic_id = :clinicId AND u.id != :doctorId AND u.id not in (SELECT me.doctor_id FROM db.medical_examination me WHERE me.date BETWEEN :date1 AND :date2)", nativeQuery = true)
     ArrayList<User> getAvailableDoctorsForOperation(Date date1, Date date2, Long clinicId, Long doctorId);
 
+    @Query(value = "SELECT * FROM users u WHERE u.clinic_id = :id AND u.id in (SELECT det.doctor_id FROM doctor_examination_types det WHERE det.type_id = :selectedOption) AND u.id NOT IN (SELECT al.user_id FROM db.annual_leave_request al WHERE :datee BETWEEN al.leave_date AND al.return_date)", nativeQuery = true)
+    Collection<User> getDoctorsThatCanDoExam(Long selectedOption, Long id, String datee);
+
+    @Query(value = "SELECT * FROM users u WHERE u.clinic_id = :id AND u.id != :doctorId AND u.id in (SELECT det.doctor_id FROM doctor_examination_types det WHERE det.type_id = :selectedOption) AND u.id NOT IN (SELECT al.user_id FROM db.annual_leave_request al WHERE :datee BETWEEN al.leave_date AND al.return_date)", nativeQuery = true)
+    Collection<User> getDoctorsThatCanDoExamWithoutSelected(Long selectedOption, Long id, String datee, Long doctorId);
+
     /*@Query(value = "SELECT * FROM db.users u WHERE u.type = 'DO' and u.clinic_id in (SELECT clinic_id FROM db.users uu WHERE uu.id = :adminId)", nativeQuery = true)
     Collection<UserMapperTwo> getAvailableDoctors(Long adminId);*/
 }

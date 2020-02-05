@@ -185,6 +185,12 @@ public class MedicalExaminationController {
         return medicalExaminationService.getAvailableTermsForDoctor(doctorId, date);
     }
 
+    @GetMapping("getAvailableTermsForDoctorWithoutRequest/{doctorId}/{date}/{requestId}")
+    public Collection<String> getAvailableTermsForDoctorWithoutRequest(@PathVariable Long doctorId, @PathVariable String date,
+                                                                       @PathVariable Long requestId) throws ParseException {
+        return medicalExaminationService.getAvailableTermsForDoctorWithoutRequest(doctorId, date, requestId);
+    }
+
     @GetMapping("medicalExaminationsDaily/{id}")
     public List<Integer> getExaminationsFromClinicDaily(@PathVariable Long id) {
         List<Integer> list = medicalExaminationService.getAllExaminationsDaily(id);
@@ -269,5 +275,10 @@ public class MedicalExaminationController {
     @GetMapping("medicalExamPatientDoctor/{patientId}/{doctorId}")
     public MedicalExamination examDoctorPatient(@PathVariable Long patientId, @PathVariable Long doctorId) {
         return medicalExaminationService.examDoctorPatient(patientId, doctorId);
+    }
+
+    @GetMapping("getClinicsPredefinedExaminations/{clinicId}")
+    public Collection<MedicalExamination> getClinicsPredefinedExaminations(@PathVariable Long clinicId) {
+        return medicalExaminationService.getClinicsPredefinedExaminations(clinicId);
     }
 }
