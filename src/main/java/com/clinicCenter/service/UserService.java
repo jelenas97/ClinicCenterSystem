@@ -37,6 +37,10 @@ public interface UserService {
     Collection<UserMapperTwo> getAvailableDoctors(Long adminId);
 
     Integer hasExam(Long id);
+
+    Collection<User> getDoctorsThatCanDoExam(Long selectedOption, Long id, String date);
+
+    Collection<User> getDoctorsThatCanDoExamWithoutSelected(Long selectedOption, Long id, String date, Long doctorId);
 }
 
 

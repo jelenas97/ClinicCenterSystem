@@ -14,4 +14,10 @@ public interface OperationService {
     List<Operation> getAllByDoctorId(Long id);
 
     Collection<Operation> getAllOperationsFromRoom(Long roomId);
+
+    Collection<Operation> getAllOperationsPatientCanRate(Long patientId);
+
+    void rateDoctor(Long examId);
+
+    void rateClinic(Long examId);
 }

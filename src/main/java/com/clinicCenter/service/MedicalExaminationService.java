@@ -63,4 +63,8 @@ public interface MedicalExaminationService {
     Boolean nurseAndPatient(Long patientId, Long nurseId);
 
     MedicalExamination examDoctorPatient(Long patientId, Long doctorId);
+
+    Collection<MedicalExamination> getClinicsPredefinedExaminations(Long clinicId);
+
+    Collection<String> getAvailableTermsForDoctorWithoutRequest(Long doctorId, String date, Long requestId) throws ParseException;
 }

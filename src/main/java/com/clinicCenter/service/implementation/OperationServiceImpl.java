@@ -82,4 +82,20 @@ public class OperationServiceImpl implements OperationService {
     public Collection<Operation> getAllOperationsFromRoom(Long roomId) {
         return operationRepository.getAllFromRoom(roomId);
     }
+
+    @Override
+    public Collection<Operation> getAllOperationsPatientCanRate(Long patientId) {
+        Date date = new Date();
+        return operationRepository.getAllOperationsPatientCanRate(patientId, date);
+    }
+
+    @Override
+    public void rateDoctor(Long examId) {
+        operationRepository.rateDoctor(examId);
+    }
+
+    @Override
+    public void rateClinic(Long examId) {
+        operationRepository.rateClinic(examId);
+    }
 }

@@ -79,4 +79,16 @@ public class OperationController {
     public Collection<Operation> getOperationsFromRoom(@PathVariable Long roomId) {
         return operationService.getAllOperationsFromRoom(roomId);
     }
+
+    @GetMapping("getAllOperationsPatientCanRate/{patientId}")
+    public Collection<Operation> getAllOperationsPatientCanRate(@PathVariable Long patientId) {
+        return operationService.getAllOperationsPatientCanRate(patientId);
+    }
+
+    @PutMapping("auth/rateDoctorO/{examId}/{number}/{doctorId}")
+    public void rateDoctor(@PathVariable Long examId, @PathVariable Integer number, @PathVariable Long doctorId) {
+        userService.rateDoctor(doctorId, number);
+        operationService.rateDoctor(examId);
+    }
+
 }
