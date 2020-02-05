@@ -30,6 +30,8 @@ public class UserRepositoryTest {
         Collection<User> doctors = userRepository.getDoctorsThatCanDoExam(1L, 2L, "2020-02-15 00:00:00.000000");
         assertEquals(1, doctors.size());
     }
+
+
 }
 
 
