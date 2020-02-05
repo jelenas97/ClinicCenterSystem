@@ -1,6 +1,7 @@
 package com.clinicCenter.controller;
 
 import com.clinicCenter.model.Doctor;
+import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.Operation;
 import com.clinicCenter.model.OperationRequest;
 import com.clinicCenter.service.OperationService;
@@ -72,5 +73,10 @@ public class OperationController {
     @GetMapping("/medicalOperations/doctor/{id}")
     public List<Operation> getAll(@PathVariable Long id){
         return operationService.getAllByDoctorId(id);
+    }
+
+    @GetMapping("medicalOperations/{roomId}")
+    public Collection<Operation> getOperationsFromRoom(@PathVariable Long roomId) {
+        return operationService.getAllOperationsFromRoom(roomId);
     }
 }
