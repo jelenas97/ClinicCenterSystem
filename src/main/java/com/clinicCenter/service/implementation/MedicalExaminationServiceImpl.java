@@ -130,7 +130,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     @Override
     public void schedulePredefinedMedicalExamination(Long examinationId, Long patientId) {
         medicalExaminationRepository.schedulePredefinedMedicalExamination(examinationId, patientId);
-        MedicalExamination examination = medicalExaminationRepository.findById(examinationId).get();
+        MedicalExamination examination = medicalExaminationRepository.getOne(examinationId);
 
         String message = "You have scheduled an examination : " +
                 "\n Date : " + examination.getDate() +

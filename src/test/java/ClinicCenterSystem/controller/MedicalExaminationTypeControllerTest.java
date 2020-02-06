@@ -38,8 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MedicalExaminationTypeControllerTest {
 
     private static final String GET_ALL_PREDEFINED_EXAMINATIONS = "/typesOfMedicalExam";
-    /*private static final String GET_CLINICS_PREDEFINED_EXAMINATIONS = "/getClinicsPredefinedExaminations/2";
-    private static final String SCHEDULE_PREDEFINED_MEDICAL_EXAMINATION = "/schedulePredefinedMedicalExamination/41/1";*/
+
 
     private MediaType contentType = new MediaType(
             MediaType.APPLICATION_JSON.getType(),

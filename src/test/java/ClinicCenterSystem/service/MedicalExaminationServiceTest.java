@@ -73,18 +73,13 @@ public class MedicalExaminationServiceTest {
 
         verify(medicalExaminationRepository, times(1)).getClinicsPredefinedExaminations(clinicId);
     }
-
-    /*@Test
+/*
+    @Test
     @Transactional
     @Rollback(true)
     public void testSchedulePredefinedMedicalExamination() throws ParseException {
 
         List<MedicalExamination> predefined = new ArrayList<>();
-        MedicalExamination me = new MedicalExamination();
-        predefined.add(me);
-
-        Mockito.when(medicalExaminationRepository.getAllPredefinedMedicalExaminations()).thenReturn(predefined);
-        assertEquals(1, predefined.size());
 
         Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(TEST_DATE);
         Clinic clinic = new Clinic(TEST_NEW_CLINIC_ID, TEST_NEW_CLINIC_NAME, TEST_NEW_CLINIC_ADDRESS, TEST_NEW_CLINIC_CITY, TEST_NEW_CLINIC_DESCRIPTION, TEST_NEW_CLINIC_AVERAGE_RATING, TEST_NEW_CLINIC_TIMES_RATED);
@@ -110,7 +105,11 @@ public class MedicalExaminationServiceTest {
         MedicalExamination newMe = new MedicalExamination(date, 1000.0, 30.0, 0.0, mer, doctor, patient2, clinic, type, true);
         newMe.setId(41L);
 
-        medicalExaminationService.schedulePredefinedMedicalExamination(41L, 1L);
+        predefined.add(new MedicalExamination());
+        Mockito.when(medicalExaminationRepository.getAllPredefinedMedicalExaminations()).thenReturn(predefined);
+        assertEquals(1, predefined.size());
+
+        medicalExaminationService.schedulePredefinedMedicalExamination(newMe.getId(), patient2.getId());
 
         List<MedicalExamination> allPredefined = new ArrayList<>();
         Mockito.when(medicalExaminationRepository.getAllPredefinedMedicalExaminations()).thenReturn(allPredefined);
@@ -118,5 +117,7 @@ public class MedicalExaminationServiceTest {
         assertEquals(0, allPredefined.size());
 
         verify(medicalExaminationRepository, times(1)).getAllPredefinedMedicalExaminations();
-    }*/
+    }
+    */
+
 }
