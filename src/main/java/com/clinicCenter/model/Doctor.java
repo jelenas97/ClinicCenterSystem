@@ -19,6 +19,11 @@ public class Doctor extends User {
     public Doctor() {
     }
 
+    public Doctor(String firstName, String lastName) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
