@@ -7,6 +7,7 @@ import com.clinicCenter.model.Nurse;
 import com.clinicCenter.model.User;
 import com.clinicCenter.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.Doc;
@@ -23,7 +24,9 @@ public class AnnualLeaveAndAbsenceController {
     private final EmailService emailService;
     private final AnnualLeaveRequestService annualLeaveRequestService;
 
+
     @PostMapping("/vacation")
+    @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
     public void saveAnnualLeave(@RequestBody AnnualLeaveRequest annualLeaveRequest){
 
             Long userId = annualLeaveRequest.getUserId();
@@ -33,18 +36,21 @@ public class AnnualLeaveAndAbsenceController {
     }
 
     @GetMapping("/vacationRequests/{id}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public List<AnnualLeaveRequest> getAllVacations(@PathVariable Long id){
         List<AnnualLeaveRequest> requests = annualLeaveRequestService.getAllVacationRequestsByAdminId(id);
         return requests;
     }
 
     @GetMapping("/absenceRequests/{id}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public List<AnnualLeaveRequest> getAllAbsences(@PathVariable Long id){
         List<AnnualLeaveRequest> requests = annualLeaveRequestService.getAllAbsenceRequestsByAdminId(id);
         return requests;
     }
 
     @PostMapping("/sendApproveMail")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void sendApproveMail(@RequestBody AnnualLeaveRequest request){
         User user = userService.getById(request.getUserId());
         emailService.sendMailToUser(user.getEmail(),"Hello Dear, "+ user.getFirstName() + " " + user.getLastName() +
@@ -56,6 +62,7 @@ public class AnnualLeaveAndAbsenceController {
 
 
     @PostMapping("/sendRejectMail/{id}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void sendRejectMail(@RequestBody String reason, @PathVariable Long id){
         AnnualLeaveRequest request = annualLeaveRequestService.getById(id);
         User user = request.getUser();
@@ -68,6 +75,7 @@ public class AnnualLeaveAndAbsenceController {
     }
 
     @DeleteMapping("/deleteRequest/{id}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void deleteRequest(@PathVariable Long id){
         annualLeaveRequestService.delete(id);
     }

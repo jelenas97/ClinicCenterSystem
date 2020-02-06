@@ -5,6 +5,7 @@ import com.clinicCenter.model.OperationRoom;
 import com.clinicCenter.service.MedicalExaminationRoomService;
 import com.clinicCenter.service.OperationRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
@@ -27,17 +28,20 @@ public class OperationRoomController {
     }
 
     @DeleteMapping(value = "/operationRooms/removeRoom/{id}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void removeById(@PathVariable Long id) {
         OperationRoom room = this.operationRoomService.getById(id);
         this.operationRoomService.removeById(id);
     }
 
     @PutMapping("/operationRooms")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public int updateOperationRoom( @RequestBody OperationRoom room) {
         return operationRoomService.updateRoom(room);
     }
 
     @PostMapping("/operationRooms")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void addOperationRoom(@RequestBody OperationRoom room){
         operationRoomService.save(room);
     }

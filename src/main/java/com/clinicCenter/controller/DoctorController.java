@@ -6,6 +6,7 @@ import com.clinicCenter.service.ClinicService;
 import com.clinicCenter.service.DoctorService;
 import com.clinicCenter.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ public class DoctorController {
 
 
     @PostMapping("/auth/addDoctor/{id}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void addDoctor(@RequestBody Doctor doctor, @PathVariable Long id) {
         Clinic clinic = clinicService.getById(id);
         List<Authority> authorities = authorityService.findByName("ROLE_DOCTOR");

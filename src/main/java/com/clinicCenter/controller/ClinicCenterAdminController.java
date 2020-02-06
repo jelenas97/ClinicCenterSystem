@@ -5,6 +5,7 @@ import com.clinicCenter.model.UserMapper;
 import com.clinicCenter.service.ClinicCenterAdminService;
 import com.clinicCenter.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
