@@ -23,45 +23,13 @@ public class MedicalExaminationController {
     private final MedicalExaminationService medicalExaminationService;
     private final MedicalExaminationRoomService medicalExaminationRoomService;
 
-    @PutMapping("auth/sendMedicalExamRequest/{typeId}/{date}/{clinicId}/{doctorId}/{patientId}/{selectedTerm}")
-    public void sendMedicalExamRequest(@PathVariable Long typeId, @PathVariable Date date, @PathVariable Long clinicId,
-                                       @PathVariable Long doctorId, @PathVariable Long patientId, @PathVariable String selectedTerm) {
-        System.out.println(date);
-        System.out.println(selectedTerm);
-        String[] time = selectedTerm.split(":");
-        String hours = time[0];
-        String minutes = time[1];
-        System.out.println(hours);
-        System.out.println(minutes);
 
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
 
-        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours));
-        cal.set(Calendar.MINUTE, Integer.parseInt(minutes));
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
 
-        Date d = cal.getTime();
-        System.out.println(d);
 
-        medicalExaminationService.sendRequest(typeId, d, clinicId, doctorId, patientId);
-    }
-
-    @GetMapping("auth/getAllExaminationRequests/{adminId}")
-    public Collection<MedicalExaminationRequest> getAllExaminationRequests(@PathVariable Long adminId) {
-        return medicalExaminationService.getAllExaminationRequests(adminId);
-    }
-
-    @GetMapping("getMedicalExaminationById/{requestId}")
-    public MedicalExaminationRequest getMedicalExaminationRequestById(@PathVariable Long requestId) {
-        return medicalExaminationService.getById(requestId);
-    }
 
     @GetMapping("medicalExaminations/doctor/{id}")
     public Collection<MedicalExamination> getExaminationsFromRoomDoctor(@PathVariable Long id) {
-        User user = userService.getById(id);
-        Collection<MedicalExamination> list = medicalExaminationService.getAllExaminationsFromDoctor(id);
         return medicalExaminationService.getAllExaminationsFromDoctor(id);
     }
 
@@ -109,35 +77,7 @@ public class MedicalExaminationController {
         return medicalExaminationService.getAllExaminationsFromRoom(roomId);
     }
 
-    @Scheduled(cron = "59 59 23 * * ?")
-    public void automaticSchedule() {
-        System.out.println("Automatska fja");
-        List<MedicalExaminationRequest> allRequests = medicalExaminationService.getAllExamsRequests();
 
-        for (MedicalExaminationRequest r : allRequests) {
-            List<MedicalExaminationRoom> availableRooms = medicalExaminationRoomService.getAvailableRooms(r.getClinic().getId(), r.getDate());
-            try {
-                medicalExaminationService.saveExamination(r.getDate(), r.getPrice(), r.getDuration(), r.getDiscount(), availableRooms.get(0).getId(),
-                        r.getClinic().getId(), r.getDoctor().getId(), r.getPatient().getId(), r.getType().getId(), r.getId(), false);
-
-            } catch (IndexOutOfBoundsException ioobe) {
-                List<MedicalExaminationRoom> availableRooms2;
-                int addDays = 1;
-                Date newDate;
-                do {
-                    Calendar c = Calendar.getInstance();
-                    c.setTime(r.getDate());
-                    c.add(Calendar.DATE, addDays);
-                    newDate = c.getTime();
-                    availableRooms2 = medicalExaminationRoomService.getAvailableRooms(r.getClinic().getId(), newDate);
-                    addDays++;
-                } while (availableRooms2.size() == 0);
-                medicalExaminationService.saveExamination(newDate, r.getPrice(), r.getDuration(), r.getDiscount(), availableRooms2.get(0).getId(),
-                        r.getClinic().getId(), r.getDoctor().getId(), r.getPatient().getId(), r.getType().getId(), r.getId(), false);
-
-            }
-        }
-    }
 
 
     @PostMapping("savePredefinedMedicalExamination/{date}/{typeId}/{duration}/{price}/{doctorId}/{roomId}/{discount}/{term}/{clinicId}")
@@ -211,8 +151,7 @@ public class MedicalExaminationController {
 
     @GetMapping("getClinicIncomes/{id}")
     public List<Long> getIncomes(@PathVariable Long id) {
-        List<Long> list = medicalExaminationService.getIncomes(id);
-        return list;
+        return medicalExaminationService.getIncomes(id);
     }
 
     @GetMapping("getMedicalExam/{examId}")

@@ -61,7 +61,6 @@ public class DoctorController {
 
         ArrayList<Doctor> doctors = null;
         doctors = doctorService.getSearchedDoctorsFromClinic(firstName,lastName,rating,caId);
-
         return doctors;
     }
 }

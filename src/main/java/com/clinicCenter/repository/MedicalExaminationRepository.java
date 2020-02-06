@@ -78,4 +78,7 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
 
     @Query(value = "SELECT * FROM db.medical_examination me WHERE me.clinic_id = :clinicId AND me.predefined = TRUE", nativeQuery = true)
     Collection<MedicalExamination> getClinicsPredefinedExaminations(Long clinicId);
+
+    @Query(value = "SELECT * FROM db.medical_examination me WHERE me.id = :examinationId", nativeQuery = true)
+    MedicalExamination getOneExamination(Long examinationId);
 }
