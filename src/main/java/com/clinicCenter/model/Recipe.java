@@ -20,7 +20,7 @@ public class Recipe {
     private Long id;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "medicament_id", referencedColumnName = "id")
     private Medicament medicament;
 
