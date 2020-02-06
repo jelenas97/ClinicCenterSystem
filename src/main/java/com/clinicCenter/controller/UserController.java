@@ -146,4 +146,16 @@ public class UserController {
     public Collection<User> getAvailableDoctors(@PathVariable Long adminId) {
         return userService.getDoctorsFromClinic(adminId);
     }
+
+    @GetMapping("auth/getDoctorsThatCanDoExam/{selectedOption}/{id}/{date}")
+    public Collection<User> getSearchedDoctors(@PathVariable Long selectedOption, @PathVariable Long id,
+                                               @PathVariable String date) {
+        return userService.getDoctorsThatCanDoExam(selectedOption, id, date);
+    }
+
+    @GetMapping("auth/getDoctorsThatCanDoExamWithoutSelected/{selectedOption}/{id}/{date}/{doctorId}")
+    public Collection<User> getDoctorsThatCanDoExamWithoutSelected(@PathVariable Long selectedOption, @PathVariable Long id,
+                                               @PathVariable String date, @PathVariable Long doctorId) {
+        return userService.getDoctorsThatCanDoExamWithoutSelected(selectedOption, id, date, doctorId);
+    }
 }

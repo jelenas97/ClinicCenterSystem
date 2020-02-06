@@ -18,6 +18,8 @@ public class MedicalExaminationType {
     public MedicalExaminationType() {
     }
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -36,4 +38,8 @@ public class MedicalExaminationType {
     @ManyToMany(mappedBy = "medicalExaminationTypes")
     private Set<Doctor> doctors;
 
+    public MedicalExaminationType(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
 }

@@ -1,6 +1,7 @@
 package com.clinicCenter.controller;
 
 import com.clinicCenter.model.Doctor;
+import com.clinicCenter.model.MedicalExamination;
 import com.clinicCenter.model.Operation;
 import com.clinicCenter.model.OperationRequest;
 import com.clinicCenter.service.OperationService;
@@ -73,4 +74,21 @@ public class OperationController {
     public List<Operation> getAll(@PathVariable Long id){
         return operationService.getAllByDoctorId(id);
     }
+
+    @GetMapping("medicalOperations/{roomId}")
+    public Collection<Operation> getOperationsFromRoom(@PathVariable Long roomId) {
+        return operationService.getAllOperationsFromRoom(roomId);
+    }
+
+    @GetMapping("getAllOperationsPatientCanRate/{patientId}")
+    public Collection<Operation> getAllOperationsPatientCanRate(@PathVariable Long patientId) {
+        return operationService.getAllOperationsPatientCanRate(patientId);
+    }
+
+    @PutMapping("auth/rateDoctorO/{examId}/{number}/{doctorId}")
+    public void rateDoctor(@PathVariable Long examId, @PathVariable Integer number, @PathVariable Long doctorId) {
+        userService.rateDoctor(doctorId, number);
+        operationService.rateDoctor(examId);
+    }
+
 }

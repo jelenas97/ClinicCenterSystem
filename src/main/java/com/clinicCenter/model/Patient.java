@@ -16,6 +16,11 @@ public class Patient extends User {
     @OneToOne
     private MedicalRecord medicalRecord;
 
+    public Patient(String firstName, String lastName) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+    }
+
 
     @Override
     public boolean isAccountNonExpired() {
