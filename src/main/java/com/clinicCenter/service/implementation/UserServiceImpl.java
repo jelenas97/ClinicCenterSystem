@@ -96,12 +96,7 @@ public class UserServiceImpl implements UserService {
     public ArrayList<User> getDoctorsFromClinic(Long id) {
         return userRepository.getDoctorsFromClinic(id);
     }
-
-    @Override
-    public Collection<UserMapperTwo> getAvailableDoctors(Long adminId) {
-        //return userRepository.getAvailableDoctors(adminId);
-        return null;
-    }
+    
 
     @Override
     public Integer hasExam(Long id) {

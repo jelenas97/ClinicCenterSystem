@@ -64,9 +64,6 @@ public abstract class User implements UserDetails {
     @Column(name = "passwordChanged")
     private Boolean passwordChanged;
 
-    @Column(name = "last_password_reset_date")
-    private Timestamp lastPasswordResetDate;
-
     @Column(name = "times_rated")
     private Integer timesRated;
 
@@ -88,9 +85,6 @@ public abstract class User implements UserDetails {
         return null;
     }
 
-    public Timestamp getLastPasswordResetDate() {
-        return lastPasswordResetDate;
-    }
 
     public String getEmail() {
         return this.email;
@@ -98,13 +92,9 @@ public abstract class User implements UserDetails {
 
     public void setPassword(String password) {
         Timestamp now = new Timestamp(DateTime.now().getMillis());
-        this.setLastPasswordResetDate(now);
         this.password = password;
     }
 
-    public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
-        this.lastPasswordResetDate = lastPasswordResetDate;
-    }
 
     public String getPassword() {
         System.out.println(password);
@@ -130,7 +120,6 @@ public abstract class User implements UserDetails {
                 ", country='" + country + '\'' +
                 ", phone='" + phone + '\'' +
                 ", ssn=" + ssn +
-                ", lastPasswordResetDate=" + lastPasswordResetDate +
                 ", timesRated=" + timesRated +
                 ", averageRating=" + averageRating +
                 ", authorities=" + authorities +

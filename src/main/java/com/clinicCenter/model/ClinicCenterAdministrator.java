@@ -13,7 +13,6 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Data
-//@Builder
 @Entity
 @DiscriminatorValue("CCA")
 public class ClinicCenterAdministrator extends User {
