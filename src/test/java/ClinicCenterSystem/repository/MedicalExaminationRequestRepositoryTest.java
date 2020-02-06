@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static ClinicCenterSystem.constants.MedicalExaminationRequestConstants.*;
 import static org.junit.Assert.*;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
@@ -29,26 +30,21 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @TestPropertySource(locations = {"/test.properties"})
 @ContextConfiguration(classes = App.class)
 @SpringBootTest
-//@DataJpaTest
-//@AutoConfigureTestDatabase(replace = NONE)
 public class MedicalExaminationRequestRepositoryTest {
 
     @Autowired
     private MedicalExaminationRequestRepository medicalExaminationRequestRepository;
 
-    /*@Autowired
-    private TestEntityManager testEntityManager;*/
 
     @Test
     @Transactional
     @Rollback(true)
     public void testSaveExaminationRequest() throws ParseException {
-        MedicalExaminationType type = new MedicalExaminationType("Pregled ociju", 1000.0);
+        MedicalExaminationType type = new MedicalExaminationType(TEST_NEW_TYPE_NAME, TEST_NEW_TYPE_PRICE);
 
-        String dates = "2020/02/20 15:30:00.000000";
-        Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(dates);
-        // Mora da id doktora, klinike, bilo kogaa, bude postojec iz baze
-        Clinic clinic = new Clinic(1L, "Klinika Vid", "Bulevar Oslobodjenja", "Novi Sad", "Klinka za vid", 9.0, 1);
+        Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(TEST_DATE);
+
+        Clinic clinic = new Clinic(TEST_NEW_CLINIC_ID, TEST_NEW_CLINIC_NAME, TEST_NEW_CLINIC_ADDRESS, TEST_NEW_CLINIC_CITY, TEST_NEW_CLINIC_DESCRIPTION, TEST_NEW_CLINIC_AVERAGE_RATING, TEST_NEW_CLINIC_TIMES_RATED);
         Doctor doctor = new Doctor("Marko", "Markovic");
         doctor.setId(3L);
 
