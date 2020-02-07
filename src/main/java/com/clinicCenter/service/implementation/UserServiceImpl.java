@@ -104,11 +104,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer hasExam(Long id) {
-        return userRepository.hasExam(id);
-    }
-
-    @Override
     public Collection<User> getDoctorsThatCanDoExam(Long selectedOption, Long id, String date) {
         return userRepository.getDoctorsThatCanDoExam(selectedOption, id, date);
     }

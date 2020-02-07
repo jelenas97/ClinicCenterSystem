@@ -100,7 +100,7 @@ public class UserController {
         System.out.println("Radiiiii");
 
         // Vrati token kao odgovor na uspesno autentifikaciju
-        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, ((Authority) user.getAuthorities().iterator().next()).getName(), user.getPasswordChanged()));
+        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn, ((Authority) user.getAuthorities().iterator().next()).getName(), user.getPasswordChanged(), user.getEnabled()));
     }
 
     @RequestMapping(value = "/api/whoami", method = RequestMethod.GET)

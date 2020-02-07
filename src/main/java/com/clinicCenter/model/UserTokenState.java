@@ -11,12 +11,14 @@ public class UserTokenState {
     private Integer expiresIn;
     private String role;
     private Boolean passwordChanged;
+    private Boolean enabled;
 
-    public UserTokenState(String jwt, int expiresIn, String role, Boolean passwordChanged) {
+    public UserTokenState(String jwt, int expiresIn, String role, Boolean passwordChanged, Boolean enabled) {
         this.accessToken = jwt;
         this.expiresIn = expiresIn;
         this.role = role;
         this.passwordChanged = passwordChanged;
+        this.enabled = enabled;
     }
 
     public UserTokenState(Boolean passwordChanged){

@@ -34,7 +34,6 @@ public class MedicalExaminationTypeController {
 
     @DeleteMapping(value = "/typesOfMedicalExam/removeType/{id}")
     public void removeById(@PathVariable Long id) {
-        MedicalExaminationType type = this.medicalExaminationTypeService.getById(id);
         this.medicalExaminationTypeService.removeById(id);
     }
 

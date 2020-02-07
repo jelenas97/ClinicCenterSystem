@@ -30,6 +30,7 @@ public class MedicalExaminationTypeServiceImpl implements MedicalExaminationType
 
     @Override
     public void removeById(Long id) {
+        this.medicalExaminationTypeRepository.deleteFromDoctorTypes(id);
         this.medicalExaminationTypeRepository.deleteById(id);
     }
 

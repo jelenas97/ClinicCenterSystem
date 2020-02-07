@@ -38,16 +38,5 @@ public class Clinic {
 
     @Column
     private Integer timesRated = 0;
-
-    /*@JsonIgnore
-    @OneToMany(mappedBy = "clinic")
-    private Set<ClinicAdministrator> clinicAdministrators;*/
-
-    /*@OneToMany(mappedBy = "clinic")
-    private Set<MedicalExaminationRequest> examinationRequests;
-
-    @OneToMany(mappedBy = "clinic")
-    @JsonIgnore
-    private Set<Doctor> doctors;*/
 }
 

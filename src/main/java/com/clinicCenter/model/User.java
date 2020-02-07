@@ -124,4 +124,8 @@ public abstract class User implements UserDetails {
                 ", authorities=" + authorities +
                 '}';
     }
+
+    public Boolean getEnabled() {
+        return this.enabled;
+    }
 }
