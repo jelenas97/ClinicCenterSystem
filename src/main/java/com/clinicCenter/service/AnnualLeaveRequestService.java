@@ -11,4 +11,5 @@ public interface AnnualLeaveRequestService {
     List<AnnualLeaveRequest> getAllVacationRequestsByAdminId(Long id);
     List<AnnualLeaveRequest> getAllAbsenceRequestsByAdminId(Long id);
 
+    void approve(Long id);
 }

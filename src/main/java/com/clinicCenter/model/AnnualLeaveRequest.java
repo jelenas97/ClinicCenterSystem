@@ -38,6 +38,9 @@ public class AnnualLeaveRequest {
     @JoinColumn
     private User user;
 
+    @Column
+    private Boolean approved = false;
+
 
     @Transient
     private Long userId;
