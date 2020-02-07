@@ -99,8 +99,7 @@ public class TokenUtils {
         final String email = getEmailFromToken(token);
         final Date created = getIssuedAtDateFromToken(token);
 
-        return (email != null && email.equals(((User) userDetails).getEmail())
-                && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
+        return (email != null && email.equals(((User) userDetails).getEmail()));
     }
 
     public String getEmailFromToken(String token) {
