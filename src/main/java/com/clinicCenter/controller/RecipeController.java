@@ -5,6 +5,7 @@ import com.clinicCenter.model.User;
 import com.clinicCenter.service.MedicamentService;
 import com.clinicCenter.service.RecipeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @GetMapping("/allRecipes")
+    @PreAuthorize("hasRole('NURSE')")
     public List<Recipe> getAll(){
         return recipeService.getAllUnvalidated();
     }
@@ -26,14 +28,13 @@ public class RecipeController {
         return recipeService.getAllValidated();
     }
 
-    @GetMapping("/allRecipes/{id}")
+    @GetMapping("/validate/{id}")
     public void validate(@PathVariable Long id){
-        Recipe recipe = recipeService.getById(id);
-        recipe.setValidated(true);
-        recipeService.save(recipe);
+        recipeService.validate(id);
     }
 
     @DeleteMapping ("/allRecipes/removeRecipe/{id}")
+    @PreAuthorize("hasRole('NURSE')")
     public void remove(@PathVariable Long id){
         Recipe recipe = recipeService.getById(id);
         recipeService.delete(recipe);

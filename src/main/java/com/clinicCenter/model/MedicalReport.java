@@ -28,11 +28,11 @@ public class MedicalReport {
     @Column(nullable = false)
     private String report;
 
-    @OneToOne
+    @ManyToOne
     @JsonIgnore
     private Diagnosis diagnosis;
 
-    @OneToOne
+    @ManyToOne
     @JsonIgnore
     private Medicament medicament;
 

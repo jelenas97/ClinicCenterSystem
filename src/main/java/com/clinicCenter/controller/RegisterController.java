@@ -17,7 +17,6 @@ public class RegisterController {
 
     @PostMapping("/auth/registration")
     public void getUser(@RequestBody RegistrationRequest registrationRequest){
-        System.out.println("registrovo sam se");
         registrationRequestService.save(registrationRequest);
     }
 }

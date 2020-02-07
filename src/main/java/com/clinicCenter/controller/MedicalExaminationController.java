@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.JsonPath;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -55,13 +56,11 @@ public class MedicalExaminationController {
 
     @PutMapping("/auth/confirmScheduledExamination/{id}")
     public void confirmScheduledExamination(@PathVariable Long id) {
-        System.out.println("Potvrdjujem pregled");
         medicalExaminationService.confirmScheduledExamination(id);
     }
 
     @DeleteMapping("/auth/declineScheduledExamination/{id}")
     public void declineScheduledExamination(@PathVariable Long id) {
-        System.out.println("Odbijam pregled");
         medicalExaminationService.declineScheduledExamination(id);
     }
 
@@ -74,6 +73,7 @@ public class MedicalExaminationController {
 
 
     @PostMapping("savePredefinedMedicalExamination/{date}/{typeId}/{duration}/{price}/{doctorId}/{roomId}/{discount}/{term}/{clinicId}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void savePredefinedMedicalExamination(@PathVariable String date, @PathVariable Long typeId, @PathVariable Double duration, @PathVariable Double price,
                                                  @PathVariable Long doctorId, @PathVariable Long roomId, @PathVariable Double discount, @PathVariable String term,
                                                  @PathVariable Long clinicId) throws ParseException {
@@ -103,6 +103,7 @@ public class MedicalExaminationController {
     }
 
     @PutMapping("schedulePredefinedMedicalExamination/{examinationId}/{patientId}")
+    @PreAuthorize("hasRole('PATIENT')")
     public void schedulePredefinedMedicalExamination(@PathVariable Long examinationId, @PathVariable Long patientId) {
         medicalExaminationService.schedulePredefinedMedicalExamination(examinationId, patientId);
     }
