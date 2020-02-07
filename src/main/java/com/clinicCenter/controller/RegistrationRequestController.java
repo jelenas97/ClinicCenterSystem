@@ -1,13 +1,7 @@
 package com.clinicCenter.controller;
 
-import com.clinicCenter.model.Authority;
-import com.clinicCenter.model.Medicament;
-import com.clinicCenter.model.Patient;
-import com.clinicCenter.model.RegistrationRequest;
-import com.clinicCenter.service.AuthorityService;
-import com.clinicCenter.service.EmailService;
-import com.clinicCenter.service.RegistrationRequestService;
-import com.clinicCenter.service.UserService;
+import com.clinicCenter.model.*;
+import com.clinicCenter.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,6 +32,9 @@ public class RegistrationRequestController {
     @Autowired
     private AuthorityService authService;
 
+    @Autowired
+    private MedicalRecordService medicalRecordService;
+
     @GetMapping("/registrationRequests")
     public Set<RegistrationRequest> getAll(){
         Set<RegistrationRequest> requests = registrationRequestService.getAll();
@@ -52,7 +49,7 @@ public class RegistrationRequestController {
 
     @PostMapping(value = "/registrationRequests/acceptRequest")
     public void accept(@RequestBody RegistrationRequest registrationRequest){
-        System.out.println(registrationRequest.getFirstName());
+        MedicalRecord medicalRecord = new MedicalRecord();
         Patient patient = new Patient(registrationRequest.getEmail(),
                 passwordEncoder.encode(registrationRequest.getPassword()),
                 registrationRequest.getFirstName(),
@@ -65,6 +62,8 @@ public class RegistrationRequestController {
         registrationRequestService.delete(registrationRequest);
         List<Authority> auth = authService.findByName("ROLE_PATIENT");
         patient.setAuthorities(auth);
+        patient.setMedicalRecord(medicalRecord);
+        medicalRecordService.save(medicalRecord);
         userService.save(patient);
         emailService.sendMailToUser(patient.getEmail(), "http://localhost:4200/activateUser/" + patient.getId(), "Automated mail : Activate account");
     }
