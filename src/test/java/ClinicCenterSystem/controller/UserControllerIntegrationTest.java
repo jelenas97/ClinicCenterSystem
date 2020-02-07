@@ -35,7 +35,7 @@ public class UserControllerIntegrationTest {
     public void login() {
         ResponseEntity<UserTokenState> responseEntity =
                 restTemplate.postForEntity("/auth/login",
-                        new JwtAuthenticationRequest("igor_malesevic@yahoo.com", "123123"),
+                        new JwtAuthenticationRequest("pa@gmail.com", "456456"),
                         UserTokenState.class);
          accessToken = Objects.requireNonNull(responseEntity.getBody()).getAccessToken();
     }
@@ -48,13 +48,13 @@ public class UserControllerIntegrationTest {
         HttpEntity<Object> httpEntity = new HttpEntity<Object>(headers);
 
         ResponseEntity<Doctor[]> responseEntity =
-                restTemplate.exchange("/auth/getDoctorsThatCanDoExam/1/1/2020_02_06", HttpMethod.GET, httpEntity, Doctor[].class);
+                restTemplate.exchange("/auth/getDoctorsThatCanDoExam/1/4/2020_02_014", HttpMethod.GET, httpEntity, Doctor[].class);
 
         Doctor[] doctors = responseEntity.getBody();
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(1, doctors.length);
-        assertEquals("Doktor", doctors[0].getFirstName());
+        assertEquals(3, doctors.length);
+        assertEquals("Nikola", doctors[0].getFirstName());
 
     }
 }

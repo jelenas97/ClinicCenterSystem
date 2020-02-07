@@ -4,45 +4,27 @@ import com.clinicCenter.App;
 import com.clinicCenter.controller.UserController;
 import com.clinicCenter.model.Doctor;
 import com.clinicCenter.model.User;
-import com.clinicCenter.model.UserTokenState;
-import com.clinicCenter.repository.UserRepository;
-import com.clinicCenter.security.auth.JwtAuthenticationRequest;
 import com.clinicCenter.service.UserService;
-import com.clinicCenter.service.implementation.UserServiceImpl;
-import com.sun.source.doctree.DocTree;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
-import javax.annotation.PostConstruct;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -53,13 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserControllerTest {
 
-    private static final String URL_DOCTORS = "/auth/getDoctorsThatCanDoExam/1/1/2020_02_06";
-    private static final String URL_DOCTORS2 = "/auth/getDoctorsThatCanDoExam/1/3/2020_02_06";
-
-    private MediaType contentType = new MediaType(
-            MediaType.APPLICATION_JSON.getType(),
-            MediaType.APPLICATION_JSON.getSubtype(),
-            Charset.forName("utf8"));
+    private static final String URL_DOCTORS = "/auth/getDoctorsThatCanDoExam/1/1/2020_02_14";
+    private static final String URL_DOCTORS2 = "/auth/getDoctorsThatCanDoExam/1/4/2020_02_14";
 
     private MockMvc mockMvc;
 
@@ -82,33 +59,63 @@ public class UserControllerTest {
 
         ArrayList<User> users = new ArrayList<>();
         Doctor doctor = new Doctor();
-        doctor.setId(3L);
-        doctor.setFirstName("Doktor");
-        doctor.setLastName("Doktoric");
-        doctor.setCountry("Serbistan");
+        doctor.setId(5L);
+        doctor.setFirstName("Milos");
+        doctor.setLastName("Ivanovic");
+        doctor.setCountry("Srbija");
         users.add(doctor);
 
-        when(userService.getDoctorsThatCanDoExam(1L, 1L, "2020_02_06")).thenReturn(users);
+        when(userService.getDoctorsThatCanDoExam(1L, 1L, "2020_02_14")).thenReturn(users);
 
         mockMvc.perform(get(URL_DOCTORS))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$.[*].firstName").value(hasItem("Doktor")))
-                .andExpect(jsonPath("$.[*].lastName").value(hasItem("Doktoric")))
-                .andExpect(jsonPath("$.[*].country").value(hasItem("Serbistan")));
+                .andExpect(jsonPath("$.[*].firstName").value(hasItem("Milos")))
+                .andExpect(jsonPath("$.[*].lastName").value(hasItem("Ivanovic")))
+                .andExpect(jsonPath("$.[*].country").value(hasItem("Srbija")));
 
-        verify(userService, times(1)).getDoctorsThatCanDoExam(1L, 1L, "2020_02_06");
+        verify(userService, times(1)).getDoctorsThatCanDoExam(1L, 1L, "2020_02_14");
 
     }
 
 
     @Test
     public void testGetDoctorsThatCanDoExam2() throws Exception {
+
+        ArrayList<User> users = new ArrayList<>();
+
+        Doctor doctor = new Doctor();
+        doctor.setId(8L);
+        doctor.setFirstName("Nikola");
+        doctor.setLastName("Zivanovic");
+        doctor.setCountry("Srbija");
+
+        Doctor doctor1 = new Doctor();
+        doctor1.setId(9L);
+        doctor1.setFirstName("Igor");
+        doctor1.setLastName("Ivic");
+        doctor1.setCountry("Srbija");
+
+        Doctor doctor2 = new Doctor();
+        doctor2.setId(10L);
+        doctor2.setFirstName("Igor");
+        doctor2.setLastName("Ivic");
+        doctor2.setCountry("Srbija");
+
+        users.add(doctor);
+        users.add(doctor1);
+        users.add(doctor2);
+
+        when(userService.getDoctorsThatCanDoExam(1L, 4L, "2020_02_14")).thenReturn(users);
+
         mockMvc.perform(get(URL_DOCTORS2))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$", hasSize(0)));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$", hasSize(3)));
+
+        verify(userService, times(1)).getDoctorsThatCanDoExam(1L, 4L, "2020_02_14");
+
     }
 
 }

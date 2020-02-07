@@ -41,12 +41,12 @@ public class UserServiceTest {
         ArrayList<User> doctors = new ArrayList<>();
         doctors.add(new Doctor());
 
-        Mockito.when(userRepository.getDoctorsThatCanDoExam(1L, 2L, "2020-02-15 00:00:00.000000")).thenReturn(doctors);
+        Mockito.when(userRepository.getDoctorsThatCanDoExam(1L, 1L, "2020-02-14 00:00:00.000000")).thenReturn(doctors);
 
-        Collection<User> users = userService.getDoctorsThatCanDoExam(1L, 2L, "2020-02-15 00:00:00.000000");
+        Collection<User> users = userService.getDoctorsThatCanDoExam(1L, 1L, "2020-02-14 00:00:00.000000");
         assertEquals(1, users.size());
 
-        verify(userRepository,times(1)).getDoctorsThatCanDoExam(1L, 2L, "2020-02-15 00:00:00.000000");
+        verify(userRepository,times(1)).getDoctorsThatCanDoExam(1L, 1L, "2020-02-14 00:00:00.000000");
 
     }
 }
