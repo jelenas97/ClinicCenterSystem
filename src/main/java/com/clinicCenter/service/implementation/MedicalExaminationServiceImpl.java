@@ -47,30 +47,11 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
     int[] daysInAMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-    @Override
-    public void sendRequest(Long typeId, Date date, Long clinicId, Long doctorId, Long patientId) {
-        MedicalExaminationType type = medicalExaminationTypeRepository.findById(typeId).get();
-        System.out.println("preuzet tip id : " + type.getId());
-        Clinic clinic = clinicRepository.findById(clinicId).get();
-        System.out.println("preuzet clinic id : " + clinic.getId());
-        User doctor = userRepository.findById(doctorId).get();
-        System.out.println("preuzet doktor id : " + doctor.getId());
-        User patient = userRepository.findById(patientId).get();
-        System.out.println("preuzet pacijent id : " + patient.getId());
 
-        MedicalExaminationRequest newReq = new MedicalExaminationRequest(type, date, clinic, (Doctor) doctor, (Patient) patient);
-        medicalExaminationRequestRepository.save(newReq);
-    }
 
-    @Override
-    public Collection<MedicalExaminationRequest> getAllExaminationRequests(Long adminId) {
-        return medicalExaminationRequestRepository.getRequestForClinic(adminId);
-    }
 
-    @Override
-    public MedicalExaminationRequest getById(Long requestId) {
-        return medicalExaminationRequestRepository.findById(requestId).get();
-    }
+
+
 
     @Override
     public void saveExamination(Date date, Double price, Double duration, Double discount, Long roomId, Long clinicId, Long doctorId, Long patientId, Long typeId, Long requestId, Boolean predefined) {
@@ -139,10 +120,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
         medicalExaminationRequestRepository.deleteById(i);
     }
 
-    @Override
-    public List<MedicalExaminationRequest> getAllExamsRequests() {
-        return medicalExaminationRequestRepository.findAll();
-    }
+
 
     @Override
     public Collection<MedicalExamination> getAllPredefinedMedicalExaminations() {
@@ -152,7 +130,7 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     @Override
     public void schedulePredefinedMedicalExamination(Long examinationId, Long patientId) {
         medicalExaminationRepository.schedulePredefinedMedicalExamination(examinationId, patientId);
-        MedicalExamination examination = medicalExaminationRepository.findById(examinationId).get();
+        MedicalExamination examination = medicalExaminationRepository.getOne(examinationId);
 
         String message = "You have scheduled an examination : " +
                 "\n Date : " + examination.getDate() +
