@@ -43,10 +43,10 @@ public class MedicalExaminationRepositoryTest {
 
     @Test
     public void testGetClinicsPredefinedExaminations() {
-        Long clinicId = 2L; // ovo ce biti konstanta
+        Long clinicId = 1L; // ovo ce biti konstanta
 
         ArrayList<MedicalExamination> clinicsPredefined = (ArrayList<MedicalExamination>) medicalExaminationRepository.getClinicsPredefinedExaminations(clinicId);
-        assertEquals(1, clinicsPredefined.size());
+        assertEquals(2, clinicsPredefined.size());
 
         for (MedicalExamination m : clinicsPredefined) {
             if (m.getId().equals(EXPECTED_PREDEFINED_EXAM_ID)) {
@@ -59,7 +59,7 @@ public class MedicalExaminationRepositoryTest {
     @Transactional
     @Rollback(true)
     public void testSchedulePredefinedMedicalExamination() {
-        Long examId = 41L;
+        Long examId = 1L;
         MedicalExamination medicalExaminationPredefined = medicalExaminationRepository.findById(examId).get();
 
         assertEquals(false, medicalExaminationPredefined.getConfirmed());
@@ -68,8 +68,8 @@ public class MedicalExaminationRepositoryTest {
 
         medicalExaminationPredefined.setConfirmed(true);
 
-        Patient patient = new Patient("Doktor", "Doktoric");
-        patient.setId(1L);
+        Patient patient = new Patient("Ivana", "Stojkovic");
+        patient.setId(18L);
 
         medicalExaminationPredefined.setPatient(patient);
 

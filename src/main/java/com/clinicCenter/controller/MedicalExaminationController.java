@@ -16,18 +16,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
-@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class MedicalExaminationController {
 
-    private final UserService userService;
-    private final MedicalExaminationService medicalExaminationService;
-    private final MedicalExaminationRoomService medicalExaminationRoomService;
-
-
-
-
-
+    @Autowired
+    private MedicalExaminationService medicalExaminationService;
 
     @GetMapping("medicalExaminations/doctor/{id}")
     public Collection<MedicalExamination> getExaminationsFromRoomDoctor(@PathVariable Long id) {
