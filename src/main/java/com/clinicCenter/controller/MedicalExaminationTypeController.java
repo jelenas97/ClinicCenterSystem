@@ -4,6 +4,7 @@ import com.clinicCenter.model.MedicalExaminationType;
 import com.clinicCenter.service.MedicalExaminationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,17 +34,20 @@ public class MedicalExaminationTypeController {
     }
 
     @DeleteMapping(value = "/typesOfMedicalExam/removeType/{id}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void removeById(@PathVariable Long id) {
         MedicalExaminationType type = this.medicalExaminationTypeService.getById(id);
         this.medicalExaminationTypeService.removeById(id);
     }
 
     @PutMapping("/typesOfMedicalExam")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public int updateTypeOfMedicalExam( @RequestBody MedicalExaminationType type) {
         return medicalExaminationTypeService.updateType(type);
     }
 
     @PostMapping("/typesOfMedicalExam")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void addTypeOfMedicalExam(@RequestBody MedicalExaminationType type){
         medicalExaminationTypeService.save(type);
     }

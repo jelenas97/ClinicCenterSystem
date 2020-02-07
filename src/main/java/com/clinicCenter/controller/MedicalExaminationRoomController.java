@@ -6,6 +6,7 @@ import com.clinicCenter.model.OperationRoom;
 import com.clinicCenter.service.MedicalExaminationRoomService;
 import com.clinicCenter.service.MedicalExaminationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -26,17 +27,20 @@ public class MedicalExaminationRoomController {
     }
 
     @DeleteMapping(value = "/medicalExamRooms/removeRoom/{id}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void removeById(@PathVariable Long id) {
         MedicalExaminationRoom room = this.medicalExaminationRoomService.getById(id);
         this.medicalExaminationRoomService.removeById(id);
     }
 
     @PutMapping("/medicalExamRooms")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public int updateMedicalExamRoom( @RequestBody MedicalExaminationRoom room) {
         return medicalExaminationRoomService.updateRoom(room);
     }
 
     @PostMapping("/medicalExamRooms")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void addMedicalExamRoom(@RequestBody MedicalExaminationRoom room){
         medicalExaminationRoomService.save(room);
     }

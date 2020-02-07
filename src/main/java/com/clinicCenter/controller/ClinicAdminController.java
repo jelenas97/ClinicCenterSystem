@@ -10,6 +10,7 @@ import com.clinicCenter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,21 +35,25 @@ public class ClinicAdminController {
     }
 
     @DeleteMapping(value = "/deleteClinicAdmin/{id}")
+    @PreAuthorize("hasRole('CLINIC_CENTER_ADMIN') or hasRole('CLINIC_CENTER_ADMIN_SUPER')")
     public void deleteById(@PathVariable Long id){
         clinicAdministratorService.delete(id);
     }
 
     @GetMapping(value = "/clinicAdministrator/{id}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public User getById(@PathVariable Long id) {
         return userService.getById(id);
     }
 
     @PutMapping("/clinicAdministrator")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public int updateMedicalStaff( @RequestBody UserMapper user) {
         return userService.updateUser(user);
     }
 
     @PostMapping("/addClinicAdmin/{clinic}")
+    @PreAuthorize("hasRole('CLINIC_CENTER_ADMIN') or hasRole('CLINIC_CENTER_ADMIN_SUPER')")
     public void save(@RequestBody ClinicAdministrator clinicAdministrator, @PathVariable Clinic clinic){
         List<Authority> authorities = authorityService.findByName("ROLE_CLINIC_ADMIN");
         String passwordEnc = passwordEncoder.encode(clinicAdministrator.getPassword());

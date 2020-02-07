@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:4200")
 public class NurseController {
 
-    @GetMapping("/auth/nurseHomePage/{id-}")
-    public void nurseHomePage(){
-        System.out.println("usla seka");
-    }
+
 
 }
