@@ -39,7 +39,6 @@ public class MedicalExaminationRequest {
     @Column
     private Double duration;
 
-    //@JsonIgnore
     @JoinColumn(name = "clinic_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Clinic clinic;
@@ -47,12 +46,10 @@ public class MedicalExaminationRequest {
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
-    //@JsonIgnore
     private Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")
-    //@JsonIgnore
     private Doctor doctor;
 
     @Column

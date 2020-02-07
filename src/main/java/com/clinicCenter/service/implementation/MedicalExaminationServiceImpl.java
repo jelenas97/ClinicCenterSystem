@@ -47,12 +47,6 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
 
     int[] daysInAMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-
-
-
-
-
-
     @Override
     public void saveExamination(Date date, Double price, Double duration, Double discount, Long roomId, Long clinicId, Long doctorId, Long patientId, Long typeId, Long requestId, Boolean predefined) {
 
@@ -144,7 +138,6 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
                 "\n  ";
 
         emailService.sendMailToUser(examination.getPatient().getEmail(), message, "Automated mail : You have scheduled examination");
-
     }
 
     @Override

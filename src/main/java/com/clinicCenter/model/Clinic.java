@@ -38,5 +38,6 @@ public class Clinic {
 
     @Column
     private Integer timesRated = 0;
+
 }
 

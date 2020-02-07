@@ -13,7 +13,7 @@ public interface ClinicService {
 
     void rateClinic(Long id, Integer number);
 
-    Set<ClinicMapper> getSearchedClinics(Long typeName);
+    Collection<Clinic> getSearchedClinics(Long typeName);
 
     Clinic findByName(String clinicName);
 
@@ -21,9 +21,9 @@ public interface ClinicService {
 
     void updateClinic(Clinic clinic);
 
-    Set<ClinicMapper> getSearchedClinicsTwo(Long typeName, Double clinicRating);
+    Collection<Clinic> getSearchedClinicsTwo(Long typeName, Double clinicRating);
 
-    Set<ClinicMapper> getSearchedClinicsThree(Long typeName, String clinicName);
+    Collection<Clinic> getSearchedClinicsThree(Long typeName, String clinicName);
 
-    Set<ClinicMapper> getSearchedClinicsFour(Long typeName, String clinicName, Double clinicRating);
+    Collection<Clinic> getSearchedClinicsFour(Long typeName, String clinicName, Double clinicRating);
 }

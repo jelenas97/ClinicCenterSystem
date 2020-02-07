@@ -85,6 +85,7 @@ public abstract class User implements UserDetails {
         return null;
     }
 
+
     public String getEmail() {
         return this.email;
     }

@@ -4,6 +4,7 @@ import com.clinicCenter.dto.MedicalReportDto;
 import com.clinicCenter.model.*;
 import com.clinicCenter.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class MedicalReportController {
     private final MedicalExaminationService medicalExaminationService;
 
     @PostMapping("/medicalReport/{id}")
+    @PreAuthorize("hasRole('DOCTOR')")
     public void save(@RequestBody MedicalReport medicalReport, @PathVariable Long id){
         MedicalReport newMedicalReport = new MedicalReport();
         Diagnosis diagnosis = null;

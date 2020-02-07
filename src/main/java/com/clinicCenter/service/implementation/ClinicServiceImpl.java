@@ -60,23 +60,22 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
-    public Set<ClinicMapper> getSearchedClinics(Long typeName) {
-        System.out.println(typeName + "ajssssssssssss");
+    public Collection<Clinic> getSearchedClinics(Long typeName) {
         return clinicRepository.getSearchedClinics(typeName);
     }
 
     @Override
-    public Set<ClinicMapper> getSearchedClinicsTwo(Long typeName, Double clinicRating) {
+    public Collection<Clinic> getSearchedClinicsTwo(Long typeName, Double clinicRating) {
         return clinicRepository.getSearchedClinicsTwo(typeName, clinicRating);
     }
 
     @Override
-    public Set<ClinicMapper> getSearchedClinicsThree(Long typeName, String clinicName) {
+    public Collection<Clinic> getSearchedClinicsThree(Long typeName, String clinicName) {
         return clinicRepository.getSearchedClinicsThree(typeName, clinicName);
     }
 
     @Override
-    public Set<ClinicMapper> getSearchedClinicsFour(Long typeName, String clinicName, Double clinicRating) {
+    public Collection<Clinic> getSearchedClinicsFour(Long typeName, String clinicName, Double clinicRating) {
         return clinicRepository.getSearchedClinicsFour(typeName, clinicName, clinicRating);
     }
 

@@ -4,6 +4,7 @@ import com.clinicCenter.model.Medicament;
 import com.clinicCenter.service.MedicamentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class MedicamentController {
     private final MedicamentService medicamentService;
 
     @PostMapping("/medicament")
+    @PreAuthorize("hasRole('CLINIC_CENTER_ADMIN') or hasRole('CLINIC_CENTER_ADMIN_SUPER')")
     public void addMedicament(@RequestBody Medicament medicament){
         medicamentService.save(medicament);
     }

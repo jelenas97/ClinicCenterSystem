@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.JsonPath;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -15,18 +16,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
-@RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
 public class MedicalExaminationController {
 
-    private final UserService userService;
-    private final MedicalExaminationService medicalExaminationService;
-    private final MedicalExaminationRoomService medicalExaminationRoomService;
-
-
-
-
-
+    @Autowired
+    private MedicalExaminationService medicalExaminationService;
 
     @GetMapping("medicalExaminations/doctor/{id}")
     public Collection<MedicalExamination> getExaminationsFromRoomDoctor(@PathVariable Long id) {
@@ -62,13 +56,11 @@ public class MedicalExaminationController {
 
     @PutMapping("/auth/confirmScheduledExamination/{id}")
     public void confirmScheduledExamination(@PathVariable Long id) {
-        System.out.println("Potvrdjujem pregled");
         medicalExaminationService.confirmScheduledExamination(id);
     }
 
     @DeleteMapping("/auth/declineScheduledExamination/{id}")
     public void declineScheduledExamination(@PathVariable Long id) {
-        System.out.println("Odbijam pregled");
         medicalExaminationService.declineScheduledExamination(id);
     }
 
@@ -81,6 +73,7 @@ public class MedicalExaminationController {
 
 
     @PostMapping("savePredefinedMedicalExamination/{date}/{typeId}/{duration}/{price}/{doctorId}/{roomId}/{discount}/{term}/{clinicId}")
+    @PreAuthorize("hasRole('CLINIC_ADMIN')")
     public void savePredefinedMedicalExamination(@PathVariable String date, @PathVariable Long typeId, @PathVariable Double duration, @PathVariable Double price,
                                                  @PathVariable Long doctorId, @PathVariable Long roomId, @PathVariable Double discount, @PathVariable String term,
                                                  @PathVariable Long clinicId) throws ParseException {
@@ -110,6 +103,7 @@ public class MedicalExaminationController {
     }
 
     @PutMapping("schedulePredefinedMedicalExamination/{examinationId}/{patientId}")
+    @PreAuthorize("hasRole('PATIENT')")
     public void schedulePredefinedMedicalExamination(@PathVariable Long examinationId, @PathVariable Long patientId) {
         medicalExaminationService.schedulePredefinedMedicalExamination(examinationId, patientId);
     }

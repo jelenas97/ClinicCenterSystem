@@ -45,22 +45,21 @@ public class MedicalExaminationRequestRepositoryTest {
         Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(TEST_DATE);
 
         Clinic clinic = new Clinic(TEST_NEW_CLINIC_ID, TEST_NEW_CLINIC_NAME, TEST_NEW_CLINIC_ADDRESS, TEST_NEW_CLINIC_CITY, TEST_NEW_CLINIC_DESCRIPTION, TEST_NEW_CLINIC_AVERAGE_RATING, TEST_NEW_CLINIC_TIMES_RATED);
-        Doctor doctor = new Doctor("Marko", "Markovic");
-        doctor.setId(3L);
+        Doctor doctor = new Doctor("Milos", "Ivanovic");
+        doctor.setId(5L);
 
-        Patient patient = new Patient("Doktoe", "Doktoric");
-        patient.setId(1L);
+        Patient patient = new Patient("Ivana", "Stojkovic");
+        patient.setId(18L);
 
         MedicalExaminationRequest newReq = new MedicalExaminationRequest(type, date, clinic, doctor, patient);
         newReq.setId(1L);
 
         MedicalExaminationRequest requestSaved = this.medicalExaminationRequestRepository.save(newReq);
-        // testEntityManager.flush();
 
         MedicalExaminationRequest request = medicalExaminationRequestRepository.getOne(requestSaved.getId());
 
         assertNotNull(request);
-        Long id = 3L;
+        Long id = 5L;
         assertEquals(id, request.getDoctor().getId());
     }
 }
