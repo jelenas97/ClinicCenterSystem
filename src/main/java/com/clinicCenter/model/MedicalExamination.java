@@ -55,11 +55,11 @@ public class MedicalExamination {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "met_id")
     private MedicalExaminationType type;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "mer_id")
     private MedicalExaminationRoom medicalExaminationRoom;
 

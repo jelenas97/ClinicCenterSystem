@@ -81,4 +81,9 @@ public interface MedicalExaminationRepository extends JpaRepository<MedicalExami
 
     @Query(value = "SELECT * FROM db.medical_examination me WHERE me.id = :examinationId", nativeQuery = true)
     MedicalExamination getOneExamination(Long examinationId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE db.medical_examination me SET me.finished = TRUE WHERE me.id = :id", nativeQuery = true)
+    void finishExam(Long id);
 }
