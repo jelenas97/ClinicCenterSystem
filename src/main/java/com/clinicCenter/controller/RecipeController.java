@@ -30,7 +30,9 @@ public class RecipeController {
 
     @GetMapping("/validate/{id}")
     public void validate(@PathVariable Long id){
-        recipeService.validate(id);
+        Recipe recipe = recipeService.getById(id);
+        recipe.setValidated(true);
+        recipeService.save(recipe);
     }
 
     @DeleteMapping ("/allRecipes/removeRecipe/{id}")

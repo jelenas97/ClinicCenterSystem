@@ -36,11 +36,13 @@ public class MedicalReportServiceImpl implements MedicalReportService {
     @Override
     public MedicalReportDto getById(Long id) {
         MedicalReport medicalReport = medicalReportRepository.findById(id).get();
-        MedicalReportDto medicalReportDto = new MedicalReportDto();
-        medicalReportDto.setReport(medicalReport.getReport());
-        medicalReportDto.setTherapy(medicalReport.getTherapy());
-        medicalReportDto.setPatientId(medicalReport.getMedicalExamination().getPatient().getId());
-        medicalReportDto.setDoctorId(medicalReport.getMedicalExamination().getDoctor().getId());
+
+        MedicalReportDto medicalReportDto = MedicalReportDto.builder()
+                .report(medicalReport.getReport())
+                .therapy(medicalReport.getTherapy())
+                .patientId(medicalReport.getMedicalExamination().getPatient().getId())
+                .doctorId(medicalReport.getMedicalExamination().getDoctor().getId())
+                .build();
 
         if(medicalReport.getMedicament() != null) {
             medicalReportDto.setMedicamentId(medicalReport.getMedicament().getId());
