@@ -40,6 +40,8 @@ public class AnnualLeaveRequestServiceImpl implements AnnualLeaveRequestService 
         return annualLeaveRequestRepository.getAllAbsenceRequest(id);
     }
 
-
-
+    @Override
+    public void approve(Long id) {
+        annualLeaveRequestRepository.approve(id);
+    }
 }

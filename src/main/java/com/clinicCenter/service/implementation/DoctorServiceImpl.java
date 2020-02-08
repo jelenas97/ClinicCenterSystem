@@ -40,7 +40,12 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Integer hasExam(Long id) {
-        return doctorRepository.hasExam(id);
+        int all = 0;
+        all += doctorRepository.hasExam(id);
+        all += doctorRepository.hasExamRequest(id);
+        all += doctorRepository.hasOperation(id);
+        all += doctorRepository.hasOperationRequest(id);
+        return all;
     }
 
     @Override

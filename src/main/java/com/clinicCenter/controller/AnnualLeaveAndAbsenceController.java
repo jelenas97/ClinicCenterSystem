@@ -49,15 +49,17 @@ public class AnnualLeaveAndAbsenceController {
         return requests;
     }
 
-    @PostMapping("/sendApproveMail")
+    @PostMapping("/sendApproveMail/{id}")
     @PreAuthorize("hasRole('CLINIC_ADMIN')")
-    public void sendApproveMail(@RequestBody AnnualLeaveRequest request){
-        User user = userService.getById(request.getUserId());
+    public void sendApproveMail(@PathVariable Long id) {
+        AnnualLeaveRequest annualLeaveRequest = annualLeaveRequestService.getById(id);
+        Doctor user = (Doctor) userService.getById(annualLeaveRequest.getUser().getId());
         emailService.sendMailToUser(user.getEmail(),"Hello Dear, "+ user.getFirstName() + " " + user.getLastName() +
-                                                        " your request for " + request.getFlag() + " from " +request.getLeaveDate()
-                                                        +" until "+ request.getReturnDate()
+                                                        " your request for " + annualLeaveRequest.getFlag() + " from " +annualLeaveRequest.getLeaveDate()
+                                                        +" until "+ annualLeaveRequest.getReturnDate()
                                                         + " is approved. Have a great time!", "Automated mail");
-        annualLeaveRequestService.delete(request.getId());
+
+        annualLeaveRequestService.approve(annualLeaveRequest.getId());
     }
 
 

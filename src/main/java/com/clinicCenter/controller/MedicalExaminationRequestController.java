@@ -67,14 +67,16 @@ public class MedicalExaminationRequestController {
 
     @Scheduled(cron = "59 59 23 * * ?")
     public void automaticSchedule() {
-        System.out.println("Automatska fja");
-        List<MedicalExaminationRequest> allRequests = medicalExaminationRequestService.getAllExamsRequests();
+        System.out.println("Automatska fja pregledi");
+        int numberOfAllRequests = medicalExaminationRequestService.getAllExamsRequests().size();
 
-        for (MedicalExaminationRequest r : allRequests) {
-            List<MedicalExaminationRoom> availableRooms = medicalExaminationRoomService.getAvailableRooms(r.getClinic().getId(), r.getDate());
+        for (int i = 0; i < numberOfAllRequests; i++) {
+            List<MedicalExaminationRequest> allRequests = medicalExaminationRequestService.getAllExamsRequests();
+            MedicalExaminationRequest oneRequest = allRequests.get(0);
+            List<MedicalExaminationRoom> availableRooms = medicalExaminationRoomService.getAvailableRooms(oneRequest.getClinic().getId(), oneRequest.getDate());
             try {
-                medicalExaminationService.saveExamination(r.getDate(), r.getPrice(), r.getDuration(), r.getDiscount(), availableRooms.get(0).getId(),
-                        r.getClinic().getId(), r.getDoctor().getId(), r.getPatient().getId(), r.getType().getId(), r.getId(), false);
+                medicalExaminationService.saveExamination(oneRequest.getDate(), oneRequest.getPrice(), oneRequest.getDuration(), oneRequest.getDiscount(), availableRooms.get(0).getId(),
+                        oneRequest.getClinic().getId(), oneRequest.getDoctor().getId(), oneRequest.getPatient().getId(), oneRequest.getType().getId(), oneRequest.getId(), false);
 
             } catch (IndexOutOfBoundsException ioobe) {
                 List<MedicalExaminationRoom> availableRooms2;
@@ -82,14 +84,14 @@ public class MedicalExaminationRequestController {
                 Date newDate;
                 do {
                     Calendar c = Calendar.getInstance();
-                    c.setTime(r.getDate());
+                    c.setTime(oneRequest.getDate());
                     c.add(Calendar.DATE, addDays);
                     newDate = c.getTime();
-                    availableRooms2 = medicalExaminationRoomService.getAvailableRooms(r.getClinic().getId(), newDate);
+                    availableRooms2 = medicalExaminationRoomService.getAvailableRooms(oneRequest.getClinic().getId(), newDate);
                     addDays++;
                 } while (availableRooms2.size() == 0);
-                medicalExaminationService.saveExamination(newDate, r.getPrice(), r.getDuration(), r.getDiscount(), availableRooms2.get(0).getId(),
-                        r.getClinic().getId(), r.getDoctor().getId(), r.getPatient().getId(), r.getType().getId(), r.getId(), false);
+                medicalExaminationService.saveExamination(newDate, oneRequest.getPrice(), oneRequest.getDuration(), oneRequest.getDiscount(), availableRooms2.get(0).getId(),
+                        oneRequest.getClinic().getId(), oneRequest.getDoctor().getId(), oneRequest.getPatient().getId(), oneRequest.getType().getId(), oneRequest.getId(), false);
 
             }
         }

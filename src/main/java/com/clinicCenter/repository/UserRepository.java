@@ -67,7 +67,12 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "SELECT COUNT(*) FROM db.medical_examination me WHERE me.confirmed = 1 and me.doctor_id = :id", nativeQuery = true)
     Integer hasExam(Long id);
 
-    @Query(value = "SELECT * FROM db.users u WHERE u.type = 'DO' AND u.clinic_id = :clinicId AND u.id != :doctorId AND u.id not in (SELECT me.doctor_id FROM db.medical_examination me WHERE me.date BETWEEN :date1 AND :date2)", nativeQuery = true)
+    @Query(value = "SELECT * FROM db.users u WHERE u.type = 'DO' AND u.clinic_id = :clinicId AND u.id != :doctorId" +
+            " AND u.id not in (SELECT me.doctor_id FROM db.medical_examination me WHERE me.date BETWEEN :date1 AND :date2)" +
+            " AND u.id not in (SELECT o.doctor_id FROM db.operation o WHERE o.date BETWEEN :date1 AND :date2)" +
+            " AND u.id not in (SELECT mer.doctor_id FROM db.medical_examination_request mer WHERE mer.date BETWEEN :date1 AND :date2)" +
+            " AND u.id not in (SELECT opq.doctor_id FROM db.operation_request opq WHERE opq.date BETWEEN :date1 AND :date2)" +
+            " AND u.id not in (SELECT uu.id FROM db.users uu INNER JOIN db.doctors_at_operation dao ON uu.id = dao.doctor_id WHERE dao.operation_id not in (SELECT oo.id FROM db.operation oo WHERE oo.date BETWEEN :date1 AND :date2))", nativeQuery = true)
     ArrayList<User> getAvailableDoctorsForOperation(Date date1, Date date2, Long clinicId, Long doctorId);
 
     @Query(value = "SELECT * FROM users u WHERE u.clinic_id = :id AND u.id in (SELECT det.doctor_id FROM doctor_examination_types det WHERE det.type_id = :selectedOption) AND u.id NOT IN (SELECT al.user_id FROM db.annual_leave_request al WHERE :datee BETWEEN al.leave_date AND al.return_date)", nativeQuery = true)

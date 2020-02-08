@@ -51,6 +51,7 @@ public class MedicalReportController {
         newMedicalReport.setTherapy(medicalReport.getTherapy());
 
         medicalReportService.save(newMedicalReport);
+        medicalExaminationService.finishExam(medicalExamination.getId());
     }
 
     @GetMapping("/editMedicalReport/{id}")

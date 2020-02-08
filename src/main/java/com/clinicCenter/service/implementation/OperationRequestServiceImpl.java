@@ -13,6 +13,7 @@ import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -42,12 +43,15 @@ public class OperationRequestServiceImpl implements OperationRequestService {
 
     @Override
     public void automaticSchedule() {
-        Collection<OperationRequest> allRequests = this.getAllOperationRequests();
+        int numberOfAllRequests = this.getAllOperationRequests().size();
 
-        for (OperationRequest r : allRequests) {
-            List<OperationRoom> availableRooms = operationRoomRepository.getAvailableRooms(r.getClinic().getId(), r.getDate());
+        for (int i = 0; i < numberOfAllRequests; i++) {
+            List<OperationRequest> allRequests = operationRequestRepository.findAll();
+            OperationRequest oneRequest = allRequests.get(0);
+            List<OperationRoom> availableRooms = operationRoomRepository.getAvailableRooms(oneRequest.getClinic().getId(), oneRequest.getDate());
+            System.out.println(availableRooms);
             try {
-                operationService.saveOperation(r, r.getDate(), 10000.0, 0.0, availableRooms.get(0).getId(), r.getId(), null);
+                operationService.saveOperation(oneRequest, oneRequest.getDate(), 10000.0, 0.0, availableRooms.get(0).getId(), oneRequest.getId(), null);
 
             } catch (IndexOutOfBoundsException ioobe) {
                 List<OperationRoom> availableRooms2;
@@ -55,13 +59,13 @@ public class OperationRequestServiceImpl implements OperationRequestService {
                 Date newDate;
                 do {
                     Calendar c = Calendar.getInstance();
-                    c.setTime(r.getDate());
+                    c.setTime(oneRequest.getDate());
                     c.add(Calendar.DATE, addDays);
                     newDate = c.getTime();
-                    availableRooms2 = operationRoomRepository.getAvailableRooms(r.getClinic().getId(), newDate);
+                    availableRooms2 = operationRoomRepository.getAvailableRooms(oneRequest.getClinic().getId(), newDate);
                     addDays++;
                 } while (availableRooms2.size() == 0);
-                operationService.saveOperation(r, r.getDate(), 10000.0, 0.0, availableRooms2.get(0).getId(), r.getId(), null);
+                operationService.saveOperation(oneRequest, newDate, 10000.0, 0.0, availableRooms2.get(0).getId(), oneRequest.getId(), null);
 
             }
         }

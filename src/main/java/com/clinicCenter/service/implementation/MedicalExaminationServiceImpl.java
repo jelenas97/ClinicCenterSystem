@@ -449,4 +449,9 @@ public class MedicalExaminationServiceImpl implements MedicalExaminationService 
     public Collection<MedicalExamination> getAllExaminationsFromRoom(Long roomId) {
         return medicalExaminationRepository.getAllFromRoom(roomId);
     }
+
+    @Override
+    public void finishExam(Long id) {
+        medicalExaminationRepository.finishExam(id);
+    }
 }

@@ -63,6 +63,7 @@ public class RegistrationRequestController {
         List<Authority> auth = authService.findByName("ROLE_PATIENT");
         patient.setAuthorities(auth);
         patient.setMedicalRecord(medicalRecord);
+        patient.setPasswordChanged(false);
         medicalRecordService.save(medicalRecord);
         userService.save(patient);
         emailService.sendMailToUser(patient.getEmail(), "http://localhost:4200/activateUser/" + patient.getId(), "Automated mail : Activate account");
