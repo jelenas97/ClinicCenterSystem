@@ -82,6 +82,8 @@ INSERT INTO `db`.`diagnosis` (`id`, `code`, `description`, `group`, `name`) VALU
 
 INSERT INTO `db`.`registration_request` (`id`, `address`, `city`, `country`, `date`, `email`, `first_name`, `last_name`, `password`, `phone`, `ssn`) VALUES ('1', 'Lasla Gala', 'Novi Sad', 'Srbija', '2020-02-29 19:00:00.000000', 'mitar@gmail.com', 'Mitar', 'Sumar', '$2a$10$DPpa3Slt3jcwkynr.9WSaO70xTGYYK8iDlX5H89fry1vHxlLUPE0C', '101010101', '3030303030303');
 INSERT INTO `db`.`registration_request` (`id`, `address`, `city`, `country`, `date`, `email`, `first_name`, `last_name`, `password`, `phone`, `ssn`) VALUES ('2', 'Mise Dimitrijevica', 'Novi Sad', 'Srbija', '2020-02-27 19:00:00.000000', 'jelica@gmail.com', 'Jelica', 'Jelic', '$2a$10$DPpa3Slt3jcwkynr.9WSaO70xTGYYK8iDlX5H89fry1vHxlLUPE0C', '789456123', '7478747874787');
+INSERT INTO `db`.`registration_request` (`id`, `address`, `city`, `country`, `date`, `email`, `first_name`, `last_name`, `password`, `phone`, `ssn`) VALUES ('3', 'Alekse Santica', 'Novi Sad', 'Srbija', '2020-02-29 19:00:00.000000', 'jovan@gmail.com', 'Jovan', 'Jovanovic', '$2a$10$DPpa3Slt3jcwkynr.9WSaO70xTGYYK8iDlX5H89fry1vHxlLUPE0C', '123456789', '1452145214521');
+INSERT INTO `db`.`registration_request` (`id`, `address`, `city`, `country`, `date`, `email`, `first_name`, `last_name`, `password`, `phone`, `ssn`) VALUES ('4', 'Zivojina Misica', 'Beograd', 'Srbija', '2020-03-03 19:00:00.000000', 'lazar@gmail.com', 'Lazar', 'Lazic', '$2a$10$DPpa3Slt3jcwkynr.9WSaO70xTGYYK8iDlX5H89fry1vHxlLUPE0C', '898989898', '7575484875487');
 
 
 INSERT INTO `db`.`operation_room` (`id`, `name`, `number`, `clinic_id`) VALUES ('1', 'Sala za hirurhiju', '101', '1');
@@ -97,9 +99,11 @@ INSERT INTO `db`.`operation_room` (`id`, `name`, `number`, `clinic_id`) VALUES (
 INSERT INTO `db`.`operation_room` (`id`, `name`, `number`, `clinic_id`) VALUES ('11', 'Sala10', '210', '4');
 INSERT INTO `db`.`operation_room` (`id`, `name`, `number`, `clinic_id`) VALUES ('12', 'Sala88', '221', '4');
 
-INSERT INTO `db`.`operation_request` (`id`, `date`, `duration`, `clinic_id`, `doctor_id`, `patient_id`) VALUES ('1', '2019-12-03 19:00:00.000000', '30', '1', '5', '18');
-INSERT INTO `db`.`operation_request` (`id`, `date`, `duration`, `clinic_id`, `doctor_id`, `patient_id`) VALUES ('2', '2020-03-05 19:00:00.000000', '30', '2', '6', '19');
-INSERT INTO `db`.`operation_request` (`id`, `date`, `duration`, `clinic_id`, `doctor_id`, `patient_id`) VALUES ('3', '2020-03-05 19:00:00.000000', '30', '4', '10', '18');
+INSERT INTO `db`.`operation_request` (`id`, `date`, `duration`, `clinic_id`, `doctor_id`, `patient_id`) VALUES ('1', '2019-12-03 16:00:00.000000', '30', '1', '5', '18');
+INSERT INTO `db`.`operation_request` (`id`, `date`, `duration`, `clinic_id`, `doctor_id`, `patient_id`) VALUES ('2', '2020-03-05 10:00:00.000000', '30', '2', '6', '19');
+INSERT INTO `db`.`operation_request` (`id`, `date`, `duration`, `clinic_id`, `doctor_id`, `patient_id`) VALUES ('3', '2020-03-05 09:30:00.000000', '30', '4', '10', '18');
+INSERT INTO `db`.`operation_request` (`id`, `date`, `duration`, `clinic_id`, `doctor_id`, `patient_id`) VALUES ('4', '2020-03-25 14:30:00.000000', '30', '1', '5', '18');
+INSERT INTO `db`.`operation_request` (`id`, `date`, `duration`, `clinic_id`, `doctor_id`, `patient_id`) VALUES ('5', '2020-03-21 11:00:00.000000', '30', '4', '8', '19');
 
 INSERT INTO `db`.`medicament` (`id`, `code`, `description`, `name`, `on_prescription`, `purpose`) VALUES ('1', '123', 'Ljek za sve', 'Kafetin', b'1', 'Za bolove');
 INSERT INTO `db`.`medicament` (`id`, `code`, `description`, `name`, `on_prescription`, `purpose`) VALUES ('2', '188', 'Ljek za gripu', 'Fervex', b'0', 'Za gripu');
@@ -134,17 +138,46 @@ INSERT INTO `db`.`medical_examination_room` (`id`, `name`, `number`, `clinic_id`
 INSERT INTO `db`.`medical_examination_room` (`id`, `name`, `number`, `clinic_id`) VALUES ('5', 'Sobica za pregeldic', '404', '3');
 INSERT INTO `db`.`medical_examination_room` (`id`, `name`, `number`, `clinic_id`) VALUES ('6', 'Sobica', '55', '4');
 
-INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('1', '2020-02-23 11:30:00.000000', '0', '30', '1000', '4', '9', '17', '1');
-INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('2', '2020-02-23 11:30:00.000000', '0', '30', '1000', '2', '6', '17', '3');
-INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('3', '2020-02-22 15:00:00.000000', '0', '30', '1000', '3', '7', '18', '2');
-INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('4', '2020-02-21 11:00:00.000000', '0', '30', '1000', '2', '6', '18', '1');
-INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('5', '2020-02-19 13:00:00.000000', '0', '30', '1000', '4', '10', '18', '2');
-INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('6', '2020-02-22 18:00:00.000000', '0', '30', '1000', '1', '5', '19', '1');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('1', '2020-02-29 11:30:00.000000', '0', '30', '1000', '4', '9', '17', '1');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('2', '2020-03-01 11:30:00.000000', '0', '30', '1000', '2', '6', '17', '3');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('3', '2020-03-22 15:00:00.000000', '0', '30', '1000', '3', '7', '18', '2');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('4', '2020-03-21 11:00:00.000000', '0', '30', '1000', '2', '6', '18', '1');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('5', '2020-03-10 13:30:00.000000', '0', '30', '1000', '4', '10', '18', '2');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('6', '2020-03-02 18:00:00.000000', '0', '30', '1000', '1', '5', '19', '1');
 
 
 INSERT INTO `db`.`medical_examination` (`id`, `clinic_rated`, `confirmed`, `date`, `discount`, `doctor_rated`, `duration`, `finished`, `predefined`, `price`, `clinic_id`, `doctor_id`, `mer_id`, `met_id`) VALUES ('1', b'0', b'0', '2020-02-22 17:00:00.000000', '1', b'0', '30', b'0', b'1', '1000', '1', '5', '1','1');
 INSERT INTO `db`.`medical_examination` (`id`, `clinic_rated`, `confirmed`, `date`, `discount`, `doctor_rated`, `duration`, `finished`, `predefined`, `price`, `clinic_id`, `doctor_id`, `mer_id`, `patient_id`, `met_id`) VALUES ('2', b'0', b'1', '2020-02-23 17:00:00.000000', '1', b'0', '30', b'0', b'1', '1000', '1', '5', '1','18','1');
 INSERT INTO `db`.`medical_examination` (`id`, `clinic_rated`, `confirmed`, `date`, `discount`, `doctor_rated`, `duration`, `finished`, `predefined`, `price`, `clinic_id`, `doctor_id`, `mer_id`, `patient_id`, `met_id`) VALUES ('4', b'0', b'1', '2020-02-16 18:00:00.000000', '0', b'0', '30', b'0', b'0', '1500', '1', '5', '2', '19','1');
-INSERT INTO `db`.`medical_examination` (`id`, `clinic_rated`, `confirmed`, `date`, `discount`, `doctor_rated`, `duration`, `finished`, `predefined`, `price`, `clinic_id`, `doctor_id`, `mer_id`, `patient_id`, `met_id`) VALUES ('3', b'0', b'0', '2020-02-16 18:00:00.000000', '0', b'0', '30', b'0', b'0', '1500', '1', '5', '2', '19','1');
+INSERT INTO `db`.`medical_examination` (`id`, `clinic_rated`, `confirmed`, `date`, `discount`, `doctor_rated`, `duration`, `finished`, `predefined`, `price`, `clinic_id`, `doctor_id`, `mer_id`, `patient_id`, `met_id`) VALUES ('3', b'0', b'0', '2020-02-16 18:30:00.000000', '0', b'0', '30', b'0', b'0', '1500', '1', '5', '2', '19','1');
 
 
+INSERT INTO `db`.`annual_leave_request` (`id`, `approved`, `flag`, `leave_date`, `reason`, `return_date`, `user_id`) VALUES ('1', b'0', 'absence', '2020-03-22 17:00:00.000000', 'eto tako', '2020-03-25 17:00:00.000000', '5');
+INSERT INTO `db`.`annual_leave_request` (`id`, `approved`, `flag`, `leave_date`, `reason`, `return_date`, `user_id`) VALUES ('2', b'0', 'absence', '2020-03-20 17:00:00.000000', 'malo bi i ja', '2020-03-28 17:00:00.000000', '6');
+INSERT INTO `db`.`annual_leave_request` (`id`, `approved`, `flag`, `leave_date`, `reason`, `return_date`, `user_id`) VALUES ('3', b'0', 'absence', '2020-03-28 17:00:00.000000', 'odo odmorit', '2020-03-29 17:00:00.000000', '7');
+INSERT INTO `db`.`annual_leave_request` (`id`, `approved`, `flag`, `leave_date`, `reason`, `return_date`, `user_id`) VALUES ('4', b'0', 'vacation', '2020-03-15 17:00:00.000000', 'odo ', '2020-03-20 17:00:00.000000', '5');
+INSERT INTO `db`.`annual_leave_request` (`id`, `approved`, `flag`, `leave_date`, `reason`, `return_date`, `user_id`) VALUES ('5', b'0', 'vaction', '2020-03-13 17:00:00.000000', 'malko bi odmorio', '2020-03-16 17:00:00.000000', '10');
+INSERT INTO `db`.`annual_leave_request` (`id`, `approved`, `flag`, `leave_date`, `reason`, `return_date`, `user_id`) VALUES ('6', b'0','vacation', '2020-03-15 17:00:00.000000', 'molim vas jel smem', '2020-03-16 17:00:00.000000', '9');
+INSERT INTO `db`.`annual_leave_request` (`id`, `approved`, `flag`, `leave_date`, `reason`, `return_date`, `user_id`) VALUES ('7', b'0', 'absence', '2020-03-17 17:00:00.000000', 'pls', '2020-03-28 17:00:00.000000', '11');
+INSERT INTO `db`.`annual_leave_request` (`id`, `approved`, `flag`, `leave_date`, `reason`, `return_date`, `user_id`) VALUES ('8', b'0', 'absence', '2020-03-22 17:00:00.000000', 'odo na more', '2020-03-23 17:00:00.000000', '8');
+
+INSERT INTO `db`.`medical_report` (`id`, `report`, `therapy`, `diagnosis_id`, `medical_examination_id`, `medicament_id`) VALUES ('1', 'boljestan je', 'Malo po malo', '1', '4', '1');
+INSERT INTO `db`.`medical_report` (`id`, `report`, `therapy`, `diagnosis_id`, `medical_examination_id`, `medicament_id`) VALUES ('2', 'ovaj takodje bolesjiv', 'laganeze', '2', '3', '3');
+INSERT INTO `db`.`medical_report` (`id`, `report`, `medical_examination_id`) VALUES ('3', 'ovaj je zdrav', '1');
+INSERT INTO `db`.`medical_report` (`id`, `report`, `therapy`, `diagnosis_id`, `medical_examination_id`, `medicament_id`) VALUES ('4', 'boljestan u glavu', 'jednu tableticu dnevno', '4', '2', '4');
+
+INSERT INTO `db`.`operation` (`id`, `clinic_rated`, `date`, `discount`, `doctor_rated`, `duration`, `price`, `clinic_id`, `doctor_id`, `or_id`, `patient_id`) VALUES ('1', b'1', '2020-03-15 13:00:00.000000', '10', b'0', '30', '1000', '1', '5', '3', '17');
+INSERT INTO `db`.`operation` (`id`, `clinic_rated`, `date`, `discount`, `doctor_rated`, `duration`, `price`, `clinic_id`, `doctor_id`, `or_id`, `patient_id`) VALUES ('2', b'0', '2020-03-25 09:00:00.000000', '20', b'1', '30', '2000', '1', '6', '3', '19');
+INSERT INTO `db`.`operation` (`id`, `clinic_rated`, `date`, `discount`, `doctor_rated`, `duration`, `price`, `clinic_id`, `doctor_id`, `or_id`, `patient_id`) VALUES ('3', b'1', '2020-03-05 14:30:00.000000', '0', b'0', '30', '1500', '2', '7', '5', '17');
+INSERT INTO `db`.`operation` (`id`, `clinic_rated`, `date`, `discount`, `doctor_rated`, `duration`, `price`, `clinic_id`, `doctor_id`, `or_id`, `patient_id`) VALUES ('4', b'1', '2020-03-09 12:30:00.000000', '15', b'0', '30', '3000', '4', '8', '11', '19');
+INSERT INTO `db`.`operation` (`id`, `clinic_rated`, `date`, `discount`, `doctor_rated`, `duration`, `price`, `clinic_id`, `doctor_id`, `or_id`, `patient_id`) VALUES ('5', b'0', '2020-03-14 18:00:00.000000', '0', b'1', '30', '1500', '3', '9', '8', '18');
+
+INSERT INTO `db`.`doctors_at_operation` (`operation_id`, `doctor_id`) VALUES ('1', '5');
+INSERT INTO `db`.`doctors_at_operation` (`operation_id`, `doctor_id`) VALUES ('1', '6');
+INSERT INTO `db`.`doctors_at_operation` (`operation_id`, `doctor_id`) VALUES ('2', '7');
+INSERT INTO `db`.`doctors_at_operation` (`operation_id`, `doctor_id`) VALUES ('3', '10');
+
+INSERT INTO `db`.`recipe` (`id`, `description`, `medicament_name`, `validated`, `medicament_id`) VALUES ('1', 'Ovo je recepat', 'Kafetin', b'0', '1');
+INSERT INTO `db`.`recipe` (`id`, `description`, `medicament_name`, `validated`, `medicament_id`) VALUES ('2', 'Recepat 2', 'Fervex', b'0', '2');
+INSERT INTO `db`.`recipe` (`id`, `description`, `medicament_name`, `validated`, `medicament_id`) VALUES ('3', 'Receptic za svasta', 'Konjska Mast', b'0', '6');
+INSERT INTO `db`.`recipe` (`id`, `description`, `medicament_name`, `validated`, `medicament_id`) VALUES ('4', 'Overen recept', 'Andol', b'1', '5');

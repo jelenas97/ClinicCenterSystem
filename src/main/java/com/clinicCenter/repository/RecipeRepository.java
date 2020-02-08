@@ -22,8 +22,5 @@ public interface RecipeRepository extends JpaRepository<Recipe,Long> {
     List<Recipe> getAllUnvalidated();
 
     @Lock(LockModeType.PESSIMISTIC_READ)
-    @Transactional
-    @Modifying
-    @Query(value = "update Recipe r set r.validated = true where r.id = :id")
-    void validate(Long id);
+    Recipe save(Recipe recipe);
 }
