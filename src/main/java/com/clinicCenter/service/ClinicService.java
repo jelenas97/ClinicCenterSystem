@@ -1,10 +1,8 @@
 package com.clinicCenter.service;
 
 import com.clinicCenter.model.Clinic;
-import com.clinicCenter.model.ClinicMapper;
 
 import java.util.Collection;
-import java.util.Set;
 
 public interface ClinicService {
     void save(Clinic clinic);

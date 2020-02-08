@@ -142,6 +142,11 @@ public class UserController {
         return userService.getById(id);
     }
 
+    @GetMapping("/users")
+    public List<User> getUsers() {
+        return userService.getAll();
+    }
+
     @GetMapping("getAvailableDoctorsFromClinic/{adminId}")
     public Collection<User> getAvailableDoctors(@PathVariable Long adminId) {
         return userService.getDoctorsFromClinic(adminId);
