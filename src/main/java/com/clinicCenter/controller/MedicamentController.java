@@ -17,7 +17,7 @@ public class MedicamentController {
     private final MedicamentService medicamentService;
 
     @PostMapping("/medicament")
-    @PreAuthorize("hasRole('CLINIC_CENTER_ADMIN') or hasRole('CLINIC_CENTER_ADMIN_SUPER')")
+    @PreAuthorize("hasRole('CLINIC_CENTER_ADMIN') or hasRole('CLINIC_CENTER_ADMIN_SUPER') or hasRole('DOCTOR')")
     public void addMedicament(@RequestBody Medicament medicament){
         medicamentService.save(medicament);
     }

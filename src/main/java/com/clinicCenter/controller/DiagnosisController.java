@@ -16,7 +16,7 @@ public class DiagnosisController {
     private final DiagnosisService diagnosisService;
 
     @GetMapping("/allDiagnosis")
-    @PreAuthorize("hasRole('CLINIC_CENTER_ADMIN') or hasRole('CLINIC_CENTER_ADMIN_SUPER')")
+    @PreAuthorize("hasRole('CLINIC_CENTER_ADMIN') or hasRole('CLINIC_CENTER_ADMIN_SUPER') or hasRole('DOCTOR')")
     public List<Diagnosis> getAll(){
         return diagnosisService.getAll();
     }
