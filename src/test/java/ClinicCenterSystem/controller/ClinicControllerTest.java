@@ -94,7 +94,7 @@ public class ClinicControllerTest {
         Set<Clinic> clinics = new HashSet<>();
         clinics.add(new Clinic());
 
-        when(clinicService.getSearchedClinicsFour(1L, "Vla" , 8.0 )).thenReturn(clinics);
+        when(clinicService.getSearchedClinicsFour(1L, "Bel" , 0.0 )).thenReturn(clinics);
 
 
         mockMvc.perform(get(URL_SEARCH_CLINICS2))
@@ -102,7 +102,7 @@ public class ClinicControllerTest {
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize(1)));
 
-        verify(clinicService, times(1)).getSearchedClinicsFour(1L, "Vla" , 8.0 );
+        verify(clinicService, times(1)).getSearchedClinicsFour(1L, "Bel" , 0.0 );
 
     }
 }

@@ -35,10 +35,10 @@ public class ClinicServiceTest {
 
     @Test
     public void testGetAllClinics() {
-        Clinic clinic1 = new Clinic(1L,"Dom Bajic", "Hajduk Veljkova 1-9", "Novi Sad", "Ludara", 9.0, 2);
-        Clinic clinic2 = new Clinic(2L,"Dom Vlahovic", "Milosa Simovica", "Beograd", "Neludara", 8.5, 4);
-        Clinic clinic3 = new Clinic(1L,"Dom Culum", "Mile Simica", "Iscuruga", "Kkfdaf", 6.0, 1);
-        Clinic clinic4 = new Clinic(2L,"Dom Sajam", "Sole Misevica", "Indjija", "Sdfsdf", 7.5, 2);
+        Clinic clinic1 = new Clinic(1L,"KCV", "Danila Kisa", "Novi Sad", "Ovo je lepa klinika", 0.0, 0);
+        Clinic clinic2 = new Clinic(2L,"Bel Medic", "Viktora Igoa", "Beograd", "Ovo je klinika u Beogradu", 0.0, 0);
+        Clinic clinic3 = new Clinic(3L,"Nata", "Gospodar Jovanova", "Beograd", "Klinika za sve i svasta", 0.0, 0);
+        Clinic clinic4 = new Clinic(4L,"Poliklinika Panajotovic", "Dragise Cvetkovica", "Nis", "U nis", 0.0, 0);
         List<Clinic> clinics = new ArrayList<>();
         clinics.add(clinic1);
         clinics.add(clinic2);
@@ -57,8 +57,8 @@ public class ClinicServiceTest {
 
     @Test
     public void testGetSearchedClinics() {
-        Clinic clinic1 = new Clinic(1L,"Dom Bajic", "Hajduk Veljkova 1-9", "Novi Sad", "Ludara", 9.0, 2);
-        Clinic clinic2 = new Clinic(2L,"Dom Vlahovic", "Milosa Simovica", "Beograd", "Neludara", 8.5, 4);
+        Clinic clinic1 = new Clinic(1L,"KCV", "Danila Kisa", "Novi Sad", "Ovo je lepa klinika", 0.0, 0);
+        Clinic clinic2 = new Clinic(2L,"Bel Medic", "Viktora Igoa", "Beograd", "Ovo je klinika u Beogradu", 0.0, 0);
         Set<Clinic> clinics = new HashSet<Clinic>();
         clinics.add(clinic1);
         clinics.add(clinic2);
@@ -74,46 +74,46 @@ public class ClinicServiceTest {
 
     @Test
     public void testGetSearchedClinicsTwo() {
-        Clinic clinic1 = new Clinic(1L,"Dom Bajic", "Hajduk Veljkova 1-9", "Novi Sad", "Ludara", 9.0, 2);
+        Clinic clinic1 = new Clinic(1L,"KCV", "Danila Kisa", "Novi Sad", "Ovo je lepa klinika", 0.0, 0);
         Set<Clinic> clinics = new HashSet<Clinic>();
         clinics.add(clinic1);
 
-        Mockito.when(clinicRepositoryMocked.getSearchedClinicsTwo(1L, 8.7)).thenReturn(clinics);
+        Mockito.when(clinicRepositoryMocked.getSearchedClinicsTwo(1L, 0.0)).thenReturn(clinics);
 
-        Collection<Clinic> clinicsResult = clinicService.getSearchedClinicsTwo(1l, 8.7);
+        Collection<Clinic> clinicsResult = clinicService.getSearchedClinicsTwo(1l, 0.0);
         assertEquals(1, clinicsResult.size());
 
-        verify(clinicRepositoryMocked,times(1)).getSearchedClinicsTwo(1L, 8.7);
+        verify(clinicRepositoryMocked,times(1)).getSearchedClinicsTwo(1L, 0.0);
 
     }
 
     @Test
     public void testGetSearchedClinicsThree() {
-        Clinic clinic1 = new Clinic(2L,"Dom Vlahovic", "Milosa Simovica", "Beograd", "Neludara", 8.5, 4);
+        Clinic clinic1 = new Clinic(2L,"Bel Medic", "Viktora Igoa", "Beograd", "Ovo je klinika u Beogradu", 0.0, 0);
         Set<Clinic> clinics = new HashSet<Clinic>();
         clinics.add(clinic1);
 
-        Mockito.when(clinicRepositoryMocked.getSearchedClinicsThree(1L, "Vlah")).thenReturn(clinics);
+        Mockito.when(clinicRepositoryMocked.getSearchedClinicsThree(1L, "Bel")).thenReturn(clinics);
 
-        Collection<Clinic> clinicsResult = clinicService.getSearchedClinicsThree(1l, "Vlah");
+        Collection<Clinic> clinicsResult = clinicService.getSearchedClinicsThree(1l, "Bel");
         assertEquals(1, clinicsResult.size());
 
-        verify(clinicRepositoryMocked,times(1)).getSearchedClinicsThree(1L, "Vlah");
+        verify(clinicRepositoryMocked,times(1)).getSearchedClinicsThree(1L, "Bel");
 
     }
 
     @Test
     public void testGetSearchedClinicsFour() {
-        Clinic clinic1 = new Clinic(2L,"Dom Vlahovic", "Milosa Simovica", "Beograd", "Neludara", 8.5, 4);
+        Clinic clinic1 = new Clinic(2L,"Bel Medic", "Viktora Igoa", "Beograd", "Ovo je klinika u Beogradu", 0.0, 0);
         Set<Clinic> clinics = new HashSet<Clinic>();
         clinics.add(clinic1);
 
-        Mockito.when(clinicRepositoryMocked.getSearchedClinicsFour(1L, "Vlah", 8.0)).thenReturn(clinics);
+        Mockito.when(clinicRepositoryMocked.getSearchedClinicsFour(1L, "Bel", 0.0)).thenReturn(clinics);
 
-        Collection<Clinic> clinicsResult = clinicService.getSearchedClinicsFour(1l, "Vlah", 8.0);
+        Collection<Clinic> clinicsResult = clinicService.getSearchedClinicsFour(1l, "Bel", 0.0);
         assertEquals(1, clinicsResult.size());
 
-        verify(clinicRepositoryMocked,times(1)).getSearchedClinicsFour(1L, "Vlah", 8.0);
+        verify(clinicRepositoryMocked,times(1)).getSearchedClinicsFour(1L, "Bel", 0.0);
 
     }
 }

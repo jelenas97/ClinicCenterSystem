@@ -38,25 +38,25 @@ public class ClinicRepositoryTest {
     @Test
     public void testGetSearchedClinics() {
         Collection<Clinic> clinics = clinicRepository.getSearchedClinics(1L);
-        assertEquals(2, clinics.size());
+        assertEquals(4, clinics.size());
     }
 
     @Test
     public void testGetSearchedClinicsTwo() {
         Collection<Clinic> clinics = clinicRepository.getSearchedClinicsTwo(1L, 8.7);
-        assertEquals(1, clinics.size());
+        assertEquals(0, clinics.size());
     }
 
     @Test
     public void testGetSearchedClinicsThree() {
-        Collection<Clinic> clinics = clinicRepository.getSearchedClinicsThree(1L, "Vlah");
+        Collection<Clinic> clinics = clinicRepository.getSearchedClinicsThree(1L, "Bel");
         assertEquals(1, clinics.size());
     }
 
     @Test
     public void testGetSearchedClinicsFour() {
-        Collection<Clinic> clinics = clinicRepository.getSearchedClinicsFour(1L, "Vlah", 8.0);
-        assertEquals(1, clinics.size());
+        Collection<Clinic> clinics = clinicRepository.getSearchedClinicsFour(1L, "Bel", 8.0);
+        assertEquals(0, clinics.size());
     }
 
 

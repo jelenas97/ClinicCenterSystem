@@ -37,7 +37,7 @@ INSERT INTO `db`.`medical_record` (`id`, `blood_type`, `diopter`, `height`, `wei
 INSERT INTO `db`.`medical_record` (`id`) VALUES ('4');
 
 UPDATE `db`.`users` SET `medical_record_id` = '1' WHERE (`id` = '17');
-UPDATE `db`.`users` SET `type` = '2', `medical_record_id` = '2' WHERE (`id` = '18');
+UPDATE `db`.`users` SET `medical_record_id` = '2' WHERE (`id` = '18');
 UPDATE `db`.`users` SET `medical_record_id` = '3' WHERE (`id` = '19');
 
 INSERT INTO `db`.`authority` (`id`, `name`) VALUES ('1', 'ROLE_PATIENT');
