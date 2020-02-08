@@ -20,7 +20,7 @@ public class RegistrationRequest {
     @Column
     private Date date;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -44,6 +44,6 @@ public class RegistrationRequest {
     @Column(nullable = false)
     private String phone;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long ssn;
 }

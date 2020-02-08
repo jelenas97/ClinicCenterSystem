@@ -14,7 +14,7 @@ public class Diagnosis {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long code;
 
     @Column(nullable = false)

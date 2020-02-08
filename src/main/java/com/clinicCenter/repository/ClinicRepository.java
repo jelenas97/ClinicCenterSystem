@@ -1,9 +1,6 @@
 package com.clinicCenter.repository;
 
 import com.clinicCenter.model.Clinic;
-import com.clinicCenter.model.ClinicMapper;
-import com.clinicCenter.model.Doctor;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,9 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 @Repository
 public interface ClinicRepository extends JpaRepository<Clinic,Long> {
