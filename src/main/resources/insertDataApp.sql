@@ -37,7 +37,7 @@ INSERT INTO `db`.`medical_record` (`id`, `blood_type`, `diopter`, `height`, `wei
 INSERT INTO `db`.`medical_record` (`id`) VALUES ('4');
 
 UPDATE `db`.`users` SET `medical_record_id` = '1' WHERE (`id` = '17');
-UPDATE `db`.`users` SET `type` = '2', `medical_record_id` = '2' WHERE (`id` = '18');
+UPDATE `db`.`users` SET `medical_record_id` = '2' WHERE (`id` = '18');
 UPDATE `db`.`users` SET `medical_record_id` = '3' WHERE (`id` = '19');
 
 INSERT INTO `db`.`authority` (`id`, `name`) VALUES ('1', 'ROLE_PATIENT');
@@ -66,7 +66,7 @@ INSERT INTO `db`.`user_authority` (`user_id`, `authority_id`) VALUES ('13', '4')
 INSERT INTO `db`.`user_authority` (`user_id`, `authority_id`) VALUES ('14', '4');
 INSERT INTO `db`.`user_authority` (`user_id`, `authority_id`) VALUES ('15', '4');
 INSERT INTO `db`.`user_authority` (`user_id`, `authority_id`) VALUES ('16', '4');
-
+INSERT INTO `db`.`user_authority` (`user_id`, `authority_id`) VALUES ('17', '1');
 INSERT INTO `db`.`user_authority` (`user_id`, `authority_id`) VALUES ('18', '1');
 INSERT INTO `db`.`user_authority` (`user_id`, `authority_id`) VALUES ('19', '1');
 
@@ -134,6 +134,17 @@ INSERT INTO `db`.`medical_examination_room` (`id`, `name`, `number`, `clinic_id`
 INSERT INTO `db`.`medical_examination_room` (`id`, `name`, `number`, `clinic_id`) VALUES ('5', 'Sobica za pregeldic', '404', '3');
 INSERT INTO `db`.`medical_examination_room` (`id`, `name`, `number`, `clinic_id`) VALUES ('6', 'Sobica', '55', '4');
 
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('1', '2020-02-23 11:30:00.000000', '0', '30', '1000', '4', '9', '17', '1');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('2', '2020-02-23 11:30:00.000000', '0', '30', '1000', '2', '6', '17', '3');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('3', '2020-02-22 15:00:00.000000', '0', '30', '1000', '3', '7', '18', '2');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('4', '2020-02-21 11:00:00.000000', '0', '30', '1000', '2', '6', '18', '1');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('5', '2020-02-19 13:00:00.000000', '0', '30', '1000', '4', '10', '18', '2');
+INSERT INTO `db`.`medical_examination_request` (`id`, `date`, `discount`, `duration`, `price`, `clinic_id`, `doctor_id`, `patient_id`, `met_id`) VALUES ('6', '2020-02-22 18:00:00.000000', '0', '30', '1000', '1', '5', '19', '1');
 
+
+INSERT INTO `db`.`medical_examination` (`id`, `clinic_rated`, `confirmed`, `date`, `discount`, `doctor_rated`, `duration`, `finished`, `predefined`, `price`, `clinic_id`, `doctor_id`, `mer_id`, `met_id`) VALUES ('1', b'0', b'0', '2020-02-22 17:00:00.000000', '1', b'0', '30', b'0', b'1', '1000', '1', '5', '1','1');
+INSERT INTO `db`.`medical_examination` (`id`, `clinic_rated`, `confirmed`, `date`, `discount`, `doctor_rated`, `duration`, `finished`, `predefined`, `price`, `clinic_id`, `doctor_id`, `mer_id`, `patient_id`, `met_id`) VALUES ('2', b'0', b'1', '2020-02-23 17:00:00.000000', '1', b'0', '30', b'0', b'1', '1000', '1', '5', '1','18','1');
+INSERT INTO `db`.`medical_examination` (`id`, `clinic_rated`, `confirmed`, `date`, `discount`, `doctor_rated`, `duration`, `finished`, `predefined`, `price`, `clinic_id`, `doctor_id`, `mer_id`, `patient_id`, `met_id`) VALUES ('4', b'0', b'1', '2020-02-16 18:00:00.000000', '0', b'0', '30', b'0', b'0', '1500', '1', '5', '2', '19','1');
+INSERT INTO `db`.`medical_examination` (`id`, `clinic_rated`, `confirmed`, `date`, `discount`, `doctor_rated`, `duration`, `finished`, `predefined`, `price`, `clinic_id`, `doctor_id`, `mer_id`, `patient_id`, `met_id`) VALUES ('3', b'0', b'0', '2020-02-16 18:00:00.000000', '0', b'0', '30', b'0', b'0', '1500', '1', '5', '2', '19','1');
 
 
