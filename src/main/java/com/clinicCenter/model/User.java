@@ -70,6 +70,9 @@ public abstract class User implements UserDetails {
     @Column(name = "average_rating")
     private Double averageRating;
 
+    @Version
+    private Long version = 0L;
+
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))

@@ -5,6 +5,7 @@ import com.clinicCenter.repository.UserRepository;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,6 +57,7 @@ public class UserServiceImpl implements UserService {
         userRepository.activateUser(id);
     }
 
+    @Transactional
     @Override
     public void rateDoctor(Long id, Integer number) {
         System.out.println(number);
