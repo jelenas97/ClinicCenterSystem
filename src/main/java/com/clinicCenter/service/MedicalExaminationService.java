@@ -63,4 +63,6 @@ public interface MedicalExaminationService {
     Collection<MedicalExamination> getClinicsPredefinedExaminations(Long clinicId);
 
     Collection<String> getAvailableTermsForDoctorWithoutRequest(Long doctorId, String date, Long requestId) throws ParseException;
+
+    void finishExam(Long id);
 }

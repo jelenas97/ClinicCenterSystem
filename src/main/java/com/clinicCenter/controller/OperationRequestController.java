@@ -59,7 +59,7 @@ public class OperationRequestController {
 
     @Scheduled(cron = "59 59 23 * * ?")
     public void automaticSchedule() {
-        System.out.println("Automatska fja");
+        System.out.println("Automatska fja operacije");
         operationRequestService.automaticSchedule();
     }
 }

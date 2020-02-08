@@ -19,7 +19,6 @@ public class MedicalExaminationType {
     }
 
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -31,12 +30,6 @@ public class MedicalExaminationType {
     @Column(nullable = false)
     private Double price;
 
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @JsonIgnore
-    @ManyToMany(mappedBy = "medicalExaminationTypes")
-    private Set<Doctor> doctors;
 
     public MedicalExaminationType(String name, double price) {
         this.name = name;
