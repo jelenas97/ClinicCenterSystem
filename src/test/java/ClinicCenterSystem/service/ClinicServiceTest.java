@@ -2,7 +2,6 @@ package ClinicCenterSystem.service;
 
 import com.clinicCenter.App;
 import com.clinicCenter.model.Clinic;
-import com.clinicCenter.model.ClinicMapper;
 import com.clinicCenter.repository.ClinicRepository;
 import com.clinicCenter.service.ClinicService;
 import org.junit.Test;

@@ -34,7 +34,7 @@ public abstract class User implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled = false;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -58,7 +58,7 @@ public abstract class User implements UserDetails {
     @Column(nullable = false)
     private String phone;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long ssn;
 
     @Column(name = "passwordChanged")
@@ -69,6 +69,9 @@ public abstract class User implements UserDetails {
 
     @Column(name = "average_rating")
     private Double averageRating;
+
+    @Version
+    private Long version = 0L;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),

@@ -2,9 +2,7 @@ package ClinicCenterSystem.repository;
 
 import com.clinicCenter.App;
 import com.clinicCenter.model.Clinic;
-import com.clinicCenter.model.ClinicMapper;
 import com.clinicCenter.repository.ClinicRepository;
-import com.clinicCenter.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 

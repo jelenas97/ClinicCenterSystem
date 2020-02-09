@@ -49,6 +49,7 @@ public class RegistrationRequestController {
 
     @PostMapping(value = "/registrationRequests/acceptRequest")
     public void accept(@RequestBody RegistrationRequest registrationRequest){
+        System.out.println(registrationRequest.getEmail());
         MedicalRecord medicalRecord = new MedicalRecord();
         Patient patient = new Patient(registrationRequest.getEmail(),
                 passwordEncoder.encode(registrationRequest.getPassword()),
@@ -66,7 +67,8 @@ public class RegistrationRequestController {
         patient.setPasswordChanged(false);
         medicalRecordService.save(medicalRecord);
         userService.save(patient);
-        emailService.sendMailToUser(patient.getEmail(), "http://localhost:4200/activateUser/" + patient.getId(), "Automated mail : Activate account");
+        Patient p = (Patient) userService.getByEmail(registrationRequest.getEmail());
+        emailService.sendMailToUser(patient.getEmail(), "http://localhost:4200/activateUser/" + p.getId(), "Automated mail : Activate account");
     }
 
     @DeleteMapping(value = "/registrationRequests/removeRequest/{id}/{message}")

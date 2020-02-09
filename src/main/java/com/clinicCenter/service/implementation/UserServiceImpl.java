@@ -5,9 +5,11 @@ import com.clinicCenter.repository.UserRepository;
 import com.clinicCenter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -15,6 +17,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Override
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
 
     @Override
     public User getById(Long id) {
@@ -56,6 +63,7 @@ public class UserServiceImpl implements UserService {
         userRepository.activateUser(id);
     }
 
+    @Transactional
     @Override
     public void rateDoctor(Long id, Integer number) {
         System.out.println(number);
