@@ -12,6 +12,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -63,11 +65,13 @@ public class E2ETest {
 
     }
 
+    @Transactional
+    @Rollback(true)
     @Test
     public void testPressPredefinedExams() throws InterruptedException {
 
         loginPage.ensureIsDisplayedEmail();
-        loginPage.getEmail().sendKeys("igor_malesevic@yahoo.com");
+        loginPage.getEmail().sendKeys("pa2@gmail.com");
         loginPage.getPassword().sendKeys("123123");
         loginPage.ensureIsVisibleLoginBtn();
 
@@ -90,6 +94,8 @@ public class E2ETest {
 
     }
 
+    @Transactional
+    @Rollback(true)
     @Test
     public void testScheduleRoomForExam() throws InterruptedException {
 

@@ -42,6 +42,8 @@ public class AnnualLeaveRequestServiceImpl implements AnnualLeaveRequestService 
 
     @Override
     public void approve(Long id) {
-        annualLeaveRequestRepository.approve(id);
+        AnnualLeaveRequest annualLeaveRequest = annualLeaveRequestRepository.findById(id).get();
+        annualLeaveRequest.setApproved(true);
+        annualLeaveRequestRepository.save(annualLeaveRequest);
     }
 }

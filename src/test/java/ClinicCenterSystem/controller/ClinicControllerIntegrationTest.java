@@ -41,7 +41,7 @@ public class ClinicControllerIntegrationTest {
     public void login() {
         ResponseEntity<UserTokenState> responseEntity =
                 restTemplate.postForEntity("/auth/login",
-                        new JwtAuthenticationRequest("igor_malesevic@yahoo.com", "123123"),
+                        new JwtAuthenticationRequest("pa2@gmail.com", "123123"),
                         UserTokenState.class);
         accessToken = Objects.requireNonNull(responseEntity.getBody()).getAccessToken();
     }
@@ -60,7 +60,7 @@ public class ClinicControllerIntegrationTest {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(4, clinics.length);
-        assertEquals("Dom Bajic", clinics[0].getName());
+        assertEquals("KCV", clinics[0].getName());
 
     }
 
@@ -72,7 +72,7 @@ public class ClinicControllerIntegrationTest {
         HttpEntity<Object> httpEntity = new HttpEntity<Object>(headers);
 
         ResponseEntity<Clinic[]> responseEntity =
-                restTemplate.exchange("/auth/getSearchedClinics/1/Vlah/8", HttpMethod.GET, httpEntity, Clinic[].class);
+                restTemplate.exchange("/auth/getSearchedClinics/1/Bel/0", HttpMethod.GET, httpEntity, Clinic[].class);
         Clinic[] clinic = responseEntity.getBody();
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -88,11 +88,11 @@ public class ClinicControllerIntegrationTest {
         HttpEntity<Object> httpEntity = new HttpEntity<Object>(headers);
 
         ResponseEntity<Clinic[]> responseEntity =
-                restTemplate.exchange("/auth/getSearchedClinics/1/ /9", HttpMethod.GET, httpEntity, Clinic[].class);
+                restTemplate.exchange("/auth/getSearchedClinics/1/ /8", HttpMethod.GET, httpEntity, Clinic[].class);
         Clinic[] clinic = responseEntity.getBody();
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(1,clinic.length);
+        assertEquals(0,clinic.length);
 
     }
 }

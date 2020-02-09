@@ -35,7 +35,7 @@ public class UserControllerIntegrationTest {
     public void login() {
         ResponseEntity<UserTokenState> responseEntity =
                 restTemplate.postForEntity("/auth/login",
-                        new JwtAuthenticationRequest("pa@gmail.com", "456456"),
+                        new JwtAuthenticationRequest("pa2@gmail.com", "123123"),
                         UserTokenState.class);
          accessToken = Objects.requireNonNull(responseEntity.getBody()).getAccessToken();
     }
